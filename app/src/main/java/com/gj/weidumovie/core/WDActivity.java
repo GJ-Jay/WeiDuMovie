@@ -12,6 +12,8 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 
+import com.gj.weidumovie.util.StatusBarCompat;
+
 import butterknife.ButterKnife;
 
 /**
@@ -110,6 +112,7 @@ public abstract class WDActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         mForegroundActivity = this;
+        StatusBarCompat.translucentStatusBar(this);
     }
 
     /**

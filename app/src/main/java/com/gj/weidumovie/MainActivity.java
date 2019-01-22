@@ -4,15 +4,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+import com.gj.weidumovie.core.WDActivity;
+
+public class MainActivity extends WDActivity {
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toast.makeText(MainActivity.this,"修改成功",Toast.LENGTH_SHORT).show();
-        Toast.makeText(MainActivity.this,"修改失败",Toast.LENGTH_SHORT).show();
-        Toast.makeText(MainActivity.this,"修改失败",Toast.LENGTH_SHORT).show();
+    protected int getLayoutId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected void destoryData() {
 
     }
 }
