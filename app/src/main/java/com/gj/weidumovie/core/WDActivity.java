@@ -15,13 +15,14 @@ import android.view.KeyEvent;
 import com.gj.weidumovie.util.StatusBarCompat;
 
 import butterknife.ButterKnife;
+import me.jessyan.autosize.internal.CustomAdapt;
 
 /**
  * @author dingtao
  * @date 2018/12/29 14:00
  * qq:1940870847
  */
-public abstract class WDActivity extends AppCompatActivity {
+public abstract class WDActivity extends AppCompatActivity implements CustomAdapt {
 
     public final static int PHOTO = 0;// 相册选取
     public final static int CAMERA = 1;// 拍照
@@ -33,6 +34,15 @@ public abstract class WDActivity extends AppCompatActivity {
     private static WDActivity mForegroundActivity = null;
 
 
+    @Override
+    public boolean isBaseOnWidth() {
+        return false;
+    }
+
+    @Override
+    public float getSizeInDp() {
+        return 720;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
