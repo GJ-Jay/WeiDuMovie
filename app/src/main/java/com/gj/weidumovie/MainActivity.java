@@ -12,6 +12,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toast.makeText(MainActivity.this,"修改成功",Toast.LENGTH_SHORT).show();
         Toast.makeText(MainActivity.this,"修改失败",Toast.LENGTH_SHORT).show();
-
+        Toast.makeText(this, "你好饰家", Toast.LENGTH_SHORT).show();
     }
 }
