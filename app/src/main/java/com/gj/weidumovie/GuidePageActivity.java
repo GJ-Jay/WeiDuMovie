@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.bw.movie.R;
 import com.gj.weidumovie.core.WDActivity;
 
 import java.util.ArrayList;

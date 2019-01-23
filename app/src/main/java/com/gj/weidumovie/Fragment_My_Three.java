@@ -1,5 +1,6 @@
 package com.gj.weidumovie;
 
+import com.bw.movie.R;
 import com.gj.weidumovie.core.WDFragment;
 
 /**

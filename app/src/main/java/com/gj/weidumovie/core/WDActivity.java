@@ -126,6 +126,7 @@ public abstract class WDActivity extends AppCompatActivity implements CustomAdap
     protected void onStart() {
         super.onStart();
         mForegroundActivity = this;
+        //沉浸式状态栏
         StatusBarCompat.translucentStatusBar(this);
     }
 

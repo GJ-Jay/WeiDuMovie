@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.bw.movie.R;
 import com.gj.weidumovie.core.WDActivity;
 
 public class MainActivity extends WDActivity {

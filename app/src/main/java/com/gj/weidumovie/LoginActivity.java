@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bw.movie.R;
 import com.gj.weidumovie.bean.Result;
 import com.gj.weidumovie.bean.UserBean;
 import com.gj.weidumovie.core.DataCall;
@@ -138,8 +139,6 @@ public class LoginActivity extends WDActivity {
                 edit.putBoolean("flag",flag);
                 edit.putBoolean("rememberPassword",rememberPassword);
                 edit.commit();
-
-                intent(ShowActivity.class);
                 finish();
             }
             UIUtils.showToastSafe(data.getMessage());

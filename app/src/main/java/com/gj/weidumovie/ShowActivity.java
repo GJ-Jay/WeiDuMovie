@@ -1,11 +1,12 @@
 package com.gj.weidumovie;
 
+import com.bw.movie.R;
 import com.gj.weidumovie.core.WDActivity;
 
 public class ShowActivity extends WDActivity {
     @Override
     protected int getLayoutId() {
-        return 0;
+        return R.layout.activity_register;
     }
 
     @Override

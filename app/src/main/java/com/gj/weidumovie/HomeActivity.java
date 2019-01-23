@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
 
+import com.bw.movie.R;
 import com.gj.weidumovie.core.WDActivity;
 
 import butterknife.BindView;
