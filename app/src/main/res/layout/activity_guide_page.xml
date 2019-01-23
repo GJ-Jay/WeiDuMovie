@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,20 +11,49 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/welcome_viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v4.view.ViewPager>
+        android:layout_height="0dp"
+        android:layout_weight="1"></android.support.v4.view.ViewPager>
 
-    <Button
-        android:id="@+id/welcome_jump"
+    <RadioGroup
+        android:id="@+id/radiogroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp"
-        android:background="@color/colorPrimary"
-        android:padding="6dp"
-        android:text="立即开启"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"
-        android:visibility="invisible"/>
+        android:layout_marginBottom="@dimen/dp_80">
+        
+        <RadioButton
+            android:id="@+id/welcome_buttom_one"
+            android:layout_width="@dimen/dp_12"
+            android:layout_height="@dimen/dp_12"
+            android:button="@null"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/bootpage"/>
+
+        <RadioButton
+            android:id="@+id/welcome_buttom_two"
+            android:layout_width="@dimen/dp_12"
+            android:layout_height="@dimen/dp_12"
+            android:button="@null"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/bootpage"/>
+
+        <RadioButton
+            android:id="@+id/welcome_buttom_three"
+            android:layout_width="@dimen/dp_12"
+            android:layout_height="@dimen/dp_12"
+            android:button="@null"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/bootpage"/>
+
+        <RadioButton
+            android:id="@+id/welcome_buttom_four"
+            android:layout_width="@dimen/dp_12"
+            android:layout_height="@dimen/dp_12"
+            android:button="@null"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/bootpage"/>
+    </RadioGroup>
     <!--invisible隐藏-->
-</RelativeLayout>
+</LinearLayout>
