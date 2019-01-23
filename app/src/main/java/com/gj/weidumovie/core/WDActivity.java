@@ -12,7 +12,10 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 
+import com.gj.weidumovie.bean.UserBean;
 import com.gj.weidumovie.util.StatusBarCompat;
+
+import java.util.List;
 
 import butterknife.ButterKnife;
 import me.jessyan.autosize.internal.CustomAdapt;
@@ -33,6 +36,7 @@ public abstract class WDActivity extends AppCompatActivity implements CustomAdap
      */
     private static WDActivity mForegroundActivity = null;
 
+    public UserBean LOGIN_USER;
 
     @Override
     public boolean isBaseOnWidth() {
