@@ -20,8 +20,18 @@ public interface IRequest {
     @FormUrlEncoded
     Observable<Result<UserBean>> login(@Field("phone")String phone, @Field("pwd")String pwd);
     //注册
-    @POST("movieApi/user/v1/registerUser")
     @FormUrlEncoded
-    Observable<Result> register(@Field("phone")String phone,@Field("pwd")String pwd);
+    @POST("movieApi/user/v1/registerUser")
+    Observable<Result> register(@Field("nickName") String nickName,
+                                @Field("phone") String phone,
+                                @Field("pwd") String pwd,
+                                @Field("pwd2") String pwd2,
+                                @Field("sex") int sex,
+                                @Field("birthday") String birthday,
+                                @Field("imei") String imei,
+                                @Field("ua") String ua,
+                                @Field("screenSize") String screenSize,
+                                @Field("os") String os,
+                                @Field("email") String email);
 
 }
