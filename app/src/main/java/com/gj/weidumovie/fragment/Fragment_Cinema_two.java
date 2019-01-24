@@ -1,4 +1,4 @@
-package com.gj.weidumovie;
+package com.gj.weidumovie.fragment;
 
 import com.bw.movie.R;
 import com.gj.weidumovie.core.WDFragment;
@@ -8,7 +8,7 @@ import com.gj.weidumovie.core.WDFragment;
  * Author:GJ<br>
  * Date:2019/1/23 15:10
  */
-public class Fragment_My_Three extends WDFragment {
+public class Fragment_Cinema_two extends WDFragment {
     @Override
     public String getPageName() {
         return null;
@@ -16,7 +16,7 @@ public class Fragment_My_Three extends WDFragment {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_my_three;
+        return R.layout.fragment_cinema_two;
     }
 
     @Override
