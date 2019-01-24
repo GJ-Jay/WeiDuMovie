@@ -24,7 +24,7 @@
             android:layout_height="@dimen/dp_72"
             android:layout_marginTop="@dimen/dp_30"
             android:layout_gravity="center_horizontal"
-            fresco:placeholderImage="@mipmap/ic_head"
+            fresco:placeholderImage="@drawable/ic_head"
             fresco:roundAsCircle="true"
             />
 
