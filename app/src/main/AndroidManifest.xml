@@ -15,16 +15,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name="com.gj.weidumovie.MainActivity">
-
-
-        </activity>
-        <activity android:name="com.gj.weidumovie.ShowActivity"/>
-        <activity android:name="com.gj.weidumovie.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name="com.gj.weidumovie.ShowActivity"/>
+
+        <activity android:name="com.gj.weidumovie.LoginActivity">
+
         </activity>
 
         <meta-data
@@ -37,6 +37,7 @@
         <activity android:name="com.gj.weidumovie.GuidePageActivity" />
         <activity android:name="com.gj.weidumovie.HomeActivity"></activity>
         <activity android:name="com.gj.weidumovie.RegisterActivity"/>
+        <activity android:name="com.gj.weidumovie.MyMassageActivity" />
     </application>
 
 </manifest>

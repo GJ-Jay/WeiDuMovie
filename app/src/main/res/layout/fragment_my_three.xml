@@ -11,7 +11,7 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/ming_remind"
+            android:id="@+id/mine_remind"
             android:layout_width="@dimen/dp_24"
             android:layout_height="@dimen/dp_24"
             android:layout_marginLeft="@dimen/dp_24"
@@ -19,7 +19,7 @@
             android:src="@drawable/my_icon_remind_default_hdpi" />
 
         <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/simp_mine_head"
+            android:id="@+id/mine_head"
             android:layout_width="@dimen/dp_72"
             android:layout_height="@dimen/dp_72"
             android:layout_marginTop="@dimen/dp_30"
@@ -29,7 +29,7 @@
             />
 
         <TextView
-            android:id="@+id/text_login_regist"
+            android:id="@+id/mine_login_reg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -58,10 +58,10 @@
             android:paddingBottom="@dimen/dp_10"
             android:orientation="vertical">
             <ImageView
-                android:id="@+id/img_myinfo"
-                android:layout_width="wrap_content"
+                android:id="@+id/mine_my_info"
                 android:layout_gravity="center_horizontal"
-                android:layout_height="wrap_content"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:src="@drawable/my_icon_messiage_default_hdpi" />
             <TextView
                 android:layout_width="wrap_content"
@@ -110,10 +110,10 @@
             android:paddingBottom="@dimen/dp_10"
             android:orientation="vertical">
             <ImageView
-                android:id="@+id/myattention"
-                android:layout_width="wrap_content"
+                android:id="@+id/mine_my_attention"
                 android:layout_gravity="center_horizontal"
-                android:layout_height="wrap_content"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:src="@drawable/my_icon_attention_default_hdpi" />
             <TextView
                 android:layout_width="wrap_content"
@@ -128,16 +128,16 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:paddingTop="@dimen/dp_10"
-            android:id="@+id/btn_rccord_mine"
+            android:id="@+id/btn_buy_mine"
             android:paddingBottom="@dimen/dp_10"
             android:layout_weight="1"
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/mybuyrecord"
-                android:layout_width="wrap_content"
+                android:id="@+id/mine_my_buy_record"
                 android:layout_gravity="center_horizontal"
-                android:layout_height="wrap_content"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:src="@drawable/my_icon_rccord_default_hdpi" />
             <TextView
                 android:layout_width="wrap_content"
@@ -176,10 +176,10 @@
             android:paddingBottom="@dimen/dp_10"
             android:orientation="vertical">
             <ImageView
-                android:id="@+id/my_yijianfankui"
-                android:layout_width="wrap_content"
+                android:id="@+id/mine_my_idea"
                 android:layout_gravity="center_horizontal"
-                android:layout_height="wrap_content"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:src="@drawable/my_icon_feedback_default_hdpi" />
             <TextView
                 android:layout_width="wrap_content"
@@ -200,10 +200,10 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/my_zuixinbanben"
-                android:layout_width="wrap_content"
+                android:id="@+id/mine_my_new"
                 android:layout_gravity="center_horizontal"
-                android:layout_height="wrap_content"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:src="@drawable/my_icon_version_default_hdpi" />
             <TextView
                 android:layout_width="wrap_content"
