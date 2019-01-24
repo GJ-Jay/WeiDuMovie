@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GuidePageActivity">
+    tools:context="com.gj.weidumovie.GuidePageActivity">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/welcome_viewpager"
