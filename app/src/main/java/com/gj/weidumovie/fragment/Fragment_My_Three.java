@@ -1,4 +1,4 @@
-package com.gj.weidumovie;
+package com.gj.weidumovie.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;

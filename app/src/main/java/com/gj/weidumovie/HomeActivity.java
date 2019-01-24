@@ -8,6 +8,8 @@ import android.widget.RadioGroup;
 
 import com.bw.movie.R;
 import com.gj.weidumovie.core.WDActivity;
+import com.gj.weidumovie.fragment.Fragment_Cinema_two;
+import com.gj.weidumovie.fragment.Fragment_My_Three;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
