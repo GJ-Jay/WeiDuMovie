@@ -9,7 +9,7 @@
         android:id="@+id/image"
         android:layout_width="205dp"
         android:layout_height="205dp"
-        android:src="@mipmap/page_three"
+        android:src="@drawable/page_three"
         android:layout_marginTop="150dp"
         android:layout_centerHorizontal="true"/>
 
