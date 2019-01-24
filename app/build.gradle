@@ -49,6 +49,7 @@ dependencies {
     //相册旋转木马
     implementation 'com.chenlittleping:recyclercoverflow:1.0.6'
     implementation 'com.contrarywind:Android-PickerView:3.2.6'
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
 
-    implementation files('libs/ormlite-core-5.1.jar')
+
 }

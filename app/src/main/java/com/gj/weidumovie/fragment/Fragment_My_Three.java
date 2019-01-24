@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.bw.movie.R;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.gj.weidumovie.LoginActivity;
+import com.gj.weidumovie.MyMassageActivity;
 import com.gj.weidumovie.core.WDFragment;
 
 import butterknife.BindView;
@@ -91,11 +93,11 @@ public class Fragment_My_Three extends WDFragment {
 
                 break;
             case R.id.mine_login_reg:
-                Intent intent = new Intent(getContext(),LoginActivity.class);
+                Intent intent = new Intent(getContext(), LoginActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_msg_mine:
-                Intent intent_msg = new Intent(getContext(),MyMassageActivity.class);
+                Intent intent_msg = new Intent(getContext(), MyMassageActivity.class);
                 startActivity(intent_msg);
                 break;
             case R.id.btn_like_mine:
