@@ -18,6 +18,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -87,7 +88,6 @@ public class MyMassageActivity extends WDActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
     }
 
@@ -125,7 +125,18 @@ public class MyMassageActivity extends WDActivity {
                         }).create();
                 dialog.show();
                 break;
-            case R.id.my_info_username:
+            case R.id.my_info_username://点击修改备注
+                AlertDialog mUpdateUserName = new AlertDialog.Builder(this)
+                        .setTitle("请输入昵称")
+                        .setView(new EditText(this))//设置输入框
+                        .setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+                        .setPositiveButton("取消",null).create();
+                mUpdateUserName.show();
                 break;
             case R.id.my_info_sex:
                 break;

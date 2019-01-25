@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.bw.movie.R;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.gj.weidumovie.FeedbackActivity;
 import com.gj.weidumovie.LoginActivity;
 import com.gj.weidumovie.MyMassageActivity;
 import com.gj.weidumovie.core.WDFragment;
@@ -105,6 +106,7 @@ public class Fragment_My_Three extends WDFragment {
             case R.id.btn_buy_mine:
                 break;
             case R.id.btn_feedback_mine://意见反馈
+                Intent intent_feedback = new Intent(getContext(), FeedbackActivity.class);
                 break;
             case R.id.btn_version_mine:
                 break;
