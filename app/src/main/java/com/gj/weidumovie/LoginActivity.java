@@ -138,6 +138,8 @@ public class LoginActivity extends WDActivity {
 
                 edit.putBoolean("flag",flag);
                 edit.putBoolean("rememberPassword",rememberPassword);
+                edit.putInt("userId",data.getResult().getUserId());
+                edit.putString("sessionId",data.getResult().getSessionId());
                 edit.commit();
                 finish();
             }

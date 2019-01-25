@@ -1,5 +1,6 @@
 package com.gj.weidumovie.core.http;
 
+import com.gj.weidumovie.bean.CinemaBean;
 import com.gj.weidumovie.bean.MoiveBean;
 import com.gj.weidumovie.bean.Result;
 import com.gj.weidumovie.bean.UserBean;
@@ -86,4 +87,18 @@ public interface IRequest {
                                                                     @Header("sessionId")String sessionId,
                                                                     @Query("page")int page,
                                                                     @Query("count")int count);
+    //推荐影院列表
+    @GET("movieApi/cinema/v1/findRecommendCinemas")
+    Observable<Result<List<CinemaBean>>> findRecommendCinemas(@Header("userId")int userId,
+                                                @Header("sessionId")String sessionId,
+                                                @Query("page") int page,
+                                                @Query("count") int count);
+    //附近影院列表
+    @GET("movieApi/cinema/v1/findNearbyCinemas")
+    Observable<Result<List<CinemaBean>>> findNearbyCinemas(@Header("userId")int userId,
+                                                @Header("sessionId")String sessionId,
+                                                @Query("longitude") String longitude,
+                                                @Query("latitude") String latitude,
+                                                @Query("page") int page,
+                                                @Query("count") int count);
 }
