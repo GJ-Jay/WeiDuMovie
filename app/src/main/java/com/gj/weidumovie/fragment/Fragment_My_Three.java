@@ -105,7 +105,6 @@ public class Fragment_My_Three extends WDFragment {
             case R.id.btn_buy_mine:
                 break;
             case R.id.btn_feedback_mine://意见反馈
-
                 break;
             case R.id.btn_version_mine:
                 break;
