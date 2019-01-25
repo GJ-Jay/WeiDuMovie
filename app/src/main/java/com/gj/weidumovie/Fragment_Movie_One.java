@@ -208,16 +208,10 @@ public class Fragment_Movie_One extends WDFragment {
 
     }
 
-    @OnClick({R.id.one_my_search, R.id.one_r, R.id.one_z, R.id.one_j})
+    @OnClick({ R.id.one_r, R.id.one_z, R.id.one_j})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.one_my_search:
-                ObjectAnimator translationX = ObjectAnimator.ofFloat(oneMySearch, "translationX", 310,140);
-                translationX.setDuration(3000);
-                translationX.setInterpolator(new LinearInterpolator());
-                translationX.start();
 
-                break;
             case R.id.one_r:
 
                 break;
