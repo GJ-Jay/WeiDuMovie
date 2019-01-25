@@ -92,11 +92,11 @@ public class Fragment_My_Three extends WDFragment {
             case R.id.mine_head:
 
                 break;
-            case R.id.mine_login_reg:
+            case R.id.mine_login_reg://登录
                 Intent intent = new Intent(getContext(), LoginActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.btn_msg_mine:
+            case R.id.btn_msg_mine://我的信息页面跳转
                 Intent intent_msg = new Intent(getContext(), MyMassageActivity.class);
                 startActivity(intent_msg);
                 break;
@@ -104,7 +104,7 @@ public class Fragment_My_Three extends WDFragment {
                 break;
             case R.id.btn_buy_mine:
                 break;
-            case R.id.btn_feedback_mine:
+            case R.id.btn_feedback_mine://意见反馈
                 break;
             case R.id.btn_version_mine:
                 break;

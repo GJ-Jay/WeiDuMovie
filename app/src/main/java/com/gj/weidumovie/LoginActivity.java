@@ -118,7 +118,7 @@ public class LoginActivity extends WDActivity {
                 phone = editLoginPhone.getText().toString();
                 String pwds = editLoginPassword.getText().toString();
                 pwd = EncryptUtil.encrypt(pwds);
-                //Log.i("abc", "onViewClicked: "+pwd);
+                Log.i("abc", "onViewClicked: "+pwd);
                 loginPresenter.reqeust(phone,pwd);
                 break;
         }
