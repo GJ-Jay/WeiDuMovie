@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <EditText
+        android:id="@+id/one_sou"
+        android:layout_width="@dimen/dp_220"
+        android:layout_height="@dimen/dp_24"
+        android:layout_alignParentRight="true"
+        android:paddingLeft="@dimen/dp_30"
+        android:background="@drawable/linesou"
+        android:layout_marginRight="-170dp"
+
+        />
+    <ImageView
+        android:id="@+id/one_image_sou"
+        android:layout_width="@dimen/dp_24"
+        android:layout_height="@dimen/dp_24"
+        android:layout_alignLeft="@+id/one_sou"
+        android:layout_marginLeft="@dimen/dp_6"
+        android:src="@drawable/com_icon_search_default_xxhdpi"/>
+    <TextView
+        android:id="@+id/one_sou_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="搜索"
+        android:layout_centerVertical="true"
+        android:layout_alignRight="@+id/one_sou"
+        android:textColor="#ffffff"/>
+</RelativeLayout>

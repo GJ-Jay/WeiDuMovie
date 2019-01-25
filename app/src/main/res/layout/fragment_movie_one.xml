@@ -22,23 +22,33 @@
                     android:layout_height="186dp" />
                 <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_marginTop="30dp"
+                    android:layout_height="@dimen/dp_24">
 
                     <com.facebook.drawee.view.SimpleDraweeView
                         android:id="@+id/moivesdv"
-                        android:layout_marginTop="30dp"
+
                         android:layout_marginLeft="24dp"
                         android:background="@drawable/one_address_img"
                         android:layout_width="16dp"
                         android:layout_height="21dp" />
+
                     <TextView
-                        android:layout_marginLeft="6dp"
-                        android:text="北京"
-                        android:textColor="#ffffff"
-                        android:layout_marginTop="30dp"
-                        android:layout_toRightOf="@+id/moivesdv"
+                        android:id="@+id/show_address"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginLeft="6dp"
+                        android:layout_toEndOf="@+id/moivesdv"
+                        android:layout_toRightOf="@+id/moivesdv"
+                        android:text="北京"
+
+                        android:textColor="#ffffff" />
+                    <com.gj.weidumovie.view.MySearchLayout
+                        android:id="@+id/one_my_search"
+                        android:layout_width="@dimen/dp_50"
+                        android:layout_alignParentRight="true"
+                        android:layout_height="match_parent"></com.gj.weidumovie.view.MySearchLayout>
                 </RelativeLayout>
 
 
@@ -125,7 +135,8 @@
                     android:layout_width="30dp"
                     android:layout_height="3dp"/>
 
-                <com.facebook.drawee.view.SimpleDraweeView
+                <ImageView
+                    android:id="@+id/one_r"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/home_next"
@@ -160,7 +171,8 @@
                     android:layout_width="30dp"
                     android:layout_height="3dp"/>
 
-                <com.facebook.drawee.view.SimpleDraweeView
+                <ImageView
+                    android:id="@+id/one_z"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/home_next"
@@ -195,7 +207,8 @@
                     android:layout_width="30dp"
                     android:layout_height="3dp"/>
 
-                <com.facebook.drawee.view.SimpleDraweeView
+                <ImageView
+                    android:id="@+id/one_j"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/home_next"

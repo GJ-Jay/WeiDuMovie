@@ -1,14 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <TextView
+    <RelativeLayout
+        android:id="@+id/cinema_relative"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="二"
-        android:gravity="center"/>
+        android:layout_height="wrap_content">
 
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/cinemasdv"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/cinema_detail_icon_location"
+            android:layout_marginLeft="24dp"
+            android:layout_width="16dp"
+            android:layout_height="21dp" />
+        <TextView
+            android:id="@+id/cimema_text"
+            android:layout_toRightOf="@+id/cinemasdv"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="30dp"
+            android:text="北京"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/recommend"
+            android:text="推荐影院"
+            android:background="@drawable/myborder"
+            android:layout_marginRight="32dp"
+            android:textSize="14sp"
+            android:textColor="#333333"
+            android:layout_width="83dp"
+            android:layout_height="25dp" />
+        <Button
+            android:id="@+id/nearby"
+            android:text="附近影院"
+            android:background="@drawable/myborder"
+            android:textSize="14sp"
+            android:textColor="#333333"
+            android:layout_width="83dp"
+            android:layout_height="25dp" />
+
+    </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/cinemarecycleview"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 </LinearLayout>
