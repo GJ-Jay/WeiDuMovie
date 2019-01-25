@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="312dp"
+        android:layout_height="139dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="24dp">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:layout_width="312dp"
+            android:layout_height="123dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/filmbg"
+            app:roundBottomLeft="true"
+            app:roundBottomRight="true"
+            app:roundTopLeft="true"
+            app:roundTopRight="true"
+            app:roundedCornerRadius="8dp"
+            android:adjustViewBounds="true"/>
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/filmshow_sim"
+            android:layout_width="103dp"
+            android:layout_height="129dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            app:roundedCornerRadius="8dp"
+             />
+
+
+        <TextView
+            android:id="@+id/filmshow_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="26dp"
+            android:layout_toRightOf="@+id/filmshow_sim"
+            android:text="铁血战士"
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/filmshow_heart"
+            android:layout_width="16dp"
+            android:layout_height="14dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="24dp"
+            android:layout_marginRight="24dp"
+            android:src="@drawable/checked_selector" />
+
+        <TextView
+            android:id="@+id/filmshow_summary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/filmshow_name"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_toRightOf="@+id/filmshow_sim"
+            android:text="铁血战士"
+            android:textColor="#ffffff"
+            android:textSize="12sp" />
+    </RelativeLayout>
+</LinearLayout>

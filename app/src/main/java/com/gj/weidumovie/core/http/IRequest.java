@@ -2,6 +2,7 @@ package com.gj.weidumovie.core.http;
 
 import com.gj.weidumovie.bean.CinemaBean;
 import com.gj.weidumovie.bean.MoiveBean;
+import com.gj.weidumovie.bean.MovieDetailsBean;
 import com.gj.weidumovie.bean.Result;
 import com.gj.weidumovie.bean.UserBean;
 
@@ -101,4 +102,8 @@ public interface IRequest {
                                                 @Query("latitude") String latitude,
                                                 @Query("page") int page,
                                                 @Query("count") int count);
+    //通过电影Id查看电影详情
+    @GET("movieApi/movie/v1/findMoviesDetail")
+    Observable<Result<MovieDetailsBean>> findMoviesDetail(@Header("userId")int userId,
+                                                          @Header("sessionId")String sessionId,@Query("movieId")int movieId);
 }

@@ -3,10 +3,15 @@ package com.gj.weidumovie.core;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.facebook.cache.disk.DiskCacheConfig;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.core.ImagePipelineConfig;
+
+import java.io.File;
 
 
 /**
@@ -39,7 +44,19 @@ public class WDApplication extends Application {
         mMainThreadHandler = new Handler();
         mMainLooper = getMainLooper();
         sharedPreferences = getSharedPreferences("share.xml",MODE_PRIVATE);
-        Fresco.initialize(this);//图片加载框架初始化
+        Fresco.initialize(this,getConfig());//图片加载框架初始化
+    }
+
+    private ImagePipelineConfig getConfig() {
+        File file = new File(Environment.getExternalStorageDirectory()+File.separator+"image");
+        if (!file.exists()){
+            file.mkdir();
+        }
+        ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
+                .setMainDiskCacheConfig(DiskCacheConfig.newBuilder(this)
+                        .setBaseDirectoryPath(file).build())
+                .build();
+        return config;
     }
 
     public static SharedPreferences getShare(){
