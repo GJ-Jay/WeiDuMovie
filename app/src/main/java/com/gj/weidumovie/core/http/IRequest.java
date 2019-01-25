@@ -3,9 +3,12 @@ package com.gj.weidumovie.core.http;
 import com.gj.weidumovie.bean.Result;
 import com.gj.weidumovie.bean.UserBean;
 
+import java.io.File;
+
 import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 
 /**
@@ -33,5 +36,12 @@ public interface IRequest {
                                 @Field("screenSize") String screenSize,
                                 @Field("os") String os,
                                 @Field("email") String email);
+
+    //修改头像
+    @POST("movieApi/user/v1/verify/uploadHeadPic")
+    @FormUrlEncoded
+    Observable<Result> updateHead(@Header("userId")int userId,
+                                  @Header("sessionId")String sessionId,
+                                  @Field("image")String image);
 
 }
