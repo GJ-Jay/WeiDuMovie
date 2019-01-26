@@ -1,9 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/dp_24"
+    android:layout_marginRight="@dimen/dp_24"
     tools:context="com.gj.weidumovie.FeedbackActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_30"
+        android:text="意见反馈"
+        android:textSize="14sp"
+        android:textColor="@color/textcolor"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_30"
+        android:background="@drawable/edit_shap">
+        <EditText
+            android:id="@+id/feedback_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_20"
+            android:hint="写下您对产品的感受吧！工作人员将会在第一时间评估处理。"
+            android:textSize="12sp"
+            android:background="@null"
+            android:textColor="@color/textcolor9"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginBottom="@dimen/dp_24">
+        <Button
+            android:id="@+id/feedback_commit"
+            android:layout_width="@dimen/dp_48"
+            android:layout_height="@dimen/dp_25"
+            android:layout_alignParentRight="true"
+            android:text="提交"
+            android:background="@drawable/feedback_btn"
+            android:textColor="@android:color/white"/>
+
+        <ImageView
+            android:id="@+id/feedback_back"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="@dimen/dp_60"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/ic_particulars_back"/>
+    </RelativeLayout>
+
+</LinearLayout>

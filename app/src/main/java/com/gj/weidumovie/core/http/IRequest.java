@@ -5,7 +5,9 @@ import com.gj.weidumovie.bean.FilmReviewBean;
 import com.gj.weidumovie.bean.MoiveBean;
 import com.gj.weidumovie.bean.MovieDetailsBean;
 import com.gj.weidumovie.bean.Result;
+import com.gj.weidumovie.bean.UpdateUser;
 import com.gj.weidumovie.bean.UserBean;
+import com.gj.weidumovie.bean.UserInfo;
 
 import java.io.File;
 
@@ -62,6 +64,27 @@ public interface IRequest {
                                   @Header("sessionId")String sessionId,
                                   @Field("image")String image);
 
+    //意见反馈
+    @POST("movieApi/tool/v1/verify/recordFeedBack")
+    @FormUrlEncoded
+    Observable<Result> feedBack(@Header("userId")int userId,
+                                  @Header("sessionId")String sessionId,
+                                  @Field("content")String content);
+
+    //根据用户ID查询用户信息
+    @GET("movieApi/user/v1/verify/getUserInfoByUserId")
+    Observable<Result<UserInfo>> queryUserInfo(@Header("userId")int userId,
+                                               @Header("sessionId")String sessionId);
+
+    //修改用户信息
+    @POST("movieApi/user/v1/verify/modifyUserInfo")
+    @FormUrlEncoded
+    Observable<Result<UpdateUser>> updateUser(@Header("userId")int userId,
+                                              @Header("sessionId")String sessionId,
+                                              @Field("nickName")String nickName,
+                                              @Field("sex")int sex,
+                                              @Field("email")String email);
+
     /**
      * 正在热映
      * @param userId
@@ -103,6 +126,7 @@ public interface IRequest {
                                                 @Query("latitude") String latitude,
                                                 @Query("page") int page,
                                                 @Query("count") int count);
+
     //通过电影Id查看电影详情
     @GET("movieApi/movie/v1/findMoviesDetail")
     Observable<Result<MovieDetailsBean>> findMoviesDetail(@Header("userId")int userId,

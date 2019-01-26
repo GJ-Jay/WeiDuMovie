@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_marginLeft="@dimen/dp_24"
+    android:layout_marginRight="@dimen/dp_24"
+    android:layout_marginBottom="@dimen/dp_24"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.gj.weidumovie.FeedbackSuccessActivity">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_30"
+        android:text="意见反馈"
+        android:textSize="14sp"
+        android:textColor="@color/textcolor"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp_140">
+
+        <ImageView
+            android:id="@+id/succes_img"
+            android:layout_width="@dimen/dp_70"
+            android:layout_height="@dimen/dp_70"
+            android:src="@drawable/feedback_success"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/success_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_30"
+            android:text="反馈成功"
+            android:textSize="16sp"
+            android:textColor="@color/textcolor"
+            android:layout_below="@+id/succes_img"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_30"
+            android:text="感谢您对维度影院的关注与支持，我们会认真处理您的反馈，尽快修复和完善相关功能。"
+            android:textSize="12sp"
+            android:textColor="@color/textcolor6"
+            android:layout_below="@+id/success_text"
+            android:gravity="center"/>
+        <ImageView
+            android:id="@+id/feedback_back"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="@dimen/dp_60"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/ic_particulars_back"/>
+    </RelativeLayout>
+</LinearLayout>

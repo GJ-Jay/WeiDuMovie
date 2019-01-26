@@ -143,7 +143,7 @@ public class LoginActivity extends WDActivity {
         @Override
         public void success(Result<UserBean> data) {
             if (data.getStatus().equals("0000")){
-
+                Log.e("abcd","userid:"+data.getResult().getUserId()+" sessionid:"+data.getResult().getSessionId());
                 //获取是否记住密码
                 boolean rememberPassword = savePwd.isChecked();
                 //获取是否自动登录
