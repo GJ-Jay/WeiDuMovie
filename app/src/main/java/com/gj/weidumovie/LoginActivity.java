@@ -62,9 +62,11 @@ public class LoginActivity extends WDActivity {
         boolean flag = sharedPreferences.getBoolean("flag",false);
         boolean rememberPassword = sharedPreferences.getBoolean("rememberPassword",false);
         edit = sharedPreferences.edit();
-
-
-        zdLogin.setChecked(false);
+        String p = sharedPreferences.getString("pwd", "");
+        String ph = sharedPreferences.getString("phone", "");
+        String d = EncryptUtil.decrypt(p);
+        Log.i("abc", "initView: "+p+ph);
+        zdLogin.setChecked(flag);
         savePwd.setChecked(rememberPassword);
 
         //登录接口
@@ -72,11 +74,22 @@ public class LoginActivity extends WDActivity {
 
         if (flag){
             /*intent(ShowActivity.class);*/
-            loginPresenter.reqeust(phone,pwd);
-        }else {
+
             if (rememberPassword){
+                //Log.i("abc", "initView: "+p+ph);
+                editLoginPhone.setText(ph);
+                editLoginPassword.setText(d);
+
+            }else {
                 editLoginPhone.setText("");
                 editLoginPassword.setText("");
+            }
+            loginPresenter.reqeust(phone, pwd);
+        }else {
+            if (rememberPassword){
+                Log.i("abc", "initView: "+p+ph);
+                editLoginPhone.setText(ph);
+                editLoginPassword.setText(d);
 
             }else {
                 editLoginPhone.setText("");
@@ -140,6 +153,8 @@ public class LoginActivity extends WDActivity {
                 edit.putBoolean("rememberPassword",rememberPassword);
                 edit.putInt("userId",data.getResult().getUserId());
                 edit.putString("sessionId",data.getResult().getSessionId());
+                edit.putString("phone",phone);
+                edit.putString("pwd",pwd);
                 edit.commit();
                 finish();
             }

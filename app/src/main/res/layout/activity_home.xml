@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:orientation="vertical"
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,14 +10,14 @@
     <FrameLayout
         android:id="@+id/checkout_frag"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"></FrameLayout>
+        android:layout_height="match_parent"></FrameLayout>
 
         <RadioGroup
+            android:layout_alignParentBottom="true"
             android:id="@+id/radio"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_78"
-            android:background="#00000000"
+            android:background="@drawable/select_show"
             android:orientation="horizontal">
             <RadioButton
                 android:id="@+id/checkout_radio_one"
@@ -45,4 +44,4 @@
                 android:drawableTop="@drawable/buttom_select3"/>
         </RadioGroup>
 
-</LinearLayout>
+</RelativeLayout>

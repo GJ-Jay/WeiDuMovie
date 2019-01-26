@@ -1,8 +1,14 @@
 package com.gj.weidumovie;
 
+import android.Manifest;
 import android.animation.ObjectAnimator;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -32,6 +38,7 @@ import com.gj.weidumovie.core.exception.ApiException;
 import com.gj.weidumovie.presenter.ComingSoonMoviePresenter;
 import com.gj.weidumovie.presenter.HotMoviePresenter;
 import com.gj.weidumovie.presenter.ReleaseMoviePresenter;
+import com.gj.weidumovie.util.UIUtils;
 import com.gj.weidumovie.view.MySearchLayout;
 
 import java.util.List;
@@ -99,9 +106,47 @@ public class Fragment_Movie_One extends WDFragment {
         return R.layout.fragment_movie_one;
     }
 
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 100) {
+            UIUtils.showToastSafe("权限打开");
+        }
+    }
     @Override
     protected void initView() {
+        myListener = new MyLocationListener();
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(getActivity(), new String[]{
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_PHONE_STATE,
+                        Manifest.permission.ACCESS_NETWORK_STATE,
+                        Manifest.permission.CHANGE_WIFI_STATE,
+                        Manifest.permission.ACCESS_WIFI_STATE,
+                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS
+                }, 100);
+            }else {
+                initData();
+            }
+        }else {
+            initData();
+        }
 
+        final EditText editText= oneMySearch.findViewById(R.id.one_sou);
+       TextView textView= oneMySearch.findViewById(R.id.one_sou_ok);
+       textView.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               String s = editText.getText().toString();
+               Intent intent = new Intent(getContext(),ShowActivity.class);
+               intent.putExtra("sou",s);
+               startActivity(intent);
+           }
+       });
     }
 
     @Override
@@ -177,11 +222,13 @@ public class Fragment_Movie_One extends WDFragment {
         popularAdapter.setClickListener(new PopularAdapter.ClickListener() {
             @Override
             public void click(int id) {
-                //Intent intent = new Intent(getContext(),);
+                Intent intent = new Intent(getContext(),MovieDetailsShow.class);
+                intent.putExtra("id",id);
+                startActivity(intent);
             }
         });
 
-        myListener = new MyLocationListener();
+
         initData();
 
     }
@@ -213,11 +260,19 @@ public class Fragment_Movie_One extends WDFragment {
         switch (view.getId()) {
 
             case R.id.one_r:
-
+                    Intent intent = new Intent(getContext(),MovieShowActivity.class);
+                    intent.putExtra("select","1");
+                    startActivity(intent);
                 break;
             case R.id.one_z:
+                Intent intentz = new Intent(getContext(),MovieShowActivity.class);
+                intentz.putExtra("select","2");
+                startActivity(intentz);
                 break;
             case R.id.one_j:
+                Intent intentj = new Intent(getContext(),MovieShowActivity.class);
+                intentj.putExtra("select","3");
+                startActivity(intentj);
                 break;
         }
     }

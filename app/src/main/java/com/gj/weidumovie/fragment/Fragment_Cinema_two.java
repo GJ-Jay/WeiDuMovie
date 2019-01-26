@@ -25,6 +25,7 @@ import com.gj.weidumovie.core.WDFragment;
 import com.gj.weidumovie.core.exception.ApiException;
 import com.gj.weidumovie.presenter.FindNearbyCinemasPresenter;
 import com.gj.weidumovie.presenter.FindRecommendCinemasPresenter;
+import com.gj.weidumovie.view.MySearchLayout;
 
 import java.util.List;
 
@@ -52,6 +53,8 @@ public class Fragment_Cinema_two extends WDFragment {
     @BindView(R.id.cinemarecycleview)
     RecyclerView cinemarecycleview;
     Unbinder unbinder;
+    @BindView(R.id.two_my_search)
+    MySearchLayout twoMySearch;
     private CinemaAdapter cinemaAdapter;
     private LinearLayoutManager linearLayoutManager;
     private FindRecommendCinemasPresenter cinemaPresenter;

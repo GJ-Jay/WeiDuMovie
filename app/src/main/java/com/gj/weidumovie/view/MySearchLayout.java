@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bw.movie.R;
@@ -23,6 +24,7 @@ import com.gj.weidumovie.core.WDApplication;
 public class MySearchLayout extends RelativeLayout {
 
     private ObjectAnimator translationX;
+    //private ObjectAnimator translationZ;
 
     public MySearchLayout(Context context) {
         super(context);
@@ -41,7 +43,32 @@ public class MySearchLayout extends RelativeLayout {
     private void init(){
         View view = View.inflate(getContext(), R.layout.one_search_layout,this);
         ImageView imageView= view.findViewById(R.id.one_image_sou);
+        //TextView textView= view.findViewById(R.id.one_sou_ok);
         translationX = ObjectAnimator.ofFloat(this, "translationX", 0,-280);
+        /*translationZ = ObjectAnimator.ofFloat(this, "translationX", -280,0);
+        translationZ.setDuration(1000);
+        translationZ.setInterpolator(new LinearInterpolator());
+        translationZ.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                translationZ.pause();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });*/
         translationX.setDuration(1000);
         translationX.setInterpolator(new LinearInterpolator());
         translationX.addListener(new Animator.AnimatorListener() {
@@ -69,8 +96,13 @@ public class MySearchLayout extends RelativeLayout {
             @Override
             public void onClick(View view) {
                     translationX.start();
-                Toast.makeText(getContext(), "1111", Toast.LENGTH_SHORT).show();
             }
         });
+        /*textView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                translationZ.start();
+            }
+        });*/
     }
 }

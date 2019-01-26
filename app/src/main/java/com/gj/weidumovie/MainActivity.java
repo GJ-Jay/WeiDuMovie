@@ -10,7 +10,13 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.bw.movie.R;
+import com.gj.weidumovie.bean.Result;
+import com.gj.weidumovie.bean.UserBean;
+import com.gj.weidumovie.core.DataCall;
 import com.gj.weidumovie.core.WDActivity;
+import com.gj.weidumovie.core.exception.ApiException;
+import com.gj.weidumovie.presenter.LoginPresenter;
+import com.gj.weidumovie.util.UIUtils;
 
 public class MainActivity extends WDActivity {
 
@@ -28,12 +34,14 @@ public class MainActivity extends WDActivity {
                 handler.sendEmptyMessageDelayed(0,1000);
             }else{
 
-                sp = getSharedPreferences("Config", Context.MODE_PRIVATE);
+
                 isFirst = sp.getBoolean("isFirst", true);
+
                 if(isFirst){
                     SharedPreferences.Editor edit = sp.edit();
                     edit.putBoolean("isFirst",false);
                     edit.commit();
+
                     startActivity(new Intent(MainActivity.this,GuidePageActivity.class));
                     finish();
                 }else {
@@ -43,6 +51,8 @@ public class MainActivity extends WDActivity {
             }
         }
     };
+    private LoginPresenter loginPresenter;
+    private SharedPreferences.Editor edit;
 
     @Override
     protected int getLayoutId() {
@@ -51,17 +61,47 @@ public class MainActivity extends WDActivity {
 
     @Override
     protected void initView() {
+        loginPresenter = new LoginPresenter(new LoginCall());
         handler.sendEmptyMessageDelayed(0,1000);
+        sp = getSharedPreferences("Config", Context.MODE_PRIVATE);
+        edit = sp.edit();
+        boolean flag=  sp.getBoolean("flag",false);
+        String p = sp.getString("pwd", "");
+        String ph = sp.getString("phone", "");
+        if (flag){
+            loginPresenter.reqeust(ph, p);
+        }
+
+
     }
 
     @Override
     protected void destoryData() {
-
+        loginPresenter.unBind();
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+    }
+    class LoginCall implements DataCall<Result<UserBean>> {
+
+        @Override
+        public void success(Result<UserBean> data) {
+            if (data.getStatus().equals("0000")) {
+                edit.putInt("userId", data.getResult().getUserId());
+                edit.putString("sessionId", data.getResult().getSessionId());
+                edit.commit();
+
+            }
+
+            UIUtils.showToastSafe(data.getMessage());
+        }
+
+        @Override
+        public void fail(ApiException e) {
+
+        }
     }
 }
