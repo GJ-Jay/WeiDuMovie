@@ -71,4 +71,6 @@
     <color name="actionbar_background_start">#3A5FCD</color>
     <color name="actionbar_background_end">#27408B</color>
     <color name="textcolor">#333333</color>
+    <color name="textcolor9">#999999</color>
+    <color name="textcolor6">#666666</color>
 </resources>

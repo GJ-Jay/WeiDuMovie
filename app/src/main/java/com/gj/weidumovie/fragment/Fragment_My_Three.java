@@ -107,6 +107,7 @@ public class Fragment_My_Three extends WDFragment {
                 break;
             case R.id.btn_feedback_mine://意见反馈
                 Intent intent_feedback = new Intent(getContext(), FeedbackActivity.class);
+                startActivity(intent_feedback);
                 break;
             case R.id.btn_version_mine:
                 break;
