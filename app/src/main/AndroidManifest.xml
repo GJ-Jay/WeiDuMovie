@@ -60,6 +60,8 @@
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote" />
+        <activity android:name="com.gj.weidumovie.MyCanBuyMovieActivity"/>
+        <activity android:name="com.gj.weidumovie.MovieBuyActivity"/>
     </application>
 
 </manifest>

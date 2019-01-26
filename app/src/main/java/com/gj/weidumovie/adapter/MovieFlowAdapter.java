@@ -29,9 +29,9 @@ public class MovieFlowAdapter extends RecyclerView.Adapter {
         }
     }
 
-    private onItemClick clickCb;
+    private OnItemClick clickCb;
 
-    public MovieFlowAdapter(onItemClick clickCb) {
+    public void setMovieFlowAdapter(OnItemClick clickCb) {
         this.clickCb = clickCb;
     }
 
@@ -48,7 +48,7 @@ public class MovieFlowAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int i) {
-        MoiveBean moiveBean = list.get(i);
+        final MoiveBean moiveBean = list.get(i);
         MovieVH movieVH = (MovieVH) viewHolder;
         Glide.with(context).load(moiveBean.getImageUrl()).into(movieVH.img);
         movieVH.populartextviewone.setBackgroundColor(0x55000000);
@@ -57,7 +57,7 @@ public class MovieFlowAdapter extends RecyclerView.Adapter {
             @Override
             public void onClick(View v) {
                 if (clickCb != null) {
-                    clickCb.clickItem(i);
+                    clickCb.clickItem(moiveBean.getId());
                 }
             }
         });
@@ -80,7 +80,8 @@ public class MovieFlowAdapter extends RecyclerView.Adapter {
         }
     }
 
-    public interface onItemClick {
+    public interface OnItemClick {
         void clickItem(int position);
     }
+
 }

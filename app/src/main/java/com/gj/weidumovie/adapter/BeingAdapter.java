@@ -18,6 +18,7 @@ import java.util.List;
 public class BeingAdapter extends RecyclerView.Adapter {
 
     private Context context;
+    private ClickListener clickListener;
 
     public BeingAdapter(Context context) {
         this.context = context;
@@ -40,11 +41,17 @@ public class BeingAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        MoiveBean moiveBean = list.get(i);
+        final MoiveBean moiveBean = list.get(i);
         PopularVH popularVH = (PopularVH) viewHolder;
         popularVH.popularsdv.setImageURI(Uri.parse(moiveBean.getImageUrl()));
         popularVH.populartextview.setBackgroundColor(0x55000000);
         popularVH.populartextview.setText(moiveBean.getName());
+        popularVH.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clickListener.click(moiveBean.getId());
+            }
+        });
     }
 
     @Override
@@ -64,5 +71,11 @@ public class BeingAdapter extends RecyclerView.Adapter {
             popularsdv = itemView.findViewById(R.id.popularsdv);
             populartextview = itemView.findViewById(R.id.populartextview);
         }
+    }
+    public interface ClickListener{
+        void click(int id);
+    }
+    public void setClickListener(ClickListener clickListener){
+        this.clickListener=clickListener;
     }
 }

@@ -1,6 +1,7 @@
 package com.gj.weidumovie.core.http;
 
 import com.gj.weidumovie.bean.CinemaBean;
+import com.gj.weidumovie.bean.FilmReviewBean;
 import com.gj.weidumovie.bean.MoiveBean;
 import com.gj.weidumovie.bean.MovieDetailsBean;
 import com.gj.weidumovie.bean.Result;
@@ -106,4 +107,15 @@ public interface IRequest {
     @GET("movieApi/movie/v1/findMoviesDetail")
     Observable<Result<MovieDetailsBean>> findMoviesDetail(@Header("userId")int userId,
                                                           @Header("sessionId")String sessionId,@Query("movieId")int movieId);
+
+    //查询电影影评
+    @GET("movieApi/movie/v1/findAllMovieComment")
+    Observable<Result<List<FilmReviewBean>>> findAllMovieComment(@Header("userId")int userId,
+                                                        @Header("sessionId")String sessionId,
+                                                        @Query("movieId") int movieId,
+                                                        @Query("page") int page,
+                                                        @Query("count") int count);
+    //根据电影ID查询当前排片该电影的影院列表
+    @GET("movieApi/movie/v1/findCinemasListByMovieId")
+    Observable<Result<List<CinemaBean>>> findCinemasListByMovieId(@Query("movieId") int movieId);
 }

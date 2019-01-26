@@ -58,7 +58,7 @@
                     android:textSize="12sp"
                     android:textColor="#333333"
                     android:text="CGV影院"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
                 <CheckBox
@@ -68,6 +68,7 @@
                     android:layout_alignParentRight="true"
                     android:background="@drawable/checked_selector"
                     android:button="@null"/>
+
             </RelativeLayout>
         </LinearLayout>
 
