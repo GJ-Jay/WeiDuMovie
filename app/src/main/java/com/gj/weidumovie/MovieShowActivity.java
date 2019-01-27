@@ -16,7 +16,6 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.bw.movie.R;
 import com.gj.weidumovie.adapter.FilmShowAdapter;
-import com.gj.weidumovie.bean.HotMovieBean;
 import com.gj.weidumovie.bean.MoiveBean;
 import com.gj.weidumovie.bean.Result;
 import com.gj.weidumovie.core.DataCall;
@@ -35,6 +34,8 @@ import butterknife.OnClick;
 
 public class MovieShowActivity extends WDActivity implements XRecyclerView.LoadingListener {
 
+    @BindView(R.id.movie_show_back)
+    ImageView movieShowBack;
     private boolean hotcheck = true;
     private boolean releasecheck = false;
     private boolean comingSooncheck = false;
@@ -60,6 +61,7 @@ public class MovieShowActivity extends WDActivity implements XRecyclerView.Loadi
     private FilmShowAdapter filmShowAdapter;
     public LocationClient mLocationClient = null;
     private MyLocationListener myListener = new MyLocationListener();
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_movie_show;
@@ -68,7 +70,7 @@ public class MovieShowActivity extends WDActivity implements XRecyclerView.Loadi
     @Override
     protected void initView() {
         SharedPreferences sharedPreferences = getSharedPreferences("Config", MODE_PRIVATE);
-       userId = sharedPreferences.getInt("userId", 0);
+        userId = sharedPreferences.getInt("userId", 0);
         sessionId = sharedPreferences.getString("sessionId", "");
         Intent intent = getIntent();
         String select = intent.getStringExtra("select");
@@ -84,31 +86,39 @@ public class MovieShowActivity extends WDActivity implements XRecyclerView.Loadi
         movieShowRecycler.setLayoutManager(manager);
         movieShowRecycler.setAdapter(filmShowAdapter);
 
-        if (select.equals("1")){
+        if (select.equals("1")) {
             hotShow.setBackgroundResource(R.drawable.btn_gradient);
             releaseShow.setBackgroundResource(R.drawable.btn_false);
             comingSoonShow.setBackgroundResource(R.drawable.btn_false);
             filmShowAdapter.remove();
             hotMoviePresenter.reqeust(userId, sessionId, false, 5);
-        }else if (select.equals("2")){
+        } else if (select.equals("2")) {
             releaseShow.setBackgroundResource(R.drawable.btn_gradient);
             hotShow.setBackgroundResource(R.drawable.btn_false);
             comingSoonShow.setBackgroundResource(R.drawable.btn_false);
             filmShowAdapter.remove();
-            releaseMoviePresenter.reqeust(userId, sessionId,false , 5);
-        }else {
+            releaseMoviePresenter.reqeust(userId, sessionId, false, 5);
+        } else {
             comingSoonShow.setBackgroundResource(R.drawable.btn_gradient);
             hotShow.setBackgroundResource(R.drawable.btn_false);
             releaseShow.setBackgroundResource(R.drawable.btn_false);
             filmShowAdapter.remove();
             comingSoonMoviePresenter.reqeust(userId, sessionId, false, 5);
         }
+        filmShowAdapter.setClickListener(new FilmShowAdapter.ClickListener() {
+            @Override
+            public void click(int id) {
+                Intent intent = new Intent(MovieShowActivity.this, MovieDetailsShow.class);
+                intent.putExtra("id", id);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
     protected void destoryData() {
         hotMoviePresenter.unBind();
-       releaseMoviePresenter.unBind();
+        releaseMoviePresenter.unBind();
         comingSoonMoviePresenter.unBind();
     }
 
@@ -119,7 +129,7 @@ public class MovieShowActivity extends WDActivity implements XRecyclerView.Loadi
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.hot_show, R.id.release_show, R.id.comingSoon_show})
+    @OnClick({R.id.hot_show, R.id.release_show, R.id.comingSoon_show,R.id.movie_show_back})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.hot_show:
@@ -158,6 +168,9 @@ public class MovieShowActivity extends WDActivity implements XRecyclerView.Loadi
                     comingSoonMoviePresenter.reqeust(userId, sessionId, false, 5);
                 }
                 break;
+            case R.id.movie_show_back:
+                finish();
+                break;
         }
     }
 
@@ -185,6 +198,7 @@ public class MovieShowActivity extends WDActivity implements XRecyclerView.Loadi
         }
 
     }
+
     private class Hot implements DataCall<Result> {
 
         @Override
@@ -223,7 +237,7 @@ public class MovieShowActivity extends WDActivity implements XRecyclerView.Loadi
 
         @Override
         public void success(Result data) {
-            if (data.getStatus().equals("0000")){
+            if (data.getStatus().equals("0000")) {
                 List<MoiveBean> result = (List<MoiveBean>) data.getResult();
                 filmShowAdapter.addItem(result);
                 filmShowAdapter.notifyDataSetChanged();
@@ -245,6 +259,7 @@ public class MovieShowActivity extends WDActivity implements XRecyclerView.Loadi
         hotMoviePresenter.unBind();
         comingSoonMoviePresenter.unBind();
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -267,6 +282,7 @@ public class MovieShowActivity extends WDActivity implements XRecyclerView.Loadi
         mLocationClient.setLocOption(option);
         mLocationClient.start();
     }
+
     //定位
     public class MyLocationListener implements BDLocationListener {
         @Override

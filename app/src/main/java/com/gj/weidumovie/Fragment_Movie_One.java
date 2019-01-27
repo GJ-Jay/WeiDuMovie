@@ -181,6 +181,7 @@ public class Fragment_Movie_One extends WDFragment {
 //        mList.setAlphaItem(true); //设置半透渐变
 
         movieFlowAdapter = new MovieFlowAdapter(getActivity());
+
         movieflow.setAdapter(movieFlowAdapter);
         movieflow.setOnItemSelectedListener(new CoverFlowLayoutManger.OnSelected() {
             @Override
@@ -189,7 +190,14 @@ public class Fragment_Movie_One extends WDFragment {
                 //Toast.makeText(getActivity(), "" + (position + 1) + "/" + movieflow.getLayoutManager().getItemCount(), Toast.LENGTH_SHORT).show();
             }
         });
-
+        movieFlowAdapter.setMovieFlowAdapter(new MovieFlowAdapter.OnItemClick() {
+            @Override
+            public void clickItem(int position) {
+                Intent intent = new Intent(getContext(),MovieDetailsShow.class);
+                intent.putExtra("id",position);
+                startActivity(intent);
+            }
+        });
         popularMoviePresenter = new HotMoviePresenter(new PopularCall());
         beingMoviePresenter = new ReleaseMoviePresenter(new BeingCall());
         soonMoviePresenter = new ComingSoonMoviePresenter(new SoonCall());
@@ -220,6 +228,22 @@ public class Fragment_Movie_One extends WDFragment {
 
         //自定义接口回调
         popularAdapter.setClickListener(new PopularAdapter.ClickListener() {
+            @Override
+            public void click(int id) {
+                Intent intent = new Intent(getContext(),MovieDetailsShow.class);
+                intent.putExtra("id",id);
+                startActivity(intent);
+            }
+        });
+        beingAdapter.setClickListener(new BeingAdapter.ClickListener() {
+            @Override
+            public void click(int id) {
+                Intent intent = new Intent(getContext(),MovieDetailsShow.class);
+                intent.putExtra("id",id);
+                startActivity(intent);
+            }
+        });
+        soonAdapter.setClickListener(new SoonAdapter.ClickListener() {
             @Override
             public void click(int id) {
                 Intent intent = new Intent(getContext(),MovieDetailsShow.class);

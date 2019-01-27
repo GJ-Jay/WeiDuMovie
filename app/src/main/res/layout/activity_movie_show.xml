@@ -1,89 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.gj.weidumovie.MovieShowActivity">
-
-    <RelativeLayout
-        android:id="@+id/cinema_relative"
+    <LinearLayout
         android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
 
-        android:layout_marginTop="30dp"
-        android:layout_height="24dp">
+        <RelativeLayout
+            android:id="@+id/cinema_relative"
+            android:layout_width="match_parent"
 
-        <ImageView
-            android:id="@+id/cinemasdv"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginLeft="24dp"
-            android:src="@drawable/cinema_detail_icon_location" />
+            android:layout_marginTop="30dp"
+            android:layout_height="24dp">
 
-        <TextView
-            android:id="@+id/cimema_text"
-            android:layout_width="wrap_content"
+            <ImageView
+                android:id="@+id/cinemasdv"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="24dp"
+                android:src="@drawable/cinema_detail_icon_location" />
+
+            <TextView
+                android:id="@+id/cimema_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:layout_toRightOf="@+id/cinemasdv"
+                android:text="北京" />
+            <com.gj.weidumovie.view.MySearchLayout
+                android:id="@+id/movie_my_search"
+                android:layout_width="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_height="match_parent"
+                android:layout_marginRight="-170dp"
+                ></com.gj.weidumovie.view.MySearchLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="6dp"
-            android:layout_toRightOf="@+id/cinemasdv"
-            android:text="北京" />
-        <com.gj.weidumovie.view.MySearchLayout
-            android:id="@+id/movie_my_search"
-            android:layout_width="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="24dp">
+
+            <Button
+                android:id="@+id/hot_show"
+                android:layout_width="83dp"
+                android:layout_height="25dp"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/btn_gradient"
+                android:text="热门电影"
+                android:textColor="#333333"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/release_show"
+                android:layout_width="83dp"
+                android:layout_height="25dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/btn_false"
+                android:text="正在热映"
+                android:textColor="#333333"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/comingSoon_show"
+                android:layout_width="83dp"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/btn_false"
+                android:text="即将上映"
+                android:textColor="#333333"
+                android:textSize="14sp" />
+
+
+        </RelativeLayout>
+
+        <com.jcodecraeer.xrecyclerview.XRecyclerView
+            android:id="@+id/movie_show_recycler"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginRight="-170dp"
-            ></com.gj.weidumovie.view.MySearchLayout>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="24dp">
-
-        <Button
-            android:id="@+id/hot_show"
-            android:layout_width="83dp"
-            android:layout_height="25dp"
-            android:layout_alignParentLeft="true"
-            android:background="@drawable/btn_gradient"
-            android:text="热门电影"
-            android:textColor="#333333"
-            android:textSize="14sp" />
-
-        <Button
-            android:id="@+id/release_show"
-            android:layout_width="83dp"
-            android:layout_height="25dp"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/btn_false"
-            android:text="正在热映"
-            android:textColor="#333333"
-            android:textSize="14sp" />
-
-        <Button
-            android:id="@+id/comingSoon_show"
-            android:layout_width="83dp"
-            android:layout_height="25dp"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/btn_false"
-            android:text="即将上映"
-            android:textColor="#333333"
-            android:textSize="14sp" />
-
-
-    </RelativeLayout>
-
-    <com.jcodecraeer.xrecyclerview.XRecyclerView
-        android:id="@+id/movie_show_recycler"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="24dp"
-        android:layout_weight="1"></com.jcodecraeer.xrecyclerview.XRecyclerView>
-</LinearLayout>
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="24dp"
+            android:layout_weight="1"></com.jcodecraeer.xrecyclerview.XRecyclerView>
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/movie_show_back"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/detalisgroup"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="24dp"
+        android:layout_marginLeft="@dimen/dp_24"
+        android:src="@drawable/ic_particulars_back" />
+</RelativeLayout>
 

@@ -21,6 +21,7 @@ import java.util.List;
 public class FilmShowAdapter extends RecyclerView.Adapter<FilmShowAdapter.ViewHolder> {
     private Context context;
     List<MoiveBean> list = new ArrayList<>();
+    private ClickListener clickListener;
 
     public FilmShowAdapter(Context context) {
         this.context = context;
@@ -34,10 +35,16 @@ public class FilmShowAdapter extends RecyclerView.Adapter<FilmShowAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
         viewHolder.name.setText(list.get(i).getName());
         viewHolder.summary.setText(list.get(i).getSummary());
         viewHolder.simpleDraweeView.setImageURI(Uri.parse(list.get(i).getImageUrl()));
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clickListener.click(list.get(i).getId());
+            }
+        });
     }
 
     @Override
@@ -69,5 +76,11 @@ public class FilmShowAdapter extends RecyclerView.Adapter<FilmShowAdapter.ViewHo
             imageView = itemView.findViewById(R.id.filmshow_heart);
             summary = itemView.findViewById(R.id.filmshow_summary);
         }
+    }
+    public interface ClickListener{
+        void click(int id);
+    }
+    public void setClickListener(ClickListener clickListener){
+        this.clickListener=clickListener;
     }
 }
