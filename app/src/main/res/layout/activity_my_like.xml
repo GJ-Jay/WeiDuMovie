@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.gj.weidumovie.MyLikeActivity">
+    
+    <LinearLayout
+        android:id="@+id/lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_50"
+        android:gravity="center">
+
+        <RadioGroup
+            android:id="@+id/mylike_radio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <RadioButton
+                android:id="@+id/mylike_radio1"
+                android:layout_width="@dimen/dp_83"
+                android:layout_height="@dimen/dp_23"
+                android:button="@null"
+                android:text="电影"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:layout_marginRight="@dimen/dp_32"
+                android:background="@drawable/my_like_btn_falseshape"/>
+
+            <RadioButton
+                android:id="@+id/mylike_radio2"
+                android:layout_width="@dimen/dp_83"
+                android:layout_height="@dimen/dp_23"
+                android:button="@null"
+                android:text="影院"
+                android:textSize="14sp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:background="@drawable/my_like_btn_falseshape"/>
+                <!--android:background="@drawable/my_like_btn_radius"/>-->
+                <!--android:background="@drawable/btn_bg"/>-->
+        </RadioGroup>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/mylike_frag"
+        android:layout_below="@id/lay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp_30"
+        android:layout_marginLeft="@dimen/dp_24"
+        android:layout_marginRight="@dimen/dp_24"></FrameLayout>
+    <ImageView
+        android:id="@+id/mylike_back"
+        android:layout_width="@dimen/dp_60"
+        android:layout_height="@dimen/dp_60"
+        android:layout_marginLeft="@dimen/dp_24"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/ic_particulars_back"/>
+</RelativeLayout>

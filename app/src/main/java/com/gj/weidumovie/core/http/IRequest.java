@@ -1,6 +1,7 @@
 package com.gj.weidumovie.core.http;
 
 import com.gj.weidumovie.bean.CinemaBean;
+import com.gj.weidumovie.bean.LikeMovie;
 import com.gj.weidumovie.bean.MoiveBean;
 import com.gj.weidumovie.bean.MovieDetailsBean;
 import com.gj.weidumovie.bean.Result;
@@ -84,6 +85,15 @@ public interface IRequest {
                                               @Field("sex")int sex,
                                               @Field("email")String email);
 
+    //修改密码
+    @POST("movieApi/user/v1/verify/modifyUserPwd")
+    @FormUrlEncoded
+    Observable<Result> updatePwd(@Header("userId")int userId,
+                                 @Header("sessionId")String sessionId,
+                                 @Field("oldPwd")String oldPwd,
+                                 @Field("newPwd")String newPwd,
+                                 @Field("newPwd2")String newPwd2);
+
     /**
      * 正在热映
      * @param userId
@@ -129,5 +139,13 @@ public interface IRequest {
     //通过电影Id查看电影详情
     @GET("movieApi/movie/v1/findMoviesDetail")
     Observable<Result<MovieDetailsBean>> findMoviesDetail(@Header("userId")int userId,
-                                                          @Header("sessionId")String sessionId,@Query("movieId")int movieId);
+                                                          @Header("sessionId")String sessionId,
+                                                          @Query("movieId")int movieId);
+
+    //我关注的影片
+    @GET("movieApi/movie/v1/verify/findMoviePageList")
+    Observable<Result<List<LikeMovie>>> myLikeMovie(@Header("userId")int userId,
+                                                    @Header("sessionId")String sessionId,
+                                                    @Query("page")int page,
+                                                    @Query("count")int count);
 }

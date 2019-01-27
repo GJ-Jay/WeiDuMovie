@@ -1,6 +1,8 @@
 package com.gj.weidumovie.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +14,9 @@ import android.widget.TextView;
 import com.bw.movie.R;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.gj.weidumovie.FeedbackActivity;
+import com.gj.weidumovie.HomeActivity;
 import com.gj.weidumovie.LoginActivity;
+import com.gj.weidumovie.MyLikeActivity;
 import com.gj.weidumovie.MyMassageActivity;
 import com.gj.weidumovie.core.WDFragment;
 
@@ -54,6 +58,8 @@ public class Fragment_My_Three extends WDFragment {
     @BindView(R.id.btn_version_mine)
     LinearLayout btnVersionMine;
     Unbinder unbinder;
+    private int userId;
+    private SharedPreferences sp;
 
     @Override
     public String getPageName() {
@@ -67,7 +73,8 @@ public class Fragment_My_Three extends WDFragment {
 
     @Override
     protected void initView() {
-
+        sp = getContext().getSharedPreferences("Config", Context.MODE_PRIVATE);
+        userId = sp.getInt("userId", 0);
     }
 
     @Override
@@ -84,7 +91,7 @@ public class Fragment_My_Three extends WDFragment {
         unbinder.unbind();
     }
 
-    @OnClick({R.id.mine_remind, R.id.mine_head, R.id.mine_login_reg, R.id.btn_msg_mine, R.id.btn_like_mine, R.id.btn_buy_mine, R.id.btn_feedback_mine, R.id.btn_version_mine})
+    @OnClick({R.id.mine_remind, R.id.mine_head, R.id.mine_login_reg, R.id.btn_msg_mine, R.id.btn_like_mine, R.id.btn_buy_mine, R.id.btn_feedback_mine, R.id.btn_version_mine, R.id.btn_back_mine})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.mine_remind:
@@ -98,10 +105,15 @@ public class Fragment_My_Three extends WDFragment {
                 startActivity(intent);
                 break;
             case R.id.btn_msg_mine://我的信息页面跳转
+                if (userId == 0) {
+                    startActivity(new Intent(getContext(), LoginActivity.class));
+                    return;
+                }
                 Intent intent_msg = new Intent(getContext(), MyMassageActivity.class);
                 startActivity(intent_msg);
                 break;
-            case R.id.btn_like_mine:
+            case R.id.btn_like_mine://我的关注
+                startActivity(new Intent(getContext(), MyLikeActivity.class));
                 break;
             case R.id.btn_buy_mine:
                 break;
@@ -110,6 +122,13 @@ public class Fragment_My_Three extends WDFragment {
                 startActivity(intent_feedback);
                 break;
             case R.id.btn_version_mine:
+                break;
+            case R.id.btn_back_mine://退出登录
+                sp.edit().clear().commit();
+                sp.edit().putBoolean("isFirst", false).commit();
+                Intent backLogin = new Intent(getContext(), HomeActivity.class);
+                backLogin.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);//重点
+                startActivity(backLogin);//重点
                 break;
         }
     }

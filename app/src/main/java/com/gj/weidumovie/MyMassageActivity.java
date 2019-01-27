@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -64,8 +65,6 @@ public class MyMassageActivity extends WDActivity {
     @BindView(R.id.my_info_email)
     TextView myInfoEmail;
     @BindView(R.id.my_info_reset_pwd)
-    ImageView myInfoResetPwd;
-    @BindView(R.id.my_info_exit_login)
     Button myInfoExitLogin;
     @BindView(R.id.my_info_back)
     ImageView myInfoBack;
@@ -83,6 +82,7 @@ public class MyMassageActivity extends WDActivity {
     private String getNickName;
     private int getSex;
     private String getEmail;
+    private int index = 0;
 
     @Override
     protected int getLayoutId() {
@@ -119,53 +119,44 @@ public class MyMassageActivity extends WDActivity {
 
     }
 
-    @OnClick({R.id.my_info_head, R.id.my_info_username, R.id.my_info_sex, R.id.my_info_birth_date, R.id.my_info_telephone, R.id.my_info_email, R.id.my_info_reset_pwd, R.id.my_info_exit_login, R.id.my_info_back})
+    @OnClick({R.id.my_info_head, R.id.my_info_username, R.id.my_info_sex, R.id.my_info_birth_date, R.id.my_info_telephone, R.id.my_info_email, R.id.my_info_reset_pwd, R.id.my_info_back})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.my_info_head://点击我的头像 弹框修改头像 从相机或相册
-                if(userId==0){//判断是否登录
-                    UIUtils.showToastSafe("请登录");
-                    return;
-                    /*pleaseLogin();*/
-                }else {
-                    CharSequence[] items = {"相机", "相册"};
-                    AlertDialog dialog = new AlertDialog.Builder(this)
-                            .setTitle("请选择图片来源")
-                            .setItems(items, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    if (which == SELECT_CAMER) {//相册
-                                        if (ContextCompat.checkSelfPermission(MyMassageActivity.this,
-                                                Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {//申请权限
-                                            ActivityCompat.requestPermissions(MyMassageActivity.this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, Constant.REQ_PERM_CAMERA);
-                                            return;
-                                        }
-                                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                                        intent.addCategory("android.intent.category.DEFAULT");
-                                        startActivityForResult(intent, SELECT_CAMER);
-                                    } else {
-                                        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                                        intent.addCategory(Intent.CATEGORY_OPENABLE);
-                                        intent.setType("image/*");
-                                        startActivityForResult(intent, SELECT_PICTURE);
+                CharSequence[] items = {"相机", "相册"};
+                AlertDialog dialog = new AlertDialog.Builder(this)
+                        .setTitle("请选择图片来源")
+                        .setItems(items, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (which == SELECT_CAMER) {//相册
+                                    if (ContextCompat.checkSelfPermission(MyMassageActivity.this,
+                                            Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {//申请权限
+                                        ActivityCompat.requestPermissions(MyMassageActivity.this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, Constant.REQ_PERM_CAMERA);
+                                        return;
                                     }
+                                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                    intent.addCategory("android.intent.category.DEFAULT");
+                                    startActivityForResult(intent, SELECT_CAMER);
+                                } else {
+                                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                                    intent.addCategory(Intent.CATEGORY_OPENABLE);
+                                    intent.setType("image/*");
+                                    startActivityForResult(intent, SELECT_PICTURE);
                                 }
-                            }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                }
-                            }).create();
-                    dialog.show();
-                }
+                            }
+                        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        }).create();
+                dialog.show();
                 break;
             case R.id.my_info_username://点击修改备注
-                if(userId==0){//判断是否登录
-                    /*pleaseLogin();*/
-                    UIUtils.showToastSafe("请登录");
-                    return;
-                }
                 final EditText editText = new EditText(this);
+                editText.setHint(getNickName);//显示原昵称
+                editText.setHintTextColor(getResources().getColor(R.color.textcolor9));
                 AlertDialog mUpdateUserName = new AlertDialog.Builder(this)
                         .setTitle("请输入昵称")
                         .setView(editText)//设置输入框
@@ -179,19 +170,35 @@ public class MyMassageActivity extends WDActivity {
                         }).setNegativeButton("取消",null).create();
                 mUpdateUserName.show();
                 break;
-            case R.id.my_info_sex:
+            case R.id.my_info_sex://修改性别
+                AlertDialog.Builder builder = new AlertDialog.Builder(MyMassageActivity.this);
+                final String[] sex={"男","女"};
+                builder.setSingleChoiceItems(sex, getSex, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        index = which;
+                    }
+                });
+                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                       myInfoSex.setText(sex[index]);
+                       UIUtils.showToastSafe(""+sex[index]);
+                       if(sex[index].equals("男")){
+                           userInfo.setSex(2);
+                           updateUserPresenter.reqeust(userId,sessionId,getNickName,2,getEmail);
+                       }else{
+                           userInfo.setSex(1);
+                           updateUserPresenter.reqeust(userId,sessionId,getNickName,1,getEmail);
+                       }
+                    }
+                });
+                builder.show();// 显示对话框
                 break;
-            case R.id.my_info_birth_date:
-                break;
-            case R.id.my_info_telephone:
-                break;
-            case R.id.my_info_email:
-                if(userId==0){//判断是否登录
-                    /*pleaseLogin();*/
-                    UIUtils.showToastSafe("请登录");
-                    return;
-                }
+            case R.id.my_info_email://修改邮箱
                 final EditText editEmail = new EditText(this);
+                editEmail.setHint(getEmail);//显示原昵称
+                editEmail.setHintTextColor(getResources().getColor(R.color.textcolor9));
                 AlertDialog mUpdateEmail = new AlertDialog.Builder(this)
                         .setTitle("修改邮箱")
                         .setView(editEmail)//设置输入框
@@ -211,9 +218,9 @@ public class MyMassageActivity extends WDActivity {
                         }).setNegativeButton("取消",null).create();
                 mUpdateEmail.show();
                 break;
-            case R.id.my_info_reset_pwd:
-                break;
-            case R.id.my_info_exit_login:
+            case R.id.my_info_reset_pwd://点击修改密码
+                Intent intent = new Intent(MyMassageActivity.this,UpdatePwdActivity.class);
+                startActivity(intent);
                 break;
             case R.id.my_info_back:
                 finish();
@@ -221,7 +228,7 @@ public class MyMassageActivity extends WDActivity {
         }
     }
 
-    //邮箱
+    //正则邮箱
     public static boolean isEmail(String strEmail) {
         String strPattern = "^[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z\\.]*[a-zA-Z]$";
         if (TextUtils.isEmpty(strPattern)) {
@@ -346,7 +353,6 @@ public class MyMassageActivity extends WDActivity {
                 UIUtils.showToastSafe(data.getStatus()+"修改用户信息请求成功"+data.getMessage());
             }
         }
-
         @Override
         public void fail(ApiException e) {
             UIUtils.showToastSafe("修改用户信息请求失败"+e.getMessage());
