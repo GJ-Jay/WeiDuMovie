@@ -1,8 +1,8 @@
 package com.gj.weidumovie.core.http;
 
 import com.gj.weidumovie.bean.CinemaBean;
-import com.gj.weidumovie.bean.LikeMovie;
 import com.gj.weidumovie.bean.FilmReviewBean;
+import com.gj.weidumovie.bean.LikeMovie;
 import com.gj.weidumovie.bean.MoiveBean;
 import com.gj.weidumovie.bean.MovieDetailsBean;
 import com.gj.weidumovie.bean.Result;
@@ -140,8 +140,7 @@ public interface IRequest {
     //通过电影Id查看电影详情
     @GET("movieApi/movie/v1/findMoviesDetail")
     Observable<Result<MovieDetailsBean>> findMoviesDetail(@Header("userId")int userId,
-                                                          @Header("sessionId")String sessionId,
-                                                          @Query("movieId")int movieId);
+                                                          @Header("sessionId")String sessionId,@Query("movieId")int movieId);
 
     //我关注的影片
     @GET("movieApi/movie/v1/verify/findMoviePageList")
@@ -149,15 +148,14 @@ public interface IRequest {
                                                     @Header("sessionId")String sessionId,
                                                     @Query("page")int page,
                                                     @Query("count")int count);
-                                                          @Header("sessionId")String sessionId,@Query("movieId")int movieId);
 
     //查询电影影评
     @GET("movieApi/movie/v1/findAllMovieComment")
     Observable<Result<List<FilmReviewBean>>> findAllMovieComment(@Header("userId")int userId,
-                                                        @Header("sessionId")String sessionId,
-                                                        @Query("movieId") int movieId,
-                                                        @Query("page") int page,
-                                                        @Query("count") int count);
+                                                                 @Header("sessionId")String sessionId,
+                                                                 @Query("movieId") int movieId,
+                                                                 @Query("page") int page,
+                                                                 @Query("count") int count);
     //根据电影ID查询当前排片该电影的影院列表
     @GET("movieApi/movie/v1/findCinemasListByMovieId")
     Observable<Result<List<CinemaBean>>> findCinemasListByMovieId(@Query("movieId") int movieId);
