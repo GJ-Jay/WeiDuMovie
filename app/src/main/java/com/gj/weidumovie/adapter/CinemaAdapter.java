@@ -79,10 +79,7 @@ public class CinemaAdapter extends RecyclerView.Adapter {
         return list.size();
     }
 
-    public void remove() {
-        list.clear();
-        notifyDataSetChanged();
-    }
+
 
     public void setnoClick() {
         cinemaVH.moive_like.setChecked(false);

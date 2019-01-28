@@ -73,6 +73,7 @@ public class Fragment_Cinema_two extends WDFragment {
     private FollowCinemaPresenter followCinemaPresenter;
     private int userId;
     private String sessionId;
+    private CancelFollowCinemaPresenter cancelFollowCinemaPresenter;
 
     @Override
     public String getPageName() {
@@ -95,11 +96,10 @@ public class Fragment_Cinema_two extends WDFragment {
         cinemaPresenter = new FindRecommendCinemasPresenter(new CinemaCall());
         nearbyMoivePresenter = new FindNearbyCinemasPresenter(new CinemaCall());
         followCinemaPresenter = new FollowCinemaPresenter(new followCinemaCall());
-        final CancelFollowCinemaPresenter cancelFollowCinemaPresenter = new CancelFollowCinemaPresenter(new cancelFollowCinema());
+        cancelFollowCinemaPresenter = new CancelFollowCinemaPresenter(new cancelFollowCinema());
 
         //默认推荐影院
-        cinemaAdapter = new CinemaAdapter(getActivity());
-        cinemarecycleview.setAdapter(cinemaAdapter);
+
         cinemaPresenter.reqeust(userId, sessionId, false, 10);
         recommend.setBackgroundResource(R.drawable.btn_gradient);
         recommend.setTextColor(Color.WHITE);
@@ -108,35 +108,7 @@ public class Fragment_Cinema_two extends WDFragment {
 
         initData();
 
-        cinemaAdapter.setClickListener(new CinemaAdapter.ClickListener() {
-            @Override
-            public void clickOk(int id) {//点击关注
-                if (userId == 0) {
-                    startActivity(new Intent(getContext(), LoginActivity.class));
-                    cinemaAdapter.setnoClick();
-                    followCinemaPresenter.reqeust(userId,sessionId,id);
-//                    cinemaPresenter.reqeust(userId, sessionId, false, 10);
-                    return;
-                }
-                followCinemaPresenter.reqeust(userId,sessionId,id);
-            }
 
-            @Override
-            public void clickNo(int id) {
-                cancelFollowCinemaPresenter.reqeust(userId,sessionId,id);
-            }
-
-            @Override
-            public void itemClick(int id,String name,String address,String image) {
-                Intent intent =  new Intent(getContext(), MovieCinemaActivity.class);
-                intent.putExtra("id",id);
-                intent.putExtra("name",name);
-                intent.putExtra("address",address);
-                intent.putExtra("image",image);
-
-                startActivity(intent);
-            }
-        });
     }
 
     @Override
@@ -151,6 +123,10 @@ public class Fragment_Cinema_two extends WDFragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        followCinemaPresenter.unBind();
+        cancelFollowCinemaPresenter.unBind();
+        nearbyMoivePresenter.unBind();
+        cinemaPresenter.unBind();
     }
 
     @OnClick({R.id.recommend, R.id.nearby})
@@ -161,20 +137,20 @@ public class Fragment_Cinema_two extends WDFragment {
                 recommend.setTextColor(Color.WHITE);
                 nearby.setBackgroundResource(R.drawable.myborder);
                 nearby.setTextColor(Color.BLACK);
-                cinemaAdapter.remove();
-                cinemaAdapter = new CinemaAdapter(getActivity());
-                cinemarecycleview.setAdapter(cinemaAdapter);
-                cinemaPresenter.reqeust(0, "", false, 10);
+                //cinemaAdapter.remove();
+               // cinemaAdapter = new CinemaAdapter(getActivity());
+                //cinemarecycleview.setAdapter(cinemaAdapter);
+                cinemaPresenter.reqeust(userId, sessionId, false, 10);
                 break;
             case R.id.nearby:
                 nearby.setBackgroundResource(R.drawable.btn_gradient);
                 nearby.setTextColor(Color.WHITE);
                 recommend.setBackgroundResource(R.drawable.myborder);
                 recommend.setTextColor(Color.BLACK);
-                cinemaAdapter.remove();
-                cinemaAdapter = new CinemaAdapter(getActivity());
-                cinemarecycleview.setAdapter(cinemaAdapter);
-                nearbyMoivePresenter.reqeust(0, "", "116.30551391385724", "40.04571807462411", false, 10);
+                //cinemaAdapter.remove();
+                //cinemaAdapter = new CinemaAdapter(getActivity());
+                //cinemarecycleview.setAdapter(cinemaAdapter);
+                nearbyMoivePresenter.reqeust(userId, sessionId, "116.30551391385724", "40.04571807462411", false, 10);
                 break;
         }
     }
@@ -185,8 +161,39 @@ public class Fragment_Cinema_two extends WDFragment {
         public void success(Result result) {
             if (result.getStatus().equals("0000")) {
                 List<CinemaBean> cinemaBeans = (List<CinemaBean>) result.getResult();
+                cinemaAdapter = new CinemaAdapter(getActivity());
                 cinemaAdapter.addItem(cinemaBeans);
-                cinemaAdapter.notifyDataSetChanged();
+                cinemarecycleview.setAdapter(cinemaAdapter);
+                //cinemaAdapter.notifyDataSetChanged();
+                cinemaAdapter.setClickListener(new CinemaAdapter.ClickListener() {
+                    @Override
+                    public void clickOk(int id) {//点击关注
+                        if (userId == 0) {
+                            startActivity(new Intent(getContext(), LoginActivity.class));
+                            // cinemaAdapter.setnoClick();
+                            followCinemaPresenter.reqeust(userId,sessionId,id);
+//                    cinemaPresenter.reqeust(userId, sessionId, false, 10);
+                            return;
+                        }
+                        followCinemaPresenter.reqeust(userId,sessionId,id);
+                    }
+
+                    @Override
+                    public void clickNo(int id) {
+                        cancelFollowCinemaPresenter.reqeust(userId,sessionId,id);
+                    }
+
+                    @Override
+                    public void itemClick(int id,String name,String address,String image) {
+                        Intent intent =  new Intent(getContext(), MovieCinemaActivity.class);
+                        intent.putExtra("id",id);
+                        intent.putExtra("name",name);
+                        intent.putExtra("address",address);
+                        intent.putExtra("image",image);
+
+                        startActivity(intent);
+                    }
+                });
             }
         }
 
@@ -230,7 +237,33 @@ public class Fragment_Cinema_two extends WDFragment {
 
         }
     }
+    private class followCinemaCall implements DataCall<Result> {
+        @Override
+        public void success(Result data) {
+            if(data.getStatus().equals("0000")){
+                UIUtils.showToastSafe(data.getMessage());
+            }
+        }
 
+        @Override
+        public void fail(ApiException e) {
+            UIUtils.showToastSafe(e.getMessage());
+        }
+    }
+
+    private class cancelFollowCinema implements DataCall<Result> {
+        @Override
+        public void success(Result data) {
+            if(data.getStatus().equals("0000")){
+                UIUtils.showToastSafe(data.getMessage());
+            }
+        }
+
+        @Override
+        public void fail(ApiException e) {
+            UIUtils.showToastSafe(e.getMessage());
+        }
+    }
     @Override
     public void onResume() {
         super.onResume();
