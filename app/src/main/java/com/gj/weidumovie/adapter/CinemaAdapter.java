@@ -21,6 +21,7 @@ public class CinemaAdapter extends RecyclerView.Adapter {
 
     private Context context;
     private ClickListener clickListener;
+    private CinemaVH cinemaVH;
 
     public CinemaAdapter(Context context) {
         this.context = context;
@@ -43,7 +44,7 @@ public class CinemaAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         final CinemaBean cinemaBean = list.get(i);
-        CinemaVH cinemaVH = (CinemaVH) viewHolder;
+        cinemaVH = (CinemaVH) viewHolder;
         cinemaVH.cinemasdvsone.setImageURI(Uri.parse(cinemaBean.getLogo()));
         cinemaVH.cinematextviewone.setText(cinemaBean.getName());
         cinemaVH.cinematextviewtwo.setText(cinemaBean.getAddress());
@@ -74,6 +75,10 @@ public class CinemaAdapter extends RecyclerView.Adapter {
     public void remove() {
         list.clear();
         notifyDataSetChanged();
+    }
+
+    public void setnoClick() {
+        cinemaVH.moive_like.setChecked(false);
     }
 
     //创建ViewHolder

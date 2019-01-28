@@ -65,7 +65,7 @@ public class MyMassageActivity extends WDActivity {
     @BindView(R.id.my_info_email)
     TextView myInfoEmail;
     @BindView(R.id.my_info_reset_pwd)
-    Button myInfoExitLogin;
+    ImageView myInfoExitLogin;
     @BindView(R.id.my_info_back)
     ImageView myInfoBack;
     private int SELECT_PICTURE = 1; // 从图库中选择图片

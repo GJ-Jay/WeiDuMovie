@@ -1,13 +1,16 @@
 package com.gj.weidumovie.adapter;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bw.movie.R;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.gj.weidumovie.bean.LikeCinema;
 import com.gj.weidumovie.bean.LikeMovie;
 import com.gj.weidumovie.util.DateUtils;
 
@@ -20,28 +23,30 @@ import java.util.Date;
  * Author:GJ<br>
  * Date:2019/1/26 20:57
  */
-public class MyLikeMovieAdapter extends RecyclerView.Adapter<MyLikeMovieAdapter.MyHolder> {
+public class MyLikeCinemaAdapter extends RecyclerView.Adapter<MyLikeCinemaAdapter.MyHolder> {
 
-    ArrayList<LikeMovie> list = new ArrayList<>();
+    Context context;
+
+    public MyLikeCinemaAdapter(Context context) {
+        this.context = context;
+    }
+
+    ArrayList<LikeCinema> list = new ArrayList<>();
 
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = View.inflate(viewGroup.getContext(),R.layout.mylike_movie_item,null);
-        return new MyHolder(view);
+        View view = LayoutInflater.from(context).inflate(R.layout.mylike_cinema_item, viewGroup, false);
+        MyHolder myHolder = new MyHolder(view);
+        return myHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyHolder myHolder, int i) {
-        LikeMovie likeMovie = list.get(i);
-        myHolder.img.setImageURI(likeMovie.getImageUrl());
-        myHolder.name.setText(likeMovie.getName());
-        myHolder.title.setText("简介："+likeMovie.getSummary());
-        try {
-            myHolder.time.setText(DateUtils.dateFormat(new Date(likeMovie.getReleaseTime()),DateUtils.MINUTE_PATTERN));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        LikeCinema likeCinema = list.get(i);
+        myHolder.img.setImageURI(likeCinema.getLogo());
+        myHolder.name.setText(likeCinema.getName());
+        myHolder.title.setText(likeCinema.getAddress());
     }
 
     @Override
@@ -49,14 +54,15 @@ public class MyLikeMovieAdapter extends RecyclerView.Adapter<MyLikeMovieAdapter.
         return list.size();
     }
 
-    public void addList(LikeMovie likeMovie) {
-        if(likeMovie!=null){
-            list.add(likeMovie);
-        }
-    }
 
     public void remove() {
         list.clear();
+    }
+
+    public void addList(LikeCinema likeCinema) {
+        if(likeCinema!=null){
+            list.add(likeCinema);
+        }
     }
 
     public class MyHolder extends RecyclerView.ViewHolder {
@@ -64,14 +70,12 @@ public class MyLikeMovieAdapter extends RecyclerView.Adapter<MyLikeMovieAdapter.
         private final SimpleDraweeView img;
         private final TextView name;
         private final TextView title;
-        private final TextView time;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
-            img = itemView.findViewById(R.id.mylike_movie_img);
-            name = itemView.findViewById(R.id.mylike_movie_name);
-            title = itemView.findViewById(R.id.mylike_movie_title);
-            time = itemView.findViewById(R.id.mylike_movie_time);
+            img = itemView.findViewById(R.id.mylike_cinema_img);
+            name = itemView.findViewById(R.id.mylike_cinema_name);
+            title = itemView.findViewById(R.id.mylike_cinema_title);
         }
     }
 }

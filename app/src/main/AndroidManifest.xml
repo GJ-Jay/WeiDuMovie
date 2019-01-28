@@ -26,7 +26,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.gj.weidumovie.MyLikeActivity"></activity>
+        <activity android:name="com.gj.weidumovie.FindUserBuyTicketActivity"></activity>
+        <activity android:name="com.gj.weidumovie.MyLikeActivity" />
         <activity android:name="com.gj.weidumovie.UpdatePwdActivity" />
         <activity android:name="com.gj.weidumovie.FeedbackSuccessActivity" />
         <activity android:name="com.gj.weidumovie.FeedbackActivity" />
@@ -62,8 +63,9 @@
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote" />
-        <activity android:name="com.gj.weidumovie.MyCanBuyMovieActivity"/>
-        <activity android:name="com.gj.weidumovie.MovieBuyActivity"/>
+
+        <activity android:name="com.gj.weidumovie.MyCanBuyMovieActivity" />
+        <activity android:name="com.gj.weidumovie.MovieBuyActivity" />
     </application>
 
 </manifest>

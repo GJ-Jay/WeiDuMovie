@@ -1,7 +1,9 @@
 package com.gj.weidumovie.core.http;
 
+import com.gj.weidumovie.bean.BuyTicket;
 import com.gj.weidumovie.bean.CinemaBean;
 import com.gj.weidumovie.bean.FilmReviewBean;
+import com.gj.weidumovie.bean.LikeCinema;
 import com.gj.weidumovie.bean.LikeMovie;
 import com.gj.weidumovie.bean.MoiveBean;
 import com.gj.weidumovie.bean.MovieDetailsBean;
@@ -148,6 +150,33 @@ public interface IRequest {
                                                     @Header("sessionId")String sessionId,
                                                     @Query("page")int page,
                                                     @Query("count")int count);
+
+    //用户关注的影院
+    @GET("movieApi/cinema/v1/verify/findCinemaPageList")
+    Observable<Result<List<LikeCinema>>> myLikeCinema(@Header("userId")int userId,
+                                                      @Header("sessionId")String sessionId,
+                                                      @Query("page")int page,
+                                                      @Query("count")int count);
+
+    //用户购票记录查询列表
+    @GET("movieApi/user/v1/verify/findUserBuyTicketRecordList")
+    Observable<Result<List<BuyTicket>>> findUserBuyTicketRecordList(@Header("userId")int userId,
+                                                                    @Header("sessionId")String sessionId,
+                                                                    @Query("page")int page,
+                                                                    @Query("count")int count,
+                                                                    @Query("status")int status);
+
+    //关注影院
+    @GET("movieApi/cinema/v1/verify/followCinema")
+    Observable<Result> followCinema(@Header("userId")int userId,
+                                    @Header("sessionId")String sessionId,
+                                    @Query("cinemaId")int cinemaId);
+
+    //取消关注影院
+    @GET("movieApi/cinema/v1/verify/cancelFollowCinema")
+    Observable<Result> cancelFollowCinema(@Header("userId")int userId,
+                                          @Header("sessionId")String sessionId,
+                                          @Query("cinemaId")int cinemaId);
 
     //查询电影影评
     @GET("movieApi/movie/v1/findAllMovieComment")

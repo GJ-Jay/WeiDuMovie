@@ -14,11 +14,13 @@ import android.widget.TextView;
 import com.bw.movie.R;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.gj.weidumovie.FeedbackActivity;
+import com.gj.weidumovie.FindUserBuyTicketActivity;
 import com.gj.weidumovie.HomeActivity;
 import com.gj.weidumovie.LoginActivity;
 import com.gj.weidumovie.MyLikeActivity;
 import com.gj.weidumovie.MyMassageActivity;
 import com.gj.weidumovie.core.WDFragment;
+import com.gj.weidumovie.util.UIUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -113,17 +115,38 @@ public class Fragment_My_Three extends WDFragment {
                 startActivity(intent_msg);
                 break;
             case R.id.btn_like_mine://我的关注
+                if (userId == 0) {
+                    startActivity(new Intent(getContext(), LoginActivity.class));
+                    return;
+                }
                 startActivity(new Intent(getContext(), MyLikeActivity.class));
                 break;
-            case R.id.btn_buy_mine:
+            case R.id.btn_buy_mine://购票记录
+                if (userId == 0) {
+                    startActivity(new Intent(getContext(), LoginActivity.class));
+                    return;
+                }
+                startActivity(new Intent(getContext(), FindUserBuyTicketActivity.class));
                 break;
             case R.id.btn_feedback_mine://意见反馈
+                if (userId == 0) {
+                    startActivity(new Intent(getContext(), LoginActivity.class));
+                    return;
+                }
                 Intent intent_feedback = new Intent(getContext(), FeedbackActivity.class);
                 startActivity(intent_feedback);
                 break;
-            case R.id.btn_version_mine:
+            case R.id.btn_version_mine://最新版本
+                if (userId == 0) {
+                    startActivity(new Intent(getContext(), LoginActivity.class));
+                    return;
+                }
                 break;
             case R.id.btn_back_mine://退出登录
+                if (userId == 0) {
+                    UIUtils.showToastSafe("未登录");
+                    return;
+                }
                 sp.edit().clear().commit();
                 sp.edit().putBoolean("isFirst", false).commit();
                 Intent backLogin = new Intent(getContext(), HomeActivity.class);

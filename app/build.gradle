@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         config {
-            keyAlias 'bw_movie '
+            keyAlias 'bw_movie'
             keyPassword '123456'
             storeFile file('C:/Users/陈国星/Desktop/movie.keystore')
             storePassword '123456'

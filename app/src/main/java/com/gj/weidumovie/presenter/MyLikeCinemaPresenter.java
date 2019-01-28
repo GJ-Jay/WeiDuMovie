@@ -7,14 +7,14 @@ import com.gj.weidumovie.core.http.NetworkManager;
 import io.reactivex.Observable;
 
 /**
- * Description:我关注的影片
+ * Description:我关注的影院
  * Author:GJ<br>
  * Date:2019/1/26 20:39
  */
-public class MyLikeMoviePresenter extends BasePresenter{
+public class MyLikeCinemaPresenter extends BasePresenter{
 
     private int page=1;
-    public MyLikeMoviePresenter(DataCall dataCall) {
+    public MyLikeCinemaPresenter(DataCall dataCall) {
         super(dataCall);
     }
 
@@ -27,6 +27,6 @@ public class MyLikeMoviePresenter extends BasePresenter{
             page=1;
         }
         IRequest iRequest = NetworkManager.instance().create(IRequest.class);
-        return iRequest.myLikeMovie((int)args[0],(String) args[1],page,(int)args[3]);
+        return iRequest.myLikeCinema((int)args[0],(String) args[1],page,(int)args[3]);
     }
 }
