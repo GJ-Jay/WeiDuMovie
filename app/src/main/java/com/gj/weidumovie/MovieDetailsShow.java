@@ -34,6 +34,7 @@ import com.gj.weidumovie.presenter.FindAllMovieCommentPresenter;
 import com.gj.weidumovie.presenter.FindMoviesDetailPresenter;
 import com.gj.weidumovie.util.SpaceItemDecoration;
 
+import java.io.Serializable;
 import java.util.List;
 
 import butterknife.BindView;
@@ -272,8 +273,8 @@ public class MovieDetailsShow extends WDActivity {
                 break;
             case R.id.movies_show_buy:
                     Intent intent = new Intent(MovieDetailsShow.this,MyCanBuyMovieActivity.class);
-                    intent.putExtra("name",result.getName());
-                    intent.putExtra("id",result.getId());
+                    //intent.putExtra("movie",result);
+                    intent.putExtra("movie",result);
                     startActivity(intent);
                 break;
         }

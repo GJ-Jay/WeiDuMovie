@@ -53,7 +53,7 @@ public class CinemaBuyAdapter extends RecyclerView.Adapter {
         cinemaVH.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                clickListener.clickNo(cinemaBean.getId());
+                clickListener.clickNo(cinemaBean.getId(),cinemaBean.getName(),cinemaBean.getAddress());
             }
         });
     }
@@ -87,7 +87,7 @@ public class CinemaBuyAdapter extends RecyclerView.Adapter {
         }
     }
     public interface ClickListener{
-        void clickNo(int id);
+        void clickNo(int id,String name,String address);
     }
     public void setClickListener(ClickListener clickListener){
         this.clickListener=clickListener;

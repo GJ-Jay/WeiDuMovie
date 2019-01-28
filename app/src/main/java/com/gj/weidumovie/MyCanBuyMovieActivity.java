@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.bw.movie.R;
 import com.gj.weidumovie.adapter.CinemaBuyAdapter;
 import com.gj.weidumovie.bean.CinemaBean;
+import com.gj.weidumovie.bean.MovieDetailsBean;
 import com.gj.weidumovie.bean.Result;
 import com.gj.weidumovie.core.DataCall;
 import com.gj.weidumovie.core.WDActivity;
@@ -19,6 +20,7 @@ import com.gj.weidumovie.util.SpaceItemDecoration;
 import com.gj.weidumovie.util.UIUtils;
 import com.google.gson.Gson;
 
+import java.io.Serializable;
 import java.util.List;
 
 import butterknife.BindView;
@@ -42,6 +44,7 @@ public class MyCanBuyMovieActivity extends WDActivity {
     RecyclerView myCanRecycler;
     private FindCinemasListByMovieIdPresenter findCinemasListByMovieIdPresenter;
     private CinemaBuyAdapter cinemaBuyAdapter;
+    private MovieDetailsBean movie;
 
     @Override
     protected int getLayoutId() {
@@ -51,11 +54,10 @@ public class MyCanBuyMovieActivity extends WDActivity {
     @Override
     protected void initView() {
         Intent intent = getIntent();
-        String name = intent.getStringExtra("name");
-        int id = intent.getIntExtra("id", 0);
-        myCanName.setText(name);
+        movie = (MovieDetailsBean) intent.getSerializableExtra("movie");
+        myCanName.setText(movie.getName());
         findCinemasListByMovieIdPresenter = new FindCinemasListByMovieIdPresenter(new FindCinemasListByMovieId());
-        findCinemasListByMovieIdPresenter.reqeust(id);
+        findCinemasListByMovieIdPresenter.reqeust(movie.getId());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         myCanRecycler.setLayoutManager(linearLayoutManager);
@@ -63,8 +65,13 @@ public class MyCanBuyMovieActivity extends WDActivity {
         myCanRecycler.setAdapter(cinemaBuyAdapter);
         cinemaBuyAdapter.setClickListener(new CinemaBuyAdapter.ClickListener() {
             @Override
-            public void clickNo(int id) {
-
+            public void clickNo(int id,String name,String address) {
+                Intent intent1 = new Intent(MyCanBuyMovieActivity.this,MovieBuyActivity.class);
+                intent1.putExtra("movie",movie);
+                intent1.putExtra("id",id);
+                intent1.putExtra("name",name);
+                intent1.putExtra("address",address);
+                startActivity(intent1);
             }
         });
 

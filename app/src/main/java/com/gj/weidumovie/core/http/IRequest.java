@@ -4,6 +4,7 @@ import com.gj.weidumovie.bean.CinemaBean;
 import com.gj.weidumovie.bean.FilmReviewBean;
 import com.gj.weidumovie.bean.MoiveBean;
 import com.gj.weidumovie.bean.MovieDetailsBean;
+import com.gj.weidumovie.bean.MovieScheduleBean;
 import com.gj.weidumovie.bean.Result;
 import com.gj.weidumovie.bean.UpdateUser;
 import com.gj.weidumovie.bean.UserBean;
@@ -142,4 +143,26 @@ public interface IRequest {
     //根据电影ID查询当前排片该电影的影院列表
     @GET("movieApi/movie/v1/findCinemasListByMovieId")
     Observable<Result<List<CinemaBean>>> findCinemasListByMovieId(@Query("movieId") int movieId);
+    //根据电影ID和影院ID查询电影排期列表
+    @GET("movieApi/movie/v1/findMovieScheduleList")
+    Observable<Result<List<MovieScheduleBean>>> findMovieScheduleList(@Query("cinemasId") int cinemasId,@Query("movieId") int movieId);
+
+    @POST("movieApi/movie/v1/verify/buyMovieTicket")
+    @FormUrlEncoded
+    Observable<Result> buyMovieTicket(@Header("userId")int userId,
+                                      @Header("sessionId")String sessionId,
+                                      @Field("scheduleId") int scheduleId,
+                                      @Field("amount")int amount,
+                                      @Field("sign")String sign);
+    @POST("movieApi/movie/v1/verify/pay")
+    @FormUrlEncoded
+    Observable<Result> buyMovieresult(@Header("userId")int userId,
+                                      @Header("sessionId")String sessionId,
+                                      @Field("payType") int payType,
+                                      @Field("orderId") String orderId);
+    //根据影院ID查询该影院当前排期的电影列表
+    @GET("movieApi/movie/v1/findMovieListByCinemaId")
+    Observable<Result<List<MoiveBean>>> findMovieListByCinemaId(@Query("cinemaId") int cinemaId);
+
+
 }

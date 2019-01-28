@@ -11,8 +11,26 @@ public class MoiveBean {
         private long releaseTime;
         private String releaseTimeShow;
         private String summary;
+         private String duration;
+        private double fare;
 
-        public int getFollowMovie() {
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public double getFare() {
+        return fare;
+    }
+
+    public void setFare(double fare) {
+        this.fare = fare;
+    }
+
+    public int getFollowMovie() {
             return followMovie;
         }
 

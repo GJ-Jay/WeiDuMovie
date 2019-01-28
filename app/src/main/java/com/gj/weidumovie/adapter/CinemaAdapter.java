@@ -29,6 +29,7 @@ public class CinemaAdapter extends RecyclerView.Adapter {
     public void addItem(List<CinemaBean> cinemaBeans) {
         if(cinemaBeans!=null)
         {
+            list.clear();
             list.addAll(cinemaBeans);
         }
     }
@@ -64,6 +65,12 @@ public class CinemaAdapter extends RecyclerView.Adapter {
                 }
             }
         });
+        cinemaVH.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clickListener.itemClick(cinemaBean.getId(),cinemaBean.getName(),cinemaBean.getAddress(),cinemaBean.getLogo());
+            }
+        });
     }
 
     @Override
@@ -97,6 +104,7 @@ public class CinemaAdapter extends RecyclerView.Adapter {
     public interface ClickListener{
         void clickOk(int id);
         void clickNo(int id);
+        void itemClick(int id,String name,String address,String image);
     }
     public void setClickListener(ClickListener clickListener){
         this.clickListener=clickListener;

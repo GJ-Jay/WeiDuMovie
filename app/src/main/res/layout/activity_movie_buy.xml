@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:padding="@dimen/dp_24"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/movie_buy"
+        android:layout_marginTop="@dimen/dp_6"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_36">
+        <TextView
+            android:id="@+id/movie_buy_cinema_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#666666"
+            android:textSize="@dimen/sp_14"
+            android:text="影院"/>
+        <TextView
+            android:id="@+id/movie_buy_cinema_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#666666"
+            android:textSize="@dimen/sp_12"
+            android:layout_alignParentBottom="true"
+            android:text="影院"/>
+    <ImageView
+        android:id="@+id/movie_buy_cinema_share"
+        android:layout_width="@dimen/dp_24"
+        android:layout_height="@dimen/dp_24"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/com_icon_navigation_default_xxhdpi"
+        />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/movie_buy_one"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_below="@+id/movie_buy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:layout_width="match_parent"
+            android:layout_height="142dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/filmbg"
+            app:roundBottomLeft="true"
+            app:roundBottomRight="true"
+            app:roundTopLeft="true"
+            app:roundTopRight="true"
+            app:roundedCornerRadius="8dp" />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/buy_film_show_simple"
+            android:layout_width="103dp"
+            android:layout_height="129dp"
+            android:layout_margin="@dimen/dp_6"
+            app:roundedCornerRadius="8dp"
+             />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_height="@dimen/dp_142"
+        android:layout_toRightOf="@+id/buy_film_show_simple">
+        <TextView
+            android:id="@+id/buy_film_show_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="铁血战士"
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
+
+
+
+        <TextView
+            android:id="@+id/buy_film_show_movieTypes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="铁血战士"
+            android:textColor="#ffffff"
+            android:textSize="12sp" />
+        <TextView
+            android:id="@+id/buy_film_show_director"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="铁血战士"
+            android:textColor="#ffffff"
+            android:textSize="12sp" />
+        <TextView
+            android:id="@+id/buy_film_show_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="铁血战士"
+            android:textColor="#ffffff"
+            android:textSize="12sp" />
+        <TextView
+            android:id="@+id/buy_film_show_placeOrigin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="铁血战士"
+            android:textColor="#ffffff"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+
+
+    </RelativeLayout>
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/movie_buy_one"
+        android:id="@+id/movie_buy_recycler"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
+    <ImageView
+        android:id="@+id/movie_buy_back"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="24dp"
+        android:src="@drawable/ic_particulars_back" />
+</RelativeLayout>

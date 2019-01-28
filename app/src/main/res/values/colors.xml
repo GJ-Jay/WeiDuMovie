@@ -10,6 +10,7 @@
     <color name="thingray">#dae8f5</color> <!-- 淡灰色 -->
     <color name="thinwhite">#c6daf0</color> <!-- 浅白色 -->
     <color name="gray">#ececec</color> <!-- 灰色 -->
+    <color name="navpage">#ececec</color> <!-- 灰色 -->
     <color name="grayblack">#999999</color> <!-- 灰黑色 -->
     <color name="commonblack">#585858</color> <!-- 一般使用的黑色 -->
     <color name="line_color">#d8d8d8</color> <!-- 单调的黑色 -->

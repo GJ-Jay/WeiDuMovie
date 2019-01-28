@@ -1,5 +1,9 @@
 package com.gj.weidumovie.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +11,7 @@ import java.util.List;
  * author:陈国星(陈国星)
  * function:
  */
-public class MovieDetailsBean {
+public class MovieDetailsBean implements Serializable{
 
     /**
      * director : 庄文强
@@ -143,7 +147,9 @@ public class MovieDetailsBean {
         this.shortFilmList = shortFilmList;
     }
 
-    public static class ShortFilmListBean {
+
+
+    public static class ShortFilmListBean implements Serializable {
         /**
          * imageUrl : http://mobile.bwstudent.com/images/movie/stills/ws/ws2.jpg
          * videoUrl : http://mobile.bwstudent.com/video/movie/ws/ws1.mp4

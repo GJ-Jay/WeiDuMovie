@@ -1,5 +1,6 @@
 package com.gj.weidumovie.fragment;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +18,7 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.bw.movie.R;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.gj.weidumovie.MovieCinemaActivity;
 import com.gj.weidumovie.adapter.CinemaAdapter;
 import com.gj.weidumovie.bean.CinemaBean;
 import com.gj.weidumovie.bean.Result;
@@ -100,6 +102,17 @@ public class Fragment_Cinema_two extends WDFragment {
             public void clickNo(int id) {
 
             }
+
+            @Override
+            public void itemClick(int id,String name,String address,String image) {
+                Intent intent =  new Intent(getContext(), MovieCinemaActivity.class);
+                intent.putExtra("id",id);
+                intent.putExtra("name",name);
+                intent.putExtra("address",address);
+                intent.putExtra("image",image);
+
+                startActivity(intent);
+            }
         });
     }
 
@@ -125,8 +138,8 @@ public class Fragment_Cinema_two extends WDFragment {
                 recommend.setTextColor(Color.WHITE);
                 nearby.setBackgroundResource(R.drawable.myborder);
                 nearby.setTextColor(Color.BLACK);
-                cinemaAdapter.remove();
-                cinemaAdapter = new CinemaAdapter(getActivity());
+                //cinemaAdapter.remove();
+                //cinemaAdapter = new CinemaAdapter(getActivity());
                 cinemarecycleview.setAdapter(cinemaAdapter);
                 cinemaPresenter.reqeust(0, "", false, 10);
                 break;
@@ -135,8 +148,8 @@ public class Fragment_Cinema_two extends WDFragment {
                 nearby.setTextColor(Color.WHITE);
                 recommend.setBackgroundResource(R.drawable.myborder);
                 recommend.setTextColor(Color.BLACK);
-                cinemaAdapter.remove();
-                cinemaAdapter = new CinemaAdapter(getActivity());
+                //cinemaAdapter.remove();
+                //cinemaAdapter = new CinemaAdapter(getActivity());
                 cinemarecycleview.setAdapter(cinemaAdapter);
                 nearbyMoivePresenter.reqeust(0, "", "116.30551391385724", "40.04571807462411", false, 10);
                 break;
