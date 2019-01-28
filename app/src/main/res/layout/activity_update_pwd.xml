@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.gj.weidumovie.UpdatePwdActivity">
+
+    <LinearLayout
+        android:id="@+id/linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_50"
+        android:layout_marginLeft="@dimen/dp_24"
+        android:layout_marginRight="@dimen/dp_24"
+        android:padding="@dimen/dp_20"
+        android:orientation="vertical"
+        android:background="@drawable/bg_shape">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:paddingTop="@dimen/dp_10"
+            android:paddingBottom="@dimen/dp_10">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="当前密码"
+                android:textSize="@dimen/sp_14"
+                android:textColor="@color/textcolor" />
+
+            <EditText
+                android:id="@+id/textpwd_now"
+                android:background="@null"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="请输入原始密码"
+                android:textSize="@dimen/sp_14"
+                android:textColor="@color/textcolor9" />
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_2"
+            android:background="@color/textcolor9"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/dp_10"
+            android:paddingBottom="@dimen/dp_10">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="重置密码为"
+                android:textSize="@dimen/sp_14"
+                android:textColor="@color/textcolor" />
+
+            <EditText
+                android:id="@+id/textpwd_reset"
+                android:background="@null"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="请输入重置密码"
+                android:textSize="@dimen/sp_14"
+                android:textColor="@color/textcolor9" />
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_2"
+            android:background="@color/textcolor9"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/dp_10">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="请再次输入密码"
+                android:textSize="@dimen/sp_14"
+                android:textColor="@color/textcolor" />
+
+            <EditText
+                android:id="@+id/textpwd_algin"
+                android:background="@null"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="请再次输入密码"
+                android:textSize="@dimen/sp_14"
+                android:textColor="@color/textcolor9" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/update_pwd_commit"
+        android:layout_width="@dimen/dp_48"
+        android:layout_height="@dimen/dp_25"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/linear_layout"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_24"
+        android:text="确定"
+        android:background="@drawable/feedback_btn"
+        android:textColor="@android:color/white"/>
+
+    <ImageView
+        android:id="@+id/update_pwd_back"
+        android:layout_width="@dimen/dp_60"
+        android:layout_height="@dimen/dp_60"
+        android:layout_marginLeft="@dimen/dp_24"
+        android:layout_marginBottom="@dimen/dp_24"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/ic_particulars_back"/>
+
+</RelativeLayout>

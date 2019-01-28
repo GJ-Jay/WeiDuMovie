@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:orientation="horizontal"
+        android:background="@drawable/myborder">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/mylike_movie_img"
+            android:layout_width="@dimen/dp_103"
+            android:layout_height="@dimen/dp_128"
+            app:roundedCornerRadius="@dimen/dp_4"
+            android:background="@mipmap/ic_launcher"></com.facebook.drawee.view.SimpleDraweeView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/dp_10">
+            <TextView
+                android:id="@+id/mylike_movie_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="铁血战士"
+                android:textSize="@dimen/sp_14"
+                android:textColor="@color/textcolor"/>
+            <!--maxLines最大行数-->
+            <TextView
+                android:id="@+id/mylike_movie_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:textSize="@dimen/sp_12"
+                android:ellipsize="end"
+                android:maxLines="5"
+                android:textColor="@color/textcolor"
+                android:text="阿斯利康第六届安徽大喀什东路卡莎可接受的拉屎的骄傲了考得好辣花生酱大客户打开阿拉山口大路口的哈伦裤"/>
+            <TextView
+                android:id="@+id/mylike_movie_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_12"
+                android:textSize="@dimen/sp_12"
+                android:textColor="@color/textcolor9"
+                android:text="2018-09-12"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

@@ -207,18 +207,6 @@
                     />
             </RelativeLayout>
         </LinearLayout>
-        <Button
-
-            android:layout_marginLeft="@dimen/dp_24"
-            android:layout_marginRight="@dimen/dp_24"
-            android:background="@color/mark_red"
-            android:id="@+id/my_info_exit_login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
-            android:textColor="@color/white"
-            android:text="退出登录"
-            />
     </LinearLayout>
     <ImageView
         android:layout_width="@dimen/dp_50"

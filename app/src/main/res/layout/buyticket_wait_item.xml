@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:orientation="vertical"
+        android:background="@drawable/myborder">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/butticket_wait_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="铁血战士"
+                    android:textSize="@dimen/sp_14"
+                    android:textColor="@color/textcolor"/>
+
+                <TextView
+                    android:id="@+id/butticket_wait_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="订单号：279000000999"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:textSize="@dimen/sp_12"
+                    android:textColor="@color/textcolor"/>
+                <TextView
+                    android:id="@+id/butticket_wait_cinema"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="影院：包里可收纳"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:textSize="@dimen/sp_12"
+                    android:textColor="@color/textcolor"/>
+                <TextView
+                    android:id="@+id/butticket_wait_cinema_room"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="影厅：包里可收纳"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:textSize="@dimen/sp_12"
+                    android:textColor="@color/textcolor"/>
+                <TextView
+                    android:id="@+id/butticket_wait_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="时间：2018-10-11 14:40-16:46"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:textSize="@dimen/sp_12"
+                    android:textColor="@color/textcolor"/>
+                <TextView
+                    android:id="@+id/butticket_wait_num"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="数量：2张"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:textSize="@dimen/sp_12"
+                    android:textColor="@color/textcolor"/>
+                <TextView
+                    android:id="@+id/butticket_wait_money"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="金额：59.9元"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:textSize="@dimen/sp_12"
+                    android:textColor="@color/textcolor"
+                    android:layout_marginBottom="@dimen/dp_10"/>
+            </LinearLayout>
+            <Button
+                android:id="@+id/butticket_wait_pay"
+                android:layout_width="@dimen/dp_60"
+                android:layout_height="@dimen/dp_30"
+                android:text="去付款"
+                android:textSize="@dimen/sp_12"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/pay_btn_bg"
+                android:textColor="@android:color/white"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

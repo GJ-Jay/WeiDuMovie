@@ -1,6 +1,7 @@
 package com.gj.weidumovie;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
@@ -73,8 +74,6 @@ public class LoginActivity extends WDActivity {
         loginPresenter = new LoginPresenter(new LoginCall());
 
         if (flag){
-            /*intent(ShowActivity.class);*/
-
             if (rememberPassword){
                 //Log.i("abc", "initView: "+p+ph);
                 editLoginPhone.setText(ph);
@@ -156,6 +155,7 @@ public class LoginActivity extends WDActivity {
                 edit.putString("phone",phone);
                 edit.putString("pwd",pwd);
                 edit.commit();
+                startActivity(new Intent(LoginActivity.this,HomeActivity.class));
                 finish();
             }
             UIUtils.showToastSafe(data.getMessage());

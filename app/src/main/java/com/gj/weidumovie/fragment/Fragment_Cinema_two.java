@@ -1,6 +1,9 @@
 package com.gj.weidumovie.fragment;
 
 import android.content.Intent;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +21,7 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.bw.movie.R;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.gj.weidumovie.LoginActivity;
 import com.gj.weidumovie.MovieCinemaActivity;
 import com.gj.weidumovie.adapter.CinemaAdapter;
 import com.gj.weidumovie.bean.CinemaBean;
@@ -25,8 +29,11 @@ import com.gj.weidumovie.bean.Result;
 import com.gj.weidumovie.core.DataCall;
 import com.gj.weidumovie.core.WDFragment;
 import com.gj.weidumovie.core.exception.ApiException;
+import com.gj.weidumovie.presenter.CancelFollowCinemaPresenter;
 import com.gj.weidumovie.presenter.FindNearbyCinemasPresenter;
 import com.gj.weidumovie.presenter.FindRecommendCinemasPresenter;
+import com.gj.weidumovie.presenter.FollowCinemaPresenter;
+import com.gj.weidumovie.util.UIUtils;
 import com.gj.weidumovie.view.MySearchLayout;
 
 import java.util.List;
@@ -63,6 +70,9 @@ public class Fragment_Cinema_two extends WDFragment {
     private FindNearbyCinemasPresenter nearbyMoivePresenter;
     public LocationClient mLocationClient = null;
     private MyLocationListener myListener = new MyLocationListener();
+    private FollowCinemaPresenter followCinemaPresenter;
+    private int userId;
+    private String sessionId;
 
     @Override
     public String getPageName() {
@@ -76,15 +86,21 @@ public class Fragment_Cinema_two extends WDFragment {
 
     @Override
     protected void initView() {
+        SharedPreferences sp = getActivity().getSharedPreferences("Config", Context.MODE_PRIVATE);
+        userId = sp.getInt("userId", 0);
+        sessionId = sp.getString("sessionId", "");
+
         linearLayoutManager = new LinearLayoutManager(getActivity());
         cinemarecycleview.setLayoutManager(linearLayoutManager);
         cinemaPresenter = new FindRecommendCinemasPresenter(new CinemaCall());
         nearbyMoivePresenter = new FindNearbyCinemasPresenter(new CinemaCall());
+        followCinemaPresenter = new FollowCinemaPresenter(new followCinemaCall());
+        final CancelFollowCinemaPresenter cancelFollowCinemaPresenter = new CancelFollowCinemaPresenter(new cancelFollowCinema());
 
         //默认推荐影院
         cinemaAdapter = new CinemaAdapter(getActivity());
         cinemarecycleview.setAdapter(cinemaAdapter);
-        cinemaPresenter.reqeust(0, "", false, 10);
+        cinemaPresenter.reqeust(userId, sessionId, false, 10);
         recommend.setBackgroundResource(R.drawable.btn_gradient);
         recommend.setTextColor(Color.WHITE);
         nearby.setBackgroundResource(R.drawable.myborder);
@@ -94,13 +110,20 @@ public class Fragment_Cinema_two extends WDFragment {
 
         cinemaAdapter.setClickListener(new CinemaAdapter.ClickListener() {
             @Override
-            public void clickOk(int id) {
-
+            public void clickOk(int id) {//点击关注
+                if (userId == 0) {
+                    startActivity(new Intent(getContext(), LoginActivity.class));
+                    cinemaAdapter.setnoClick();
+                    followCinemaPresenter.reqeust(userId,sessionId,id);
+//                    cinemaPresenter.reqeust(userId, sessionId, false, 10);
+                    return;
+                }
+                followCinemaPresenter.reqeust(userId,sessionId,id);
             }
 
             @Override
             public void clickNo(int id) {
-
+                cancelFollowCinemaPresenter.reqeust(userId,sessionId,id);
             }
 
             @Override
@@ -138,8 +161,8 @@ public class Fragment_Cinema_two extends WDFragment {
                 recommend.setTextColor(Color.WHITE);
                 nearby.setBackgroundResource(R.drawable.myborder);
                 nearby.setTextColor(Color.BLACK);
-                //cinemaAdapter.remove();
-                //cinemaAdapter = new CinemaAdapter(getActivity());
+                cinemaAdapter.remove();
+                cinemaAdapter = new CinemaAdapter(getActivity());
                 cinemarecycleview.setAdapter(cinemaAdapter);
                 cinemaPresenter.reqeust(0, "", false, 10);
                 break;
@@ -148,8 +171,8 @@ public class Fragment_Cinema_two extends WDFragment {
                 nearby.setTextColor(Color.WHITE);
                 recommend.setBackgroundResource(R.drawable.myborder);
                 recommend.setTextColor(Color.BLACK);
-                //cinemaAdapter.remove();
-                //cinemaAdapter = new CinemaAdapter(getActivity());
+                cinemaAdapter.remove();
+                cinemaAdapter = new CinemaAdapter(getActivity());
                 cinemarecycleview.setAdapter(cinemaAdapter);
                 nearbyMoivePresenter.reqeust(0, "", "116.30551391385724", "40.04571807462411", false, 10);
                 break;
