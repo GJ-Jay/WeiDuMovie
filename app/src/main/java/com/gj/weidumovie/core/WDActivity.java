@@ -14,6 +14,7 @@ import android.view.KeyEvent;
 
 import com.gj.weidumovie.bean.UserBean;
 import com.gj.weidumovie.util.StatusBarCompat;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.List;
 
@@ -164,4 +165,5 @@ public abstract class WDActivity extends AppCompatActivity implements CustomAdap
         }
         return null;
     }
+
 }

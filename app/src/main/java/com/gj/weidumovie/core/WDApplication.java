@@ -10,6 +10,8 @@ import android.os.Looper;
 import com.facebook.cache.disk.DiskCacheConfig;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
+import com.tencent.bugly.crashreport.CrashReport;
+import com.umeng.commonsdk.UMConfigure;
 
 import java.io.File;
 
@@ -45,6 +47,11 @@ public class WDApplication extends Application {
         mMainLooper = getMainLooper();
         sharedPreferences = getSharedPreferences("share.xml",MODE_PRIVATE);
         Fresco.initialize(this,getConfig());//图片加载框架初始化
+
+        CrashReport.initCrashReport(getApplicationContext(), "16d12f5b5e", false);
+
+        UMConfigure.init(this,  UMConfigure.DEVICE_TYPE_PHONE, null);
+        UMConfigure.setLogEnabled(true);
     }
 
     private ImagePipelineConfig getConfig() {

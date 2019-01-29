@@ -53,7 +53,9 @@ public abstract class BasePresenter {
 //                        if (result.getStatus().equals("1001")){
 //                            Dialog dialog = new AlertDialog.Builder().setMessage("").set.create().sh;
 //                        }else {
-                        dataCall.success(result);
+                        if (dataCall!=null){
+                            dataCall.success(result);
+                        }
 //                        }
                     }
                 }, new Consumer<Throwable>() {
@@ -63,7 +65,9 @@ public abstract class BasePresenter {
                         // 处理异常
 //                        UIUtils.showToastSafe("请求失败");
                         //通过异常工具类封装成自定义的ApiException
-                        dataCall.fail(CustomException.handleException(throwable));
+                        if (dataCall!=null) {
+                            dataCall.fail(CustomException.handleException(throwable));
+                        }
                     }
                 });
 

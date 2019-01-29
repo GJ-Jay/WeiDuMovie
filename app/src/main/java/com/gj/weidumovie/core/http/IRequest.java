@@ -178,6 +178,16 @@ public interface IRequest {
     Observable<Result> cancelFollowCinema(@Header("userId")int userId,
                                           @Header("sessionId")String sessionId,
                                           @Query("cinemaId")int cinemaId);
+    //关注影片
+    @GET("movieApi/movie/v1/verify/followMovie")
+    Observable<Result> followMovie(@Header("userId")int userId,
+                                   @Header("sessionId")String sessionId,
+                                   @Query("movieId")int cinemaId);
+    //取消关注影片
+    @GET("movieApi/movie/v1/verify/cancelFollowMovie")
+    Observable<Result> cancelFollowMovie(@Header("userId")int userId,
+                                          @Header("sessionId")String sessionId,
+                                          @Query("movieId")int cinemaId);
 
     //查询电影影评
     @GET("movieApi/movie/v1/findAllMovieComment")
@@ -209,6 +219,7 @@ public interface IRequest {
     //根据影院ID查询该影院当前排期的电影列表
     @GET("movieApi/movie/v1/findMovieListByCinemaId")
     Observable<Result<List<MoiveBean>>> findMovieListByCinemaId(@Query("cinemaId") int cinemaId);
+
 
 
 }

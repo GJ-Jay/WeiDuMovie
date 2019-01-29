@@ -49,12 +49,13 @@
 
         <ImageView
             android:id="@+id/filmshow_heart"
-            android:layout_width="16dp"
-            android:layout_height="14dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_alignParentRight="true"
             android:layout_marginTop="24dp"
             android:layout_marginRight="24dp"
-            android:src="@drawable/checked_selector" />
+            android:src="@drawable/xing"
+             />
 
         <TextView
             android:id="@+id/filmshow_summary"

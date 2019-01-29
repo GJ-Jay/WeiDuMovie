@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.gj.weidumovie.util.LogUtils;
 import com.google.gson.Gson;
+import com.umeng.analytics.MobclickAgent;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -39,19 +40,19 @@ public abstract class WDFragment extends Fragment {
 		unbinder.unbind();
 	}
 
-	//	@Override
-//	public void onResume() {
-//		super.onResume();
-//		if (!MTStringUtils.isEmpty(getPageName()))
-//			MobclickAgent.onPageStart(getPageName()); // 统计页面
-//	}
-//
-//	@Override
-//	public void onPause() {
-//		super.onPause();
-//		if (!MTStringUtils.isEmpty(getPageName()))
-//			MobclickAgent.onPageEnd(getPageName());// 统计页面
-//	}
+		@Override
+	public void onResume() {
+		super.onResume();
+		//if (!MTStringUtils.isEmpty(getPageName()))
+			MobclickAgent.onPageStart(getPageName()); // 统计页面
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		//if (!MTStringUtils.isEmpty(getPageName()))
+			MobclickAgent.onPageEnd(getPageName());// 统计页面
+	}
 
 	/**
 	 * 设置页面名字 用于友盟统计

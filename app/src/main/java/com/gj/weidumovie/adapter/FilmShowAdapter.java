@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,7 +37,7 @@ public class FilmShowAdapter extends RecyclerView.Adapter<FilmShowAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
         viewHolder.name.setText(list.get(i).getName());
         viewHolder.summary.setText(list.get(i).getSummary());
         viewHolder.simpleDraweeView.setImageURI(Uri.parse(list.get(i).getImageUrl()));
@@ -45,6 +47,41 @@ public class FilmShowAdapter extends RecyclerView.Adapter<FilmShowAdapter.ViewHo
                 clickListener.click(list.get(i).getId());
             }
         });
+        final int followMovie = list.get(i).getFollowMovie();
+        if (followMovie==1){
+            viewHolder.imageView.setImageResource(R.drawable.com_icon_collection_selectet);
+        }else {
+            viewHolder.imageView.setImageResource(R.drawable.xing);
+        }
+        /*viewHolder.imageView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b){
+                    clickListener.clickOk(list.get(i).getId());
+                }else {
+                    clickListener.clickNo(list.get(i).getId());
+                }
+            }
+        });*/
+        viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (followMovie==1){
+                    list.get(i).setFollowMovie(2);
+                    viewHolder.imageView.setImageResource(R.drawable.xing);
+                    clickListener.clickNo(list.get(i).getId());
+
+
+                }else {
+                    list.get(i).setFollowMovie(1);
+                    viewHolder.imageView.setImageResource(R.drawable.com_icon_collection_selectet);
+                    clickListener.clickOk(list.get(i).getId());
+
+                }
+                notifyDataSetChanged();
+            }
+        });
+
     }
 
     @Override
@@ -79,6 +116,8 @@ public class FilmShowAdapter extends RecyclerView.Adapter<FilmShowAdapter.ViewHo
     }
     public interface ClickListener{
         void click(int id);
+        void clickOk(int id);
+        void clickNo(int id);
     }
     public void setClickListener(ClickListener clickListener){
         this.clickListener=clickListener;

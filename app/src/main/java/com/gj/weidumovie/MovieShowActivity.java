@@ -21,9 +21,12 @@ import com.gj.weidumovie.bean.Result;
 import com.gj.weidumovie.core.DataCall;
 import com.gj.weidumovie.core.WDActivity;
 import com.gj.weidumovie.core.exception.ApiException;
+import com.gj.weidumovie.presenter.CancelFollowMoviePresenter;
 import com.gj.weidumovie.presenter.ComingSoonMoviePresenter;
+import com.gj.weidumovie.presenter.FollowMoviePresenter;
 import com.gj.weidumovie.presenter.HotMoviePresenter;
 import com.gj.weidumovie.presenter.ReleaseMoviePresenter;
+import com.gj.weidumovie.util.UIUtils;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.List;
@@ -61,6 +64,8 @@ public class MovieShowActivity extends WDActivity implements XRecyclerView.Loadi
     private FilmShowAdapter filmShowAdapter;
     public LocationClient mLocationClient = null;
     private MyLocationListener myListener = new MyLocationListener();
+    private FollowMoviePresenter followMoviePresenter;
+    private CancelFollowMoviePresenter cancelFollowMoviePresenter;
 
     @Override
     protected int getLayoutId() {
@@ -74,9 +79,11 @@ public class MovieShowActivity extends WDActivity implements XRecyclerView.Loadi
         sessionId = sharedPreferences.getString("sessionId", "");
         Intent intent = getIntent();
         String select = intent.getStringExtra("select");
-        hotMoviePresenter = new HotMoviePresenter(new Hot());
-        releaseMoviePresenter = new ReleaseMoviePresenter(new Release());
+        hotMoviePresenter = new HotMoviePresenter(new ComingSoon());
+        releaseMoviePresenter = new ReleaseMoviePresenter(new ComingSoon());
         comingSoonMoviePresenter = new ComingSoonMoviePresenter(new ComingSoon());
+        followMoviePresenter = new FollowMoviePresenter(new FollowMovieCall());
+        cancelFollowMoviePresenter = new CancelFollowMoviePresenter(new FollowMovieCall());
         movieShowRecycler.setLoadingListener(this);
         movieShowRecycler.setLoadingMoreEnabled(true);
         movieShowRecycler.setPullRefreshEnabled(true);
@@ -112,6 +119,18 @@ public class MovieShowActivity extends WDActivity implements XRecyclerView.Loadi
                 intent.putExtra("id", id);
                 startActivity(intent);
             }
+
+            @Override
+            public void clickOk(int id) {
+                followMoviePresenter.reqeust(userId,sessionId,id);
+
+            }
+
+            @Override
+            public void clickNo(int id) {
+                cancelFollowMoviePresenter.reqeust(userId,sessionId,id);
+
+            }
         });
     }
 
@@ -120,6 +139,8 @@ public class MovieShowActivity extends WDActivity implements XRecyclerView.Loadi
         hotMoviePresenter.unBind();
         releaseMoviePresenter.unBind();
         comingSoonMoviePresenter.unBind();
+        followMoviePresenter.unBind();
+        cancelFollowMoviePresenter.unBind();
     }
 
     @Override
@@ -199,7 +220,7 @@ public class MovieShowActivity extends WDActivity implements XRecyclerView.Loadi
 
     }
 
-    private class Hot implements DataCall<Result> {
+    /*private class Hot implements DataCall<Result> {
 
         @Override
         public void success(Result data) {
@@ -231,7 +252,7 @@ public class MovieShowActivity extends WDActivity implements XRecyclerView.Loadi
         public void fail(ApiException e) {
 
         }
-    }
+    }*/
 
     private class ComingSoon implements DataCall<Result> {
 
@@ -281,6 +302,14 @@ public class MovieShowActivity extends WDActivity implements XRecyclerView.Loadi
         option.setLocationNotify(false);
         mLocationClient.setLocOption(option);
         mLocationClient.start();
+        filmShowAdapter.remove();
+        if (hotcheck) {
+            hotMoviePresenter.reqeust(userId, sessionId, false, 5);
+        } else if (releasecheck) {
+            releaseMoviePresenter.reqeust(userId, sessionId, false, 5);
+        } else {
+            comingSoonMoviePresenter.reqeust(userId, sessionId, false, 5);
+        }
     }
 
     //定位
@@ -298,6 +327,19 @@ public class MovieShowActivity extends WDActivity implements XRecyclerView.Loadi
 //            String locationDescribe = location.getLocationDescribe();    //获取位置描述信息
             String addr = location.getCity();    //获取详细地址信息
             cimemaText.setText(addr);
+        }
+    }
+    private class FollowMovieCall implements DataCall<Result> {
+        @Override
+        public void success(Result data) {
+            if(data.getStatus().equals("0000")){
+                UIUtils.showToastSafe(data.getMessage());
+            }
+        }
+
+        @Override
+        public void fail(ApiException e) {
+            UIUtils.showToastSafe(e.getMessage());
         }
     }
 }

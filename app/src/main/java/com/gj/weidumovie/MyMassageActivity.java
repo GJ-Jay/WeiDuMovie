@@ -113,7 +113,7 @@ public class MyMassageActivity extends WDActivity {
     }
 
     @Override//再次查询
-    protected void onResume() {
+    public void onResume() {
         queryUserInfoPresenter.reqeust(userId,sessionId);
         super.onResume();
 

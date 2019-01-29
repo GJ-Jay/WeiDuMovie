@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -30,9 +31,12 @@ import com.gj.weidumovie.bean.Result;
 import com.gj.weidumovie.core.DataCall;
 import com.gj.weidumovie.core.WDActivity;
 import com.gj.weidumovie.core.exception.ApiException;
+import com.gj.weidumovie.presenter.CancelFollowMoviePresenter;
 import com.gj.weidumovie.presenter.FindAllMovieCommentPresenter;
 import com.gj.weidumovie.presenter.FindMoviesDetailPresenter;
+import com.gj.weidumovie.presenter.FollowMoviePresenter;
 import com.gj.weidumovie.util.SpaceItemDecoration;
+import com.gj.weidumovie.util.UIUtils;
 
 import java.io.Serializable;
 import java.util.List;
@@ -78,7 +82,8 @@ public class MovieDetailsShow extends WDActivity {
     private String sessionId;
     private int id;
     private ReviewAdapter reviewAdapter;
-
+    private FollowMoviePresenter followMoviePresenter;
+    private CancelFollowMoviePresenter cancelFollowMoviePresenter;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_movie_details_show;
@@ -97,7 +102,18 @@ public class MovieDetailsShow extends WDActivity {
         findMoviesDetailPresenter.reqeust(userId, sessionId, id);
 
         parent = View.inflate(MovieDetailsShow.this, R.layout.activity_movie_details_show, null);
-
+        followMoviePresenter = new FollowMoviePresenter(new FollowMovieCall());
+        cancelFollowMoviePresenter = new CancelFollowMoviePresenter(new FollowMovieCall());
+        moviesShowLike.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b){
+                    followMoviePresenter.reqeust(userId,sessionId,id);
+                }else {
+                    cancelFollowMoviePresenter.reqeust(userId,sessionId,id);
+                }
+            }
+        });
     }
 
     private void getShow() {
@@ -241,6 +257,8 @@ public class MovieDetailsShow extends WDActivity {
     protected void destoryData() {
         findMoviesDetailPresenter.unBind();
         findAllMovieCommentPresenter.unBind();
+        cancelFollowMoviePresenter.unBind();
+        followMoviePresenter.unBind();
     }
 
     @Override
@@ -320,5 +338,18 @@ public class MovieDetailsShow extends WDActivity {
 
         }
 
+    }
+    private class FollowMovieCall implements DataCall<Result> {
+        @Override
+        public void success(Result data) {
+            if(data.getStatus().equals("0000")){
+                UIUtils.showToastSafe(data.getMessage());
+            }
+        }
+
+        @Override
+        public void fail(ApiException e) {
+
+        }
     }
 }

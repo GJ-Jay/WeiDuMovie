@@ -17,6 +17,7 @@ import com.gj.weidumovie.core.WDActivity;
 import com.gj.weidumovie.core.exception.ApiException;
 import com.gj.weidumovie.presenter.LoginPresenter;
 import com.gj.weidumovie.util.UIUtils;
+import com.umeng.analytics.MobclickAgent;
 
 public class MainActivity extends WDActivity {
 
@@ -103,5 +104,15 @@ public class MainActivity extends WDActivity {
         public void fail(ApiException e) {
 
         }
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }
