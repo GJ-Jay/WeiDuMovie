@@ -23,6 +23,9 @@ import com.gj.weidumovie.core.exception.ApiException;
 import com.gj.weidumovie.presenter.LoginPresenter;
 import com.gj.weidumovie.util.EncryptUtil;
 import com.gj.weidumovie.util.UIUtils;
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,6 +54,7 @@ public class LoginActivity extends WDActivity {
     private String pwd;
     private LoginPresenter loginPresenter;
     private SharedPreferences.Editor edit;
+    private IWXAPI api;
 
     @Override
     protected int getLayoutId() {
@@ -107,10 +111,13 @@ public class LoginActivity extends WDActivity {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
-
+        //通过WXAPIFactory工厂获取IWXApI的示例
+        api = WXAPIFactory.createWXAPI(this,"wxb3852e6a6b7d9516",true);
+        //将应用的appid注册到微信
+        api.registerApp("wxb3852e6a6b7d9516");
     }
 
-    @OnClick({R.id.login_eye, R.id.login_reg, R.id.login_ok})
+    @OnClick({R.id.login_eye, R.id.login_reg, R.id.login_ok,R.id.login_weixin})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.login_eye:
@@ -132,6 +139,13 @@ public class LoginActivity extends WDActivity {
                 pwd = EncryptUtil.encrypt(pwds);
                 Log.i("abc", "onViewClicked: "+pwd);
                 loginPresenter.reqeust(phone,pwd);
+                break;
+            case R.id.login_weixin://微信第三方登录
+                SendAuth.Req req = new SendAuth.Req();
+                req.scope = "snsapi_userinfo";
+                req.state = "wechat_sdk_微信登录"; // 自行填写
+                api.sendReq(req);
+                finish();
                 break;
         }
 

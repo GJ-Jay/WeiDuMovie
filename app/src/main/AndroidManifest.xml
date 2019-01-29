@@ -77,7 +77,11 @@
             android:name="com.bw.movie.wxapi.WXPayEntryActivity"
             android:exported="true"
             android:launchMode="singleTop" />
-        <activity android:name="com.gj.weidumovie.MovieCinemaActivity"/>
+        <activity android:name="com.gj.weidumovie.MovieCinemaActivity" />
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop"/>
     </application>
 
 </manifest>
