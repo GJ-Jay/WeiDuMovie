@@ -20,6 +20,24 @@ public class Result<T> {
     private String sign;
     private String timeStamp;
     private String packageValue;
+    private int flag;
+    private String downloadUrl;
+
+    public int getFlag() {
+        return flag;
+    }
+
+    public void setFlag(int flag) {
+        this.flag = flag;
+    }
+
+    public String getDownloadUrl() {
+        return downloadUrl;
+    }
+
+    public void setDownloadUrl(String downloadUrl) {
+        this.downloadUrl = downloadUrl;
+    }
 
     public String getAppId() {
         return appId;

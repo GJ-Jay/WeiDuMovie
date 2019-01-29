@@ -12,6 +12,7 @@ import com.gj.weidumovie.bean.Result;
 import com.gj.weidumovie.bean.UpdateUser;
 import com.gj.weidumovie.bean.UserBean;
 import com.gj.weidumovie.bean.UserInfo;
+import com.gj.weidumovie.bean.WxLogin;
 
 import java.io.File;
 
@@ -210,5 +211,19 @@ public interface IRequest {
     @GET("movieApi/movie/v1/findMovieListByCinemaId")
     Observable<Result<List<MoiveBean>>> findMovieListByCinemaId(@Query("cinemaId") int cinemaId);
 
+    //微信登录
+    @POST("movieApi/user/v1/weChatBindingLogin")
+    @FormUrlEncoded
+    Observable<Result<WxLogin>> weChatBindingLogin(@Field("code")String code);
 
+    //用户签到
+    @GET("movieApi/user/v1/verify/userSignIn")
+    Observable<Result> userSignIn(@Header("userId")int userId,
+                                  @Header("sessionId")String sessionId);
+
+    //查询新版本
+    @GET("movieApi/tool/v1/findNewVersion")
+    Observable<Result> findNewVersion(@Header("userId")int userId,
+                                      @Header("sessionId")String sessionId,
+                                      @Header("ak")String ak);
 }
