@@ -17,6 +17,7 @@ import com.gj.weidumovie.FeedbackActivity;
 import com.gj.weidumovie.FindUserBuyTicketActivity;
 import com.gj.weidumovie.HomeActivity;
 import com.gj.weidumovie.LoginActivity;
+import com.gj.weidumovie.MineRemindActivity;
 import com.gj.weidumovie.MyLikeActivity;
 import com.gj.weidumovie.MyMassageActivity;
 import com.gj.weidumovie.bean.Result;
@@ -141,8 +142,13 @@ public class Fragment_My_Three extends WDFragment {
     @OnClick({R.id.mine_remind, R.id.mine_head, R.id.mine_login_reg, R.id.btn_msg_mine, R.id.btn_like_mine, R.id.btn_buy_mine, R.id.btn_feedback_mine, R.id.btn_version_mine, R.id.btn_back_mine,R.id.sigin_in})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.mine_remind:
-
+            case R.id.mine_remind://点击跳转消息
+                if (userId == 0) {
+                    startActivity(new Intent(getContext(), LoginActivity.class));
+                    return;
+                }
+                Intent intent_message = new Intent(getContext(), MineRemindActivity.class);
+                startActivity(intent_message);
                 break;
             case R.id.mine_head:
 

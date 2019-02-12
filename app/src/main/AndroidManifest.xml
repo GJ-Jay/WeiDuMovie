@@ -60,6 +60,7 @@
         <activity android:name="com.gj.weidumovie.HomeActivity" />
         <activity android:name="com.gj.weidumovie.RegisterActivity" />
         <activity android:name="com.gj.weidumovie.MyMassageActivity" />
+        <activity android:name="com.gj.weidumovie.MineRemindActivity"/>
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"

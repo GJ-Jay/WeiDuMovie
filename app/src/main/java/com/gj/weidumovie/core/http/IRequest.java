@@ -3,6 +3,7 @@ package com.gj.weidumovie.core.http;
 import com.gj.weidumovie.bean.BuyTicket;
 import com.gj.weidumovie.bean.CinemaBean;
 import com.gj.weidumovie.bean.FilmReviewBean;
+import com.gj.weidumovie.bean.FindMessageList;
 import com.gj.weidumovie.bean.LikeCinema;
 import com.gj.weidumovie.bean.LikeMovie;
 import com.gj.weidumovie.bean.MoiveBean;
@@ -236,4 +237,12 @@ public interface IRequest {
     Observable<Result> findNewVersion(@Header("userId")int userId,
                                       @Header("sessionId")String sessionId,
                                       @Header("ak")String ak);
+
+
+    //查询系统消息列表
+    @GET("movieApi/tool/v1/verify/findAllSysMsgList")
+    Observable<Result<List<FindMessageList>>> findAllSysMsgList(@Header("userId")int userId,
+                                                                @Header("sessionId")String sessionId,
+                                                                @Query("page")int page,
+                                                                @Query("count")int count);
 }
