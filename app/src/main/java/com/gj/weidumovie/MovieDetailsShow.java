@@ -411,9 +411,9 @@ public class MovieDetailsShow extends WDActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("Config", Context.MODE_PRIVATE);
         userId = sharedPreferences.getInt("userId", 0);
         sessionId = sharedPreferences.getString("sessionId", "");
-        if (userId!=0){
+
             findMoviesDetailPresenter.reqeust(userId, sessionId, id);
-        }
+
 
     }
     class MovieCommentGreat implements DataCall<Result>{

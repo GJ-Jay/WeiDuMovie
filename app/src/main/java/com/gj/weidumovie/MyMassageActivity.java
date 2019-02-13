@@ -291,10 +291,11 @@ public class MyMassageActivity extends WDActivity {
         }
         if (resultCode == RESULT_OK) {
             Uri uri = data.getData();
+            myInfoHead.setImageURI(uri);
             String paths = StringUtils.getRealPathFromUri(MyMassageActivity.this, uri);
             file = new File(paths);
             updateHeadPresenter.reqeust(userId, sessionId, file);
-            myInfoHead.setImageURI(uri);
+
         } else {
             Toast.makeText(MyMassageActivity.this, "选择图片失败,请重新选择", Toast.LENGTH_SHORT)
                     .show();
