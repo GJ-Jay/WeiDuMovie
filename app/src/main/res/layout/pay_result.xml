@@ -1,15 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:padding="@dimen/dp_20"
     style="@style/NavPage">
-    
 	<TextView
-		android:id="@+id/pay_result"
-	    android:layout_width="fill_parent"
-	 	android:layout_height="fill_parent"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/dp_40"
+		android:text="支付结果"
 		android:gravity="center"
-	 	android:textColor="#ff000000"
-	 	android:textSize="30dp"
-	 	android:text="结果"/>
-	
-</LinearLayout>
+		android:textSize="14sp"
+		android:textColor="@color/textcolor"/>
+
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/dp_180">
+
+		<ImageView
+			android:id="@+id/succes_pay_img"
+			android:layout_width="@dimen/dp_70"
+			android:layout_height="@dimen/dp_70"
+			android:src="@drawable/feedback_success"
+			android:layout_centerHorizontal="true"/>
+
+		<ImageView
+			android:id="@+id/faile_pay_img"
+			android:layout_width="@dimen/dp_70"
+			android:layout_height="@dimen/dp_70"
+			android:src="@drawable/faile_img"
+			android:visibility="invisible"
+			android:layout_centerHorizontal="true"/>
+
+		<TextView
+			android:id="@+id/pay_result"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/dp_30"
+			android:text="结果"
+			android:textSize="16sp"
+			android:textColor="@color/textcolor"
+			android:layout_below="@+id/succes_pay_img"
+			android:gravity="center"/>
+
+	</RelativeLayout>
+
+	<ImageView
+		android:id="@+id/pay_back"
+		android:layout_width="@dimen/dp_60"
+		android:layout_height="@dimen/dp_60"
+		android:layout_alignParentBottom="true"
+		android:src="@drawable/ic_particulars_back"/>
+</RelativeLayout>
