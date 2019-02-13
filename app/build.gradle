@@ -4,7 +4,7 @@ android {
         config {
             keyAlias 'bw_movie'
             keyPassword '123456'
-            storeFile file('C:/Users/陈国星/Desktop/movie.keystore')
+            storeFile file('C:/Users/lenovo/Desktop/movie.keystore')
             storePassword '123456'
         }
     }
@@ -105,13 +105,11 @@ dependencies {
     implementation 'com.tencent.bugly:nativecrashreport:3.6.0.1'
     implementation 'com.umeng.umsdk:analytics:8.0.0'
     implementation 'com.umeng.umsdk:common:2.0.0'
-
-
     //信鸽普通版本jar，不包含厂商通道
-    implementation  'com.tencent.xinge:xinge:4.0.5-release'
+    implementation 'com.tencent.xinge:xinge:4.0.5-release'
     //implementation'com.tencent.xinge:xinge:4.3.1-beta'
     //jg包
-    implementation'com.tencent.jg:jg:1.1'
+    implementation 'com.tencent.jg:jg:1.1'
     //wup包
     implementation 'com.tencent.wup:wup:1.0.0.E-release'
     //mid包，minSdkVersion 14

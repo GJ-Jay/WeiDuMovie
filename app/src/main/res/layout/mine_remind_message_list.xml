@@ -9,6 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
         android:orientation="vertical">
         <TextView
             android:id="@+id/mine_remind_message_list_name"
@@ -16,8 +17,7 @@
             android:layout_height="wrap_content"
             android:text="购票信息"
             android:textSize="@dimen/sp_16"
-            android:textColor="@color/textcolor"
-            android:layout_marginTop="@dimen/dp_20"/>
+            android:textColor="@color/textcolor"/>
 
         <TextView
             android:id="@+id/mine_remind_message_list_title"
@@ -27,6 +27,12 @@
             android:textSize="@dimen/sp_12"
             android:textColor="@color/textcolor"
             android:text="阿路口的哈伦裤"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:background="#ddd"
+            android:layout_marginTop="@dimen/dp_10"/>
     </LinearLayout>
     <TextView
         android:id="@+id/mine_remind_message_list_time"

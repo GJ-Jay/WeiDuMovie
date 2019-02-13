@@ -15,7 +15,7 @@
             android:layout_width="@dimen/dp_24"
             android:layout_height="@dimen/dp_24"
             android:layout_marginLeft="@dimen/dp_24"
-            android:layout_marginTop="@dimen/dp_25"
+            android:layout_marginTop="@dimen/dp_35"
             android:src="@drawable/my_icon_remind_default_hdpi" />
 
         <com.facebook.drawee.view.SimpleDraweeView
