@@ -11,7 +11,7 @@
         android:layout_gravity="center"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="95dp"
+        android:layout_height="105dp"
         android:background="@drawable/myborder">
 
         <com.facebook.drawee.view.SimpleDraweeView
@@ -24,7 +24,7 @@
             android:layout_height="70dp" />
 
         <LinearLayout
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="10dp"
             android:layout_marginLeft="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -61,13 +61,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-                <CheckBox
+                <ImageView
                     android:id="@+id/moive_like"
                     android:layout_width="@dimen/dp_24"
                     android:layout_height="@dimen/dp_24"
                     android:layout_alignParentRight="true"
-                    android:background="@drawable/checked_selector"
-                    android:button="@null"/>
+                    android:src="@drawable/xing"/>
 
             </RelativeLayout>
         </LinearLayout>

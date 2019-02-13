@@ -169,7 +169,7 @@ public class LoginActivity extends WDActivity {
                 edit.putString("phone",phone);
                 edit.putString("pwd",pwd);
                 edit.commit();
-                startActivity(new Intent(LoginActivity.this,HomeActivity.class));
+                //startActivity(new Intent(LoginActivity.this,HomeActivity.class));
                 finish();
             }
             UIUtils.showToastSafe(data.getMessage());

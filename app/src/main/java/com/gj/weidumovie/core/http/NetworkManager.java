@@ -1,5 +1,9 @@
 package com.gj.weidumovie.core.http;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -66,5 +70,14 @@ public class NetworkManager {
     public <T> T create(final Class<T> service){
         return retrofit.create(service);
     }
+    public boolean isNet(Context context){
+       ConnectivityManager connectivityManager= (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = connectivityManager.getActiveNetworkInfo();
+        if (info!=null&& info.isConnected()){
+            return true;
+        }else {
+            return false;
+        }
 
+    }
 }

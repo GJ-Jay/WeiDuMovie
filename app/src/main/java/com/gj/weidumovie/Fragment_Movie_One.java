@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -38,9 +39,15 @@ import com.gj.weidumovie.core.exception.ApiException;
 import com.gj.weidumovie.presenter.ComingSoonMoviePresenter;
 import com.gj.weidumovie.presenter.HotMoviePresenter;
 import com.gj.weidumovie.presenter.ReleaseMoviePresenter;
+import com.gj.weidumovie.util.CacheManager;
+import com.gj.weidumovie.util.FileUtils;
 import com.gj.weidumovie.util.UIUtils;
 import com.gj.weidumovie.view.MySearchLayout;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.io.File;
+import java.lang.reflect.Type;
 import java.util.List;
 
 import butterknife.BindView;
@@ -94,11 +101,13 @@ public class Fragment_Movie_One extends WDFragment {
     private HotMoviePresenter popularMoviePresenter;
     private ReleaseMoviePresenter beingMoviePresenter;
     private ComingSoonMoviePresenter soonMoviePresenter;
-
+    private String movieFile = Environment.getExternalStorageDirectory()+File.separator+"movie";
+    private CacheManager cacheManager;
+    //private File files;
 
     @Override
     public String getPageName() {
-        return "影片fragment";
+        return "影片页面";
     }
 
     @Override
@@ -116,6 +125,13 @@ public class Fragment_Movie_One extends WDFragment {
     }
     @Override
     protected void initView() {
+        /*File file = new File(movieFile);
+        if (!file.exists()){
+            file.mkdir();
+        }else {
+            files = new File(movieFile + File.separator + "movie.text");
+        }*/
+        cacheManager = new CacheManager();
         myListener = new MyLocationListener();
         if (Build.VERSION.SDK_INT >= 23) {
             if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -321,6 +337,9 @@ public class Fragment_Movie_One extends WDFragment {
             if (result.getStatus().equals("0000")) {
                 List<MoiveBean> moiveBeans = (List<MoiveBean>) result.getResult();
 
+                    cacheManager.saveDataToFile(getContext(),new Gson().toJson(moiveBeans),"hotMovie");
+
+
                 movieFlowAdapter.addItem(moiveBeans);
 
                 popularAdapter.addItem(moiveBeans);
@@ -331,7 +350,14 @@ public class Fragment_Movie_One extends WDFragment {
 
         @Override
         public void fail(ApiException e) {
+            String s = cacheManager.loadDataFromFile(getContext(), "hotMovie");
+            Type type = new TypeToken<List<MoiveBean>>() {}.getType();
+            List<MoiveBean>  moiveBeans = new Gson().fromJson(s, type);
+            movieFlowAdapter.addItem(moiveBeans);
 
+            popularAdapter.addItem(moiveBeans);
+            popularAdapter.notifyDataSetChanged();
+            movieFlowAdapter.notifyDataSetChanged();
         }
     }
 
@@ -341,6 +367,7 @@ public class Fragment_Movie_One extends WDFragment {
         public void success(Result result) {
             if (result.getStatus().equals("0000")) {
                 List<MoiveBean> moiveBeans = (List<MoiveBean>) result.getResult();
+                cacheManager.saveDataToFile(getContext(),new Gson().toJson(moiveBeans),"newMovie");
                 soonAdapter.addItem(moiveBeans);
                 soonAdapter.notifyDataSetChanged();
             }
@@ -348,7 +375,11 @@ public class Fragment_Movie_One extends WDFragment {
 
         @Override
         public void fail(ApiException e) {
-
+            String s = cacheManager.loadDataFromFile(getContext(), "newMovie");
+            Type type = new TypeToken<List<MoiveBean>>() {}.getType();
+            List<MoiveBean>  moiveBeans = new Gson().fromJson(s, type);
+            soonAdapter.addItem(moiveBeans);
+            soonAdapter.notifyDataSetChanged();
         }
     }
 
@@ -358,6 +389,7 @@ public class Fragment_Movie_One extends WDFragment {
         public void success(Result result) {
             if (result.getStatus().equals("0000")) {
                 List<MoiveBean> moiveBeans = (List<MoiveBean>) result.getResult();
+                cacheManager.saveDataToFile(getContext(),new Gson().toJson(moiveBeans),"nextMovie");
                 beingAdapter.addItem(moiveBeans);
                 beingAdapter.notifyDataSetChanged();
             }
@@ -365,6 +397,11 @@ public class Fragment_Movie_One extends WDFragment {
 
         @Override
         public void fail(ApiException e) {
+            String s = cacheManager.loadDataFromFile(getContext(), "nextMovie");
+            Type type = new TypeToken<List<MoiveBean>>() {}.getType();
+            List<MoiveBean>  moiveBeans = new Gson().fromJson(s, type);
+            beingAdapter.addItem(moiveBeans);
+            beingAdapter.notifyDataSetChanged();
 
         }
     }

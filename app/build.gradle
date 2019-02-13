@@ -4,7 +4,7 @@ android {
         config {
             keyAlias 'bw_movie'
             keyPassword '123456'
-            storeFile file('C:/Users/lenovo/Desktop/movie.keystore')
+            storeFile file('C:/Users/陈国星/Desktop/movie.keystore')
             storePassword '123456'
         }
     }
@@ -21,15 +21,32 @@ android {
             // 设置支持的SO库架构
             abiFilters 'armeabi' , 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
         }
+        manifestPlaceholders = [
+
+                XG_ACCESS_ID:"2100300660",
+                XG_ACCESS_KEY : "A44FJ9N7N9EY",
+        ]
     }
     flavorDimensions "versionCode"
     productFlavors {
-        kuan {}
-        xiaomi{}
-        qh360 {}
-        baidu {}
-        wandoujia {}
-        yingyongbao {}
+        kuan {
+            signingConfig signingConfigs.config
+        }
+        xiaomi {
+            signingConfig signingConfigs.config
+        }
+        qh360 {
+            signingConfig signingConfigs.config
+        }
+        baidu {
+            signingConfig signingConfigs.config
+        }
+        wandoujia {
+            signingConfig signingConfigs.config
+        }
+        yingyongbao {
+            signingConfig signingConfigs.config
+        }
     }
 
     productFlavors.all {
@@ -84,11 +101,19 @@ dependencies {
     implementation 'cn.jzvd:jiaozivideoplayer:6.2.9'
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
     implementation project(':seattable')
-
-
     implementation 'com.tencent.bugly:crashreport:2.8.6'
     implementation 'com.tencent.bugly:nativecrashreport:3.6.0.1'
+    implementation 'com.umeng.umsdk:analytics:8.0.0'
+    implementation 'com.umeng.umsdk:common:2.0.0'
 
-    implementation  'com.umeng.umsdk:analytics:8.0.0'
-    implementation  'com.umeng.umsdk:common:2.0.0'
+
+    //信鸽普通版本jar，不包含厂商通道
+    implementation  'com.tencent.xinge:xinge:4.0.5-release'
+    //implementation'com.tencent.xinge:xinge:4.3.1-beta'
+    //jg包
+    implementation'com.tencent.jg:jg:1.1'
+    //wup包
+    implementation 'com.tencent.wup:wup:1.0.0.E-release'
+    //mid包，minSdkVersion 14
+    implementation 'com.tencent.mid:mid:4.0.7-Release'
 }

@@ -12,6 +12,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -37,6 +38,7 @@ import com.gj.weidumovie.presenter.QueryUserInfoPresenter;
 import com.gj.weidumovie.presenter.UpdateHeadPresenter;
 import com.gj.weidumovie.presenter.UpdateUserPresenter;
 import com.gj.weidumovie.util.DateUtils;
+import com.gj.weidumovie.util.StringUtils;
 import com.gj.weidumovie.util.updatemyhead.Constant;
 import com.gj.weidumovie.util.updatemyhead.GetRealPath;
 import com.gj.weidumovie.util.UIUtils;
@@ -83,7 +85,7 @@ public class MyMassageActivity extends WDActivity {
     private int getSex;
     private String getEmail;
     private int index = 0;
-
+    private String path = Environment.getExternalStorageDirectory() + "/tou.jpg";
     @Override
     protected int getLayoutId() {
         return R.layout.activity_my_info;
@@ -136,11 +138,12 @@ public class MyMassageActivity extends WDActivity {
                                         return;
                                     }
                                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                                    intent.addCategory("android.intent.category.DEFAULT");
+                                    //intent.addCategory("android.intent.category.DEFAULT");
+                                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(path)));
                                     startActivityForResult(intent, SELECT_CAMER);
                                 } else {
                                     Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                                    intent.addCategory(Intent.CATEGORY_OPENABLE);
+                                    //intent.addCategory(Intent.CATEGORY_OPENABLE);
                                     intent.setType("image/*");
                                     startActivityForResult(intent, SELECT_PICTURE);
                                 }
@@ -260,38 +263,18 @@ public class MyMassageActivity extends WDActivity {
             return;
         }
         if(requestCode==0){
-            Bitmap bitmap = data.getParcelableExtra("data");
-            Uri uri = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), bitmap,
-                    null, null));
-            myInfoHead.setImageURI(uri);
-            String realPathFromUri = GetRealPath.getRealPathFromUri(MyMassageActivity.this, uri);
-            file = new File(realPathFromUri);
-            String seesionId = sp.getString("sessionId", "");
-            int userId = sp.getInt("userId", 0);
-            File file = null;
-            String[] proj = {MediaStore.Images.Media.DATA};
-            Cursor cursor = this.managedQuery(uri, proj, null, null, null);
-            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            cursor.moveToFirst();
-            String filepath = cursor.getString(column_index);
-            file = new File(filepath);
+            myInfoHead.setImageURI(Uri.fromFile(new File(path)));
+            String paths = StringUtils.getRealPathFromUri(MyMassageActivity.this, Uri.fromFile(new File(path)));
+            file = new File(paths);
             // TODO: 2019/1/24 上传头像
-            updateHeadPresenter.reqeust(userId, seesionId, file);//"http://mobile.bwstudent.com/images/movie/head_pic/2019-01-24/20190124132033.jpg"
+            updateHeadPresenter.reqeust(userId, sessionId, file);//"http://mobile.bwstudent.com/images/movie/head_pic/2019-01-24/20190124132033.jpg"
             return;
         }
         if (resultCode == RESULT_OK) {
             Uri uri = data.getData();
-            ContentResolver cr = this.getContentResolver();
-            try {
-                if (bmp != null) {
-                    bmp.recycle();
-                    bmp = BitmapFactory.decodeStream(cr.openInputStream(uri));
-                    file = new File(uri.toString());
-                    updateHeadPresenter.reqeust(userId, sessionId, file);
-                }
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+            String paths = StringUtils.getRealPathFromUri(MyMassageActivity.this, uri);
+            file = new File(paths);
+            updateHeadPresenter.reqeust(userId, sessionId, file);
             myInfoHead.setImageURI(uri);
         } else {
             Toast.makeText(MyMassageActivity.this, "选择图片失败,请重新选择", Toast.LENGTH_SHORT)
