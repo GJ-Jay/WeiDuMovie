@@ -201,7 +201,7 @@ public class MovieDetailsShow extends WDActivity {
         reviewAdapter.setClickListener(new ReviewAdapter.ClickListener() {
             @Override
             public void clickOk(int id) {
-                Log.i("abc", "clickOk: id"+id);
+                //Log.i("abc", "clickOk: id"+id);
                 movieCommentGreatPresenter.reqeust(userId,sessionId,id);
             }
 

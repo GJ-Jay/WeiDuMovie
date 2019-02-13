@@ -276,11 +276,11 @@ public class MyMassageActivity extends WDActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(data==null){//如果没有图片返回就return
+        /*if(data==null){//如果没有图片返回就return
             Toast.makeText(MyMassageActivity.this, "选择图片失败,请重新选择", Toast.LENGTH_SHORT)
                     .show();
             return;
-        }
+        }*/
         if(requestCode==0){
             myInfoHead.setImageURI(Uri.fromFile(new File(path)));
             String paths = StringUtils.getRealPathFromUri(MyMassageActivity.this, Uri.fromFile(new File(path)));

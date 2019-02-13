@@ -24,7 +24,7 @@ import com.gj.weidumovie.core.WDApplication;
 public class MySearchLayout extends RelativeLayout {
 
     private ObjectAnimator translationX;
-    //private ObjectAnimator translationZ;
+    private ObjectAnimator translationZ;
 
     public MySearchLayout(Context context) {
         super(context);
@@ -43,9 +43,9 @@ public class MySearchLayout extends RelativeLayout {
     private void init(){
         View view = View.inflate(getContext(), R.layout.one_search_layout,this);
         ImageView imageView= view.findViewById(R.id.one_image_sou);
-        //TextView textView= view.findViewById(R.id.one_sou_ok);
+        TextView textView= view.findViewById(R.id.one_sou_ok);
         translationX = ObjectAnimator.ofFloat(this, "translationX", 0,-280);
-        /*translationZ = ObjectAnimator.ofFloat(this, "translationX", -280,0);
+        translationZ = ObjectAnimator.ofFloat(this, "translationX", -280,0);
         translationZ.setDuration(1000);
         translationZ.setInterpolator(new LinearInterpolator());
         translationZ.addListener(new Animator.AnimatorListener() {
@@ -68,7 +68,7 @@ public class MySearchLayout extends RelativeLayout {
             public void onAnimationRepeat(Animator animator) {
 
             }
-        });*/
+        });
         translationX.setDuration(1000);
         translationX.setInterpolator(new LinearInterpolator());
         translationX.addListener(new Animator.AnimatorListener() {
@@ -98,11 +98,11 @@ public class MySearchLayout extends RelativeLayout {
                     translationX.start();
             }
         });
-        /*textView.setOnClickListener(new OnClickListener() {
+        textView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 translationZ.start();
             }
-        });*/
+        });
     }
 }
