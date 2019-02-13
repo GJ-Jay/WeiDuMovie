@@ -24,6 +24,7 @@ import java.util.ArrayList;
 public class MyLikeWaitAdapter extends RecyclerView.Adapter<MyLikeWaitAdapter.MyHolder> {
 
     Context context;
+    private ClickListener clickListener;
 
     public MyLikeWaitAdapter(Context context) {
         this.context = context;
@@ -41,7 +42,7 @@ public class MyLikeWaitAdapter extends RecyclerView.Adapter<MyLikeWaitAdapter.My
 
     @Override
     public void onBindViewHolder(@NonNull MyHolder myHolder, int i) {
-        BuyTicket buyTicket = list.get(i);
+        final BuyTicket buyTicket = list.get(i);
         myHolder.name.setText(buyTicket.getMovieName());
         myHolder.code.setText("订单号："+buyTicket.getOrderId());
         myHolder.cinema.setText("影院："+buyTicket.getCinemaName());
@@ -49,6 +50,12 @@ public class MyLikeWaitAdapter extends RecyclerView.Adapter<MyLikeWaitAdapter.My
         myHolder.time.setText(buyTicket.getBeginTime()+"-"+buyTicket.getEndTime());
         myHolder.num.setText("数量："+buyTicket.getAmount()+"张");
         myHolder.money.setText("金额："+buyTicket.getPrice()+"元");
+        myHolder.pay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickListener.click(buyTicket.getOrderId(),buyTicket.getPrice());//点击回调订单
+            }
+        });
     }
 
     @Override
@@ -89,5 +96,14 @@ public class MyLikeWaitAdapter extends RecyclerView.Adapter<MyLikeWaitAdapter.My
             money = itemView.findViewById(R.id.butticket_wait_money);
             pay = itemView.findViewById(R.id.butticket_wait_pay);
         }
+    }
+
+
+    public interface ClickListener{
+        void click(String code,double price);
+    }
+
+    public void setClickListener(ClickListener clickListener){
+        this.clickListener = clickListener;
     }
 }

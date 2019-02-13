@@ -7,13 +7,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="@dimen/dp_24"
+    android:layout_marginTop="@dimen/dp_60"
     android:layout_marginRight="@dimen/dp_24"
     tools:context="com.gj.weidumovie.FeedbackActivity">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_30"
         android:text="意见反馈"
         android:textSize="14sp"
         android:textColor="@color/textcolor"/>
