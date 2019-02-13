@@ -225,7 +225,8 @@ public class Fragment_Cinema_two extends WDFragment {
             //更多结果信息获取说明，请参照类参考中BDLocation类中的说明
             String locationDescribe = location.getLocationDescribe();    //获取位置描述信息
             String addr = location.getAddrStr();    //获取详细地址信息
-            cimemaText.setText(locationDescribe + addr);
+            //cimemaText.setText(locationDescribe + addr);
+            cimemaText.setText(addr);
 
         }
     }

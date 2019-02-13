@@ -101,7 +101,6 @@ public class Fragment_Movie_One extends WDFragment {
     private HotMoviePresenter popularMoviePresenter;
     private ReleaseMoviePresenter beingMoviePresenter;
     private ComingSoonMoviePresenter soonMoviePresenter;
-    private String movieFile = Environment.getExternalStorageDirectory()+File.separator+"movie";
     private CacheManager cacheManager;
     //private File files;
 
@@ -325,8 +324,8 @@ public class Fragment_Movie_One extends WDFragment {
             //更多结果信息获取说明，请参照类参考中BDLocation类中的说明
             String locationDescribe = location.getLocationDescribe();    //获取位置描述信息
             String addr = location.getCity();    //获取详细地址信息
-            showAddress.setText(locationDescribe + addr);
-
+            //showAddress.setText(locationDescribe + addr);
+            showAddress.setText(addr);
         }
     }
 
