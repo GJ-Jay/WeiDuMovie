@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bw.movie.R;
@@ -75,7 +76,7 @@ public class CinemaBuyAdapter extends RecyclerView.Adapter {
         public TextView cinematextviewone;
         public TextView cinematextviewtwo;
         public TextView cinematextviewthree;
-        public CheckBox moive_like;
+        public ImageView moive_like;
         public CinemaVH(@NonNull View itemView) {
             super(itemView);
             cinemasdvsone = itemView.findViewById(R.id.cinemasdvsone);

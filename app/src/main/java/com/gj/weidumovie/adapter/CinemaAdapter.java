@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bw.movie.R;
@@ -43,27 +44,35 @@ public class CinemaAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder viewHolder, final int i) {
         final CinemaBean cinemaBean = list.get(i);
         cinemaVH = (CinemaVH) viewHolder;
         cinemaVH.cinemasdvsone.setImageURI(Uri.parse(cinemaBean.getLogo()));
         cinemaVH.cinematextviewone.setText(cinemaBean.getName());
         cinemaVH.cinematextviewtwo.setText(cinemaBean.getAddress());
         cinemaVH.cinematextviewthree.setText(cinemaBean.getCommentTotal()+"km");
-        int followCinema = cinemaBean.getFollowCinema();
+        final int followCinema = cinemaBean.getFollowCinema();
         if (followCinema==1){
-            cinemaVH.moive_like.setChecked(true);
+            cinemaVH.moive_like.setImageResource(R.drawable.com_icon_collection_selectet);
         }else {
-            cinemaVH.moive_like.setChecked(false);
+            cinemaVH.moive_like.setImageResource(R.drawable.xing);
         }
-        cinemaVH.moive_like.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        cinemaVH.moive_like.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b){
-                    clickListener.clickOk(cinemaBean.getId());
+            public void onClick(View view) {
+                if (followCinema==1){
+                    list.get(i).setFollowCinema(2);
+                    cinemaVH.moive_like.setImageResource(R.drawable.xing);
+                    clickListener.clickNo(list.get(i).getId());
+
+
                 }else {
-                    clickListener.clickNo(cinemaBean.getId());
+                    list.get(i).setFollowCinema(1);
+                    cinemaVH.moive_like.setImageResource(R.drawable.com_icon_collection_selectet);
+                    clickListener.clickOk(list.get(i).getId());
+
                 }
+                notifyDataSetChanged();
             }
         });
         cinemaVH.itemView.setOnClickListener(new View.OnClickListener() {
@@ -81,9 +90,7 @@ public class CinemaAdapter extends RecyclerView.Adapter {
 
 
 
-    public void setnoClick() {
-        cinemaVH.moive_like.setChecked(false);
-    }
+
 
     //创建ViewHolder
     class CinemaVH extends RecyclerView.ViewHolder {
@@ -92,7 +99,7 @@ public class CinemaAdapter extends RecyclerView.Adapter {
         public TextView cinematextviewone;
         public TextView cinematextviewtwo;
         public TextView cinematextviewthree;
-        public CheckBox moive_like;
+        public ImageView moive_like;
         public CinemaVH(@NonNull View itemView) {
             super(itemView);
             cinemasdvsone = itemView.findViewById(R.id.cinemasdvsone);

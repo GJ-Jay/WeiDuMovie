@@ -1,6 +1,7 @@
 package com.gj.weidumovie.core.http;
 
 import com.gj.weidumovie.bean.BuyTicket;
+import com.gj.weidumovie.bean.CineamComListBean;
 import com.gj.weidumovie.bean.CinemaBean;
 import com.gj.weidumovie.bean.FilmReviewBean;
 import com.gj.weidumovie.bean.FindMessageList;
@@ -20,6 +21,8 @@ import java.io.File;
 import java.util.List;
 
 import io.reactivex.Observable;
+import okhttp3.MultipartBody;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Header;
@@ -65,10 +68,9 @@ public interface IRequest {
 
     //修改头像
     @POST("movieApi/user/v1/verify/uploadHeadPic")
-    @FormUrlEncoded
     Observable<Result> updateHead(@Header("userId")int userId,
                                   @Header("sessionId")String sessionId,
-                                  @Field("image")String image);
+                                  @Body MultipartBody body);
 
     //意见反馈
     @POST("movieApi/tool/v1/verify/recordFeedBack")
@@ -184,12 +186,12 @@ public interface IRequest {
     @GET("movieApi/movie/v1/verify/followMovie")
     Observable<Result> followMovie(@Header("userId")int userId,
                                    @Header("sessionId")String sessionId,
-                                   @Query("movieId")int cinemaId);
+                                   @Query("movieId")int movieId);
     //取消关注影片
     @GET("movieApi/movie/v1/verify/cancelFollowMovie")
     Observable<Result> cancelFollowMovie(@Header("userId")int userId,
                                           @Header("sessionId")String sessionId,
-                                          @Query("movieId")int cinemaId);
+                                          @Query("movieId")int movieId);
 
     //查询电影影评
     @GET("movieApi/movie/v1/findAllMovieComment")
@@ -245,4 +247,40 @@ public interface IRequest {
                                                                 @Header("sessionId")String sessionId,
                                                                 @Query("page")int page,
                                                                 @Query("count")int count);
+
+    //点赞评论
+    @POST("movieApi/movie/v1/verify/movieCommentGreat")
+    @FormUrlEncoded
+    Observable<Result> movieCommentGreat(@Header("userId")int userId,
+                                   @Header("sessionId")String sessionId,
+                                   @Field("commentId") int commentId);
+    //添加用户对影片的评论
+    @POST("movieApi/movie/v1/verify/movieComment")
+    @FormUrlEncoded
+    Observable<Result> movieComment(@Header("userId")int userId,
+                                   @Header("sessionId")String sessionId,
+                                   @Field("movieId") int movieId,
+                                   @Field("commentContent") String commentContent);
+    /**
+     * 影院评论列表
+     */
+    @GET("movieApi/cinema/v1/findAllCinemaComment")
+    Observable<Result<List<CineamComListBean>>> findAllCinemaComment(@Header("userId") int userId,
+                                                                     @Header("sessionId") String sessionId,
+                                                                     @Query("cinemaId") int cinemaId,
+                                                                     @Query("page") int page,
+                                                                     @Query("count") int count);
+    //点赞影院评论
+    @POST("movieApi/cinema/v1/verify/cinemaCommentGreat")
+    @FormUrlEncoded
+    Observable<Result> cinemaCommentGreat(@Header("userId")int userId,
+                                         @Header("sessionId")String sessionId,
+                                         @Field("commentId") int commentId);
+    //添加用户对影院的评论
+    @POST("movieApi/cinema/v1/verify/cinemaComment")
+    @FormUrlEncoded
+    Observable<Result> cinemaComment(@Header("userId")int userId,
+                                    @Header("sessionId")String sessionId,
+                                    @Field("cinemaId") int cinemaId,
+                                    @Field("commentContent") String commentContent);
 }

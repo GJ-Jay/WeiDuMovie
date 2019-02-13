@@ -74,9 +74,7 @@ public class MovieShowActivity extends WDActivity implements XRecyclerView.Loadi
 
     @Override
     protected void initView() {
-        SharedPreferences sharedPreferences = getSharedPreferences("Config", MODE_PRIVATE);
-        userId = sharedPreferences.getInt("userId", 0);
-        sessionId = sharedPreferences.getString("sessionId", "");
+
         Intent intent = getIntent();
         String select = intent.getStringExtra("select");
         hotMoviePresenter = new HotMoviePresenter(new ComingSoon());
@@ -303,6 +301,9 @@ public class MovieShowActivity extends WDActivity implements XRecyclerView.Loadi
         mLocationClient.setLocOption(option);
         mLocationClient.start();
         filmShowAdapter.remove();
+        SharedPreferences sharedPreferences = getSharedPreferences("Config", MODE_PRIVATE);
+        userId = sharedPreferences.getInt("userId", 0);
+        sessionId = sharedPreferences.getString("sessionId", "");
         if (hotcheck) {
             hotMoviePresenter.reqeust(userId, sessionId, false, 5);
         } else if (releasecheck) {

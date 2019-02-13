@@ -1,9 +1,19 @@
 package com.gj.weidumovie.presenter;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.util.Log;
+
+import com.gj.weidumovie.LoginActivity;
 import com.gj.weidumovie.bean.Result;
 import com.gj.weidumovie.core.DataCall;
+import com.gj.weidumovie.core.WDActivity;
 import com.gj.weidumovie.core.exception.CustomException;
 import com.gj.weidumovie.core.exception.ResponseTransformer;
+import com.gj.weidumovie.core.http.NetworkManager;
+import com.gj.weidumovie.util.UIUtils;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -35,6 +45,15 @@ public abstract class BasePresenter {
         }
 
         running = true;
+        boolean net = NetworkManager.instance().isNet(WDActivity.getForegroundActivity());
+        if (!net){
+            UIUtils.showToastSafe("没有网络");
+            //Log.i("aaa", "reqeust: "+"没有网络");
+            if (dataCall!=null) {
+                dataCall.fail(CustomException.handleException(new Throwable()));
+            }
+            return;
+        }
         observable = observable(args);
         observable.compose(ResponseTransformer.handleResult())//添加了一个全局的异常-观察者
                 .compose(new ObservableTransformer() {
@@ -50,13 +69,22 @@ public abstract class BasePresenter {
                     @Override
                     public void accept(Result result) throws Exception {
                         running = false;
-//                        if (result.getStatus().equals("1001")){
-//                            Dialog dialog = new AlertDialog.Builder().setMessage("").set.create().sh;
-//                        }else {
+                       if (result.getStatus().equals("9999")){
+                           Dialog dialog = new AlertDialog.Builder(WDActivity.getForegroundActivity()).setMessage("请登录")
+                                   .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                                       @Override
+                                       public void onClick(DialogInterface dialogInterface, int i) {
+                                           WDActivity.getForegroundActivity().startActivity(new Intent(WDActivity.getForegroundActivity(), LoginActivity.class));
+                                       }
+                                   })
+                                   .setNegativeButton("取消",null)
+                                   .show();
+
+                       }else {
                         if (dataCall!=null){
                             dataCall.success(result);
                         }
-//                        }
+                       }
                     }
                 }, new Consumer<Throwable>() {
                     @Override

@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
+import android.view.WindowManager;
 
 import com.gj.weidumovie.bean.UserBean;
 import com.gj.weidumovie.util.StatusBarCompat;
@@ -58,6 +60,8 @@ public abstract class WDActivity extends AppCompatActivity implements CustomAdap
         setContentView(getLayoutId());
         ButterKnife.bind(this);//绑定布局
         initView();
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
     /**
      * 设置layoutId

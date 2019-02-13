@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -35,6 +37,8 @@ import com.gj.weidumovie.presenter.CancelFollowMoviePresenter;
 import com.gj.weidumovie.presenter.FindAllMovieCommentPresenter;
 import com.gj.weidumovie.presenter.FindMoviesDetailPresenter;
 import com.gj.weidumovie.presenter.FollowMoviePresenter;
+import com.gj.weidumovie.presenter.MovieCommentGreatPresenter;
+import com.gj.weidumovie.presenter.MovieCommentPresenter;
 import com.gj.weidumovie.util.SpaceItemDecoration;
 import com.gj.weidumovie.util.UIUtils;
 
@@ -44,6 +48,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.jzvd.JZVideoPlayer;
 
 public class MovieDetailsShow extends WDActivity {
 
@@ -84,6 +89,9 @@ public class MovieDetailsShow extends WDActivity {
     private ReviewAdapter reviewAdapter;
     private FollowMoviePresenter followMoviePresenter;
     private CancelFollowMoviePresenter cancelFollowMoviePresenter;
+    private MovieCommentGreatPresenter movieCommentGreatPresenter;
+    private MovieCommentPresenter movieCommentPresenter;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_movie_details_show;
@@ -95,12 +103,11 @@ public class MovieDetailsShow extends WDActivity {
         Intent intent = getIntent();
         id = intent.getIntExtra("id", 1);
         Log.d("abc", "initView: " + id);
-        SharedPreferences sharedPreferences = getSharedPreferences("Config", Context.MODE_PRIVATE);
-        userId = sharedPreferences.getInt("userId", 0);
-        sessionId = sharedPreferences.getString("sessionId", "");
-        findMoviesDetailPresenter = new FindMoviesDetailPresenter(new FindMoviesDetail());
-        findMoviesDetailPresenter.reqeust(userId, sessionId, id);
 
+        findMoviesDetailPresenter = new FindMoviesDetailPresenter(new FindMoviesDetail());
+        findAllMovieCommentPresenter = new FindAllMovieCommentPresenter(new FindAllMovieComment());
+        movieCommentGreatPresenter = new MovieCommentGreatPresenter(new MovieCommentGreat());
+        movieCommentPresenter = new MovieCommentPresenter(new MovieCommentGreat());
         parent = View.inflate(MovieDetailsShow.this, R.layout.activity_movie_details_show, null);
         followMoviePresenter = new FollowMoviePresenter(new FollowMovieCall());
         cancelFollowMoviePresenter = new CancelFollowMoviePresenter(new FollowMovieCall());
@@ -137,6 +144,12 @@ public class MovieDetailsShow extends WDActivity {
         //点击窗口外部窗口不消失
         trailerWindow.setOutsideTouchable(true);
         trailerWindow.setBackgroundDrawable(new BitmapDrawable());
+        trailerWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                JZVideoPlayer.releaseAllVideos();
+            }
+        });
         getShowTrailer(contentView_trailer);
         View contentView_stills = View.inflate(MovieDetailsShow.this, R.layout.pup_stills, null);
         stillsWindow = new PopupWindow(contentView_stills, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -163,8 +176,14 @@ public class MovieDetailsShow extends WDActivity {
     }
 
     private void getShowReview(View contentView_review) {
-        findAllMovieCommentPresenter = new FindAllMovieCommentPresenter(new FindAllMovieComment());
+
+
+
         ImageView pupo_yp_back = contentView_review.findViewById(R.id.pupo_yp_back);
+        ImageView popu_yp_pl = contentView_review.findViewById(R.id.popu_yp_pl);
+        final LinearLayout popu_yp_xpl = contentView_review.findViewById(R.id.popu_yp_xpl);
+        final EditText popu_yp_xpl_x = contentView_review.findViewById(R.id.popu_yp_xpl_x);
+        TextView popu_yp_xpl_f = contentView_review.findViewById(R.id.popu_yp_xpl_f);
         pupo_yp_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -179,7 +198,37 @@ public class MovieDetailsShow extends WDActivity {
         findAllMovieCommentPresenter.reqeust(userId,sessionId,id,false,10);
         reviewAdapter = new ReviewAdapter();
         review_movie_review.setAdapter(reviewAdapter);
+        reviewAdapter.setClickListener(new ReviewAdapter.ClickListener() {
+            @Override
+            public void clickOk(int id) {
+                Log.i("abc", "clickOk: id"+id);
+                movieCommentGreatPresenter.reqeust(userId,sessionId,id);
+            }
 
+            @Override
+            public void sekClick(int id) {
+
+            }
+        });
+        popu_yp_pl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popu_yp_xpl.setVisibility(View.VISIBLE);
+            }
+        });
+        popu_yp_xpl_f.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String s = popu_yp_xpl_x.getText().toString();
+                if (TextUtils.isEmpty(s)){
+                    UIUtils.showToastSafe("评论不能为空");
+                    return;
+                }
+                movieCommentPresenter.reqeust(userId,sessionId,id,s);
+                popu_yp_xpl.setVisibility(View.GONE);
+                popu_yp_xpl_x.setText("");
+            }
+        });
     }
 
     private void getShowStills(View contentView_stills) {
@@ -214,6 +263,7 @@ public class MovieDetailsShow extends WDActivity {
         pupo_yg_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                JZVideoPlayer.releaseAllVideos();
                 trailerWindow.dismiss();
             }
         });
@@ -259,6 +309,8 @@ public class MovieDetailsShow extends WDActivity {
         findAllMovieCommentPresenter.unBind();
         cancelFollowMoviePresenter.unBind();
         followMoviePresenter.unBind();
+        movieCommentGreatPresenter.unBind();
+        movieCommentPresenter.unBind();
     }
 
     @Override
@@ -344,6 +396,33 @@ public class MovieDetailsShow extends WDActivity {
         public void success(Result data) {
             if(data.getStatus().equals("0000")){
                 UIUtils.showToastSafe(data.getMessage());
+            }
+        }
+
+        @Override
+        public void fail(ApiException e) {
+
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences sharedPreferences = getSharedPreferences("Config", Context.MODE_PRIVATE);
+        userId = sharedPreferences.getInt("userId", 0);
+        sessionId = sharedPreferences.getString("sessionId", "");
+        if (userId!=0){
+            findMoviesDetailPresenter.reqeust(userId, sessionId, id);
+        }
+
+    }
+    class MovieCommentGreat implements DataCall<Result>{
+
+        @Override
+        public void success(Result data) {
+            if (data.getStatus().equals("0000")){
+                UIUtils.showToastSafe(data.getMessage());
+                findAllMovieCommentPresenter.reqeust(userId,sessionId,id,false,10);
             }
         }
 

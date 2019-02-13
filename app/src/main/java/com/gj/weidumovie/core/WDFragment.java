@@ -3,6 +3,8 @@ package com.gj.weidumovie.core;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,14 +46,21 @@ public abstract class WDFragment extends Fragment {
 	public void onResume() {
 		super.onResume();
 		//if (!MTStringUtils.isEmpty(getPageName()))
-			MobclickAgent.onPageStart(getPageName()); // 统计页面
+			Log.i("abb", "onResume: "+getPageName());
+			if (!TextUtils.isEmpty(getPageName())){
+
+				MobclickAgent.onPageEnd(getPageName());// 统计页面
+			}
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		//if (!MTStringUtils.isEmpty(getPageName()))
+		if (!TextUtils.isEmpty(getPageName())){
 			MobclickAgent.onPageEnd(getPageName());// 统计页面
+		}
+
 	}
 
 	/**

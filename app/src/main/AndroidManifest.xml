@@ -20,7 +20,7 @@
     <application
         android:name="com.gj.weidumovie.core.WDApplication"
         android:allowBackup="true"
-        android:icon="@drawable/movie_icon"
+        android:icon="@mipmap/icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -32,7 +32,8 @@
             android:name="UMENG_CHANNEL"
             android:value="${UMENG_CHANNEL_VALUE}" />
 
-        <activity android:name="com.gj.weidumovie.FindUserBuyTicketActivity"></activity>
+        <activity android:name="com.gj.weidumovie.FindUserBuyTicketActivity"
+            android:screenOrientation="portrait"></activity>
         <activity android:name="com.gj.weidumovie.MyLikeActivity" />
         <activity android:name="com.gj.weidumovie.UpdatePwdActivity" />
         <activity android:name="com.gj.weidumovie.FeedbackSuccessActivity" />

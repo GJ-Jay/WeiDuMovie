@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/popu_type"
     android:orientation="vertical"
     >
     <RelativeLayout
+        android:id="@+id/popu_yp_relative"
         android:layout_width="match_parent"
         android:layout_margin="@dimen/dp_20"
         android:layout_height="@dimen/dp_25">
@@ -29,9 +30,49 @@
             android:layout_alignParentRight="true"
             />
     </RelativeLayout>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/review_movie_review"
+    <RelativeLayout
+        android:layout_below="@+id/popu_yp_relative"
         android:layout_width="match_parent"
-        android:layout_height="520dp"/>
+        android:layout_height="520dp">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/review_movie_review"
+            android:layout_width="match_parent"
+            android:layout_height="520dp"/>
+        <ImageView
+            android:id="@+id/popu_yp_pl"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="@dimen/dp_60"
+            android:src="@drawable/com_icon_publish_default_xxhdpi"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp_24"
+            android:layout_marginBottom="@dimen/dp_24"
+            />
+        <LinearLayout
+            android:id="@+id/popu_yp_xpl"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_80"
+            android:padding="@dimen/dp_10"
+            android:visibility="gone"
+            android:background="#ffffff"
+            android:layout_alignParentBottom="true">
+            <EditText
+                android:id="@+id/popu_yp_xpl_x"
+                android:layout_width="@dimen/dp_284"
+                android:layout_height="match_parent"
+                android:hint="写评论"
+                android:background="@null"
 
-</LinearLayout>
+                />
+            <TextView
+                android:id="@+id/popu_yp_xpl_f"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="发送"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

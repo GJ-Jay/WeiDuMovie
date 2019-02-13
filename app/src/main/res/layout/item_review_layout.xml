@@ -67,12 +67,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <CheckBox
+                <ImageView
                     android:layout_marginRight="25dp"
-                    android:id="@+id/review_checkbox_like"
-                    android:button="@null"
+                    android:id="@+id/review_image_like"
                     android:layout_alignParentRight="true"
-                    android:background="@drawable/like_selector"
+                    android:src="@drawable/com_icon_praise_default"
                     android:layout_width="16dp"
                     android:layout_height="16dp" />
                 <TextView
@@ -94,7 +93,7 @@
 
                 <ImageView
                     android:layout_marginRight="25dp"
-                    android:id="@+id/pingluncheckbox"
+                    android:id="@+id/review_image_sek"
                     android:layout_alignParentRight="true"
                     android:src="@drawable/com_icon_comment_default"
                     android:layout_width="15dp"

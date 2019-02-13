@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,7 +78,7 @@ public class Fragment_Cinema_two extends WDFragment {
 
     @Override
     public String getPageName() {
-        return null;
+        return "影院页面";
     }
 
     @Override
@@ -87,9 +88,6 @@ public class Fragment_Cinema_two extends WDFragment {
 
     @Override
     protected void initView() {
-        SharedPreferences sp = getActivity().getSharedPreferences("Config", Context.MODE_PRIVATE);
-        userId = sp.getInt("userId", 0);
-        sessionId = sp.getString("sessionId", "");
 
         linearLayoutManager = new LinearLayoutManager(getActivity());
         cinemarecycleview.setLayoutManager(linearLayoutManager);
@@ -168,13 +166,7 @@ public class Fragment_Cinema_two extends WDFragment {
                 cinemaAdapter.setClickListener(new CinemaAdapter.ClickListener() {
                     @Override
                     public void clickOk(int id) {//点击关注
-                        if (userId == 0) {
-                            startActivity(new Intent(getContext(), LoginActivity.class));
-                            // cinemaAdapter.setnoClick();
-                            followCinemaPresenter.reqeust(userId,sessionId,id);
-//                    cinemaPresenter.reqeust(userId, sessionId, false, 10);
-                            return;
-                        }
+
                         followCinemaPresenter.reqeust(userId,sessionId,id);
                     }
 
@@ -268,5 +260,10 @@ public class Fragment_Cinema_two extends WDFragment {
     public void onResume() {
         super.onResume();
         initData();
+        SharedPreferences sp = getActivity().getSharedPreferences("Config", Context.MODE_PRIVATE);
+        userId = sp.getInt("userId", 0);
+        sessionId = sp.getString("sessionId", "");
+        cinemaPresenter.reqeust(userId, sessionId, false, 10);
+        nearbyMoivePresenter.reqeust(userId, sessionId, "116.30551391385724", "40.04571807462411", false, 10);
     }
 }

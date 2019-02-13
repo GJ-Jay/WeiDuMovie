@@ -87,7 +87,7 @@ public class Fragment_My_Three extends WDFragment {
 
     @Override
     public String getPageName() {
-        return null;
+        return "我的页面";
     }
 
     @Override
@@ -98,8 +98,7 @@ public class Fragment_My_Three extends WDFragment {
     @Override
     protected void initView() {
         sp = getContext().getSharedPreferences("Config", Context.MODE_PRIVATE);
-        userId = sp.getInt("userId", 0);
-        sessionId = sp.getString("sessionId", "");
+
         queryUserInfoPresenter = new QueryUserInfoPresenter(new queryCall());
         if (userId != 0) {
             //根据id查询用户
@@ -169,7 +168,7 @@ public class Fragment_My_Three extends WDFragment {
                 break;
             case R.id.btn_msg_mine://我的信息页面跳转
                 if (userId == 0) {
-                    startActivity(new Intent(getContext(), LoginActivity.class));
+                    queryUserInfoPresenter.reqeust(userId, sessionId);
                     return;
                 }
                 Intent intent_msg = new Intent(getContext(), MyMassageActivity.class);
@@ -177,21 +176,21 @@ public class Fragment_My_Three extends WDFragment {
                 break;
             case R.id.btn_like_mine://我的关注
                 if (userId == 0) {
-                    startActivity(new Intent(getContext(), LoginActivity.class));
+                    queryUserInfoPresenter.reqeust(userId, sessionId);
                     return;
                 }
                 startActivity(new Intent(getContext(), MyLikeActivity.class));
                 break;
             case R.id.btn_buy_mine://购票记录
                 if (userId == 0) {
-                    startActivity(new Intent(getContext(), LoginActivity.class));
+                    queryUserInfoPresenter.reqeust(userId, sessionId);
                     return;
                 }
                 startActivity(new Intent(getContext(), FindUserBuyTicketActivity.class));
                 break;
             case R.id.btn_feedback_mine://意见反馈
                 if (userId == 0) {
-                    startActivity(new Intent(getContext(), LoginActivity.class));
+                    queryUserInfoPresenter.reqeust(userId, sessionId);
                     return;
                 }
                 Intent intent_feedback = new Intent(getContext(), FeedbackActivity.class);
@@ -199,7 +198,7 @@ public class Fragment_My_Three extends WDFragment {
                 break;
             case R.id.btn_version_mine://最新版本
                 if (userId == 0) {
-                    startActivity(new Intent(getContext(), LoginActivity.class));
+
                     return;
                 }
                 FindNewVersionPresenter findNewVersionPresenter = new FindNewVersionPresenter(new findNewVerdionCall());
