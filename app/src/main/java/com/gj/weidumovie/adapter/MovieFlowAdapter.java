@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -52,8 +53,8 @@ public class MovieFlowAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int i) {
         final MoiveBean moiveBean = list.get(i);
         MovieVH movieVH = (MovieVH) viewHolder;
-       movieVH.img.setImageURI(Uri.parse(moiveBean.getImageUrl()));
-        movieVH.populartextviewone.setBackgroundColor(0x55000000);
+        movieVH.img.setImageURI(Uri.parse(moiveBean.getImageUrl()));
+//        movieVH.linearLayout.setBackgroundColor(0x55000000);
         movieVH.populartextviewone.setText(moiveBean.getName());
         movieVH.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,10 +76,13 @@ public class MovieFlowAdapter extends RecyclerView.Adapter {
     class MovieVH extends RecyclerView.ViewHolder {
         public SimpleDraweeView img;
         public TextView populartextviewone;
+        private final LinearLayout linearLayout;
+
         public MovieVH(View itemView) {
             super(itemView);
             img = itemView.findViewById(R.id.img);
             populartextviewone = (TextView) itemView.findViewById(R.id.populartextviewone);
+            linearLayout = itemView.findViewById(R.id.popularlalayoutone);
         }
     }
 

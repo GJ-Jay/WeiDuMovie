@@ -44,7 +44,7 @@ public class BeingAdapter extends RecyclerView.Adapter {
         final MoiveBean moiveBean = list.get(i);
         PopularVH popularVH = (PopularVH) viewHolder;
         popularVH.popularsdv.setImageURI(Uri.parse(moiveBean.getImageUrl()));
-        popularVH.populartextview.setBackgroundColor(0x55000000);
+//        popularVH.populartextview.setBackgroundColor(0x55000000);
         popularVH.populartextview.setText(moiveBean.getName());
         popularVH.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
