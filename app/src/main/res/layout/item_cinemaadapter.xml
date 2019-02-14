@@ -45,6 +45,8 @@
                 android:textSize="12sp"
                 android:textColor="#333333"
                 android:text="CGV影院"
+                android:singleLine="true"
+                android:ellipsize="end"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <RelativeLayout
