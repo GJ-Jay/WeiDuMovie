@@ -8,7 +8,7 @@
    >
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="520dp">
+            android:layout_height="580dp">
 
             <TextView
                 android:id="@+id/tv_pop_title"
@@ -22,15 +22,16 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="520dp"
+                android:layout_height="580dp"
+                android:padding="@dimen/dp_20"
                 android:layout_marginTop="@dimen/dp_40"
                 android:background="@drawable/popu_type">
 
                 <LinearLayout
                     android:id="@+id/linear_one"
-                    android:layout_width="@dimen/dp_200"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_160"
+                   android:layout_alignParentRight="true"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -220,57 +221,7 @@
                                 android:text="慕容云海" />
                         </RelativeLayout>
 
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_20">
 
-                            <TextView
-
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="演员" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerHorizontal="true"
-                                android:text="饰" />
-
-                            <TextView
-
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:layout_marginLeft="@dimen/dp_213"
-                                android:text="演员" />
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_20">
-
-                            <TextView
-
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="演员" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerHorizontal="true"
-                                android:text="饰" />
-
-                            <TextView
-
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:layout_marginLeft="@dimen/dp_213"
-                                android:text="演员" />
-                        </RelativeLayout>
                     </LinearLayout>
 
 
