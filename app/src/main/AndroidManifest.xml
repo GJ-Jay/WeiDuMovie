@@ -41,7 +41,8 @@
         <activity android:name="com.gj.weidumovie.FeedbackActivity" />
         <activity android:name="com.gj.weidumovie.MovieDetailsShow" />
         <activity android:name="com.gj.weidumovie.MovieShowActivity" />
-        <activity android:name="com.gj.weidumovie.MainActivity">
+        <activity android:name="com.gj.weidumovie.MainActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

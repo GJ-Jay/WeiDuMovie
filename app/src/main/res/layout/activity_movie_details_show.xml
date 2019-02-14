@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="70dp"
-        android:text="铁血战士"
+        android:text="电影标题"
         android:textColor="#ffffff"
         android:textSize="20sp" />
 
@@ -57,7 +57,7 @@
         android:layout_below="@+id/movies_show_name"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:background="@drawable/baobeier" />
+         />
 
     <LinearLayout
         android:id="@+id/detalisgroup"

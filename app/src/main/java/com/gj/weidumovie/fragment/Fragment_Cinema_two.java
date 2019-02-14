@@ -1,13 +1,18 @@
 package com.gj.weidumovie.fragment;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -225,8 +230,13 @@ public class Fragment_Cinema_two extends WDFragment {
             //更多结果信息获取说明，请参照类参考中BDLocation类中的说明
             String locationDescribe = location.getLocationDescribe();    //获取位置描述信息
             String addr = location.getAddrStr();    //获取详细地址信息
-            //cimemaText.setText(locationDescribe + addr);
-            cimemaText.setText(addr);
+            if(TextUtils.isEmpty(locationDescribe)&&TextUtils.isEmpty(addr)){
+                cimemaText.setText("北京市");
+            }else {
+                cimemaText.setText(locationDescribe + addr);
+            }
+           // cimemaText.setText(locationDescribe + addr);
+            //cimemaText.setText(addr);
 
         }
     }

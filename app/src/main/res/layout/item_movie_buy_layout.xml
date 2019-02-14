@@ -35,7 +35,7 @@
                 android:text="00:00"
                 android:textColor="@color/textcolor"
                 android:textStyle="bold"
-                android:textSize="@dimen/sp_24"/>
+                android:textSize="@dimen/sp_20"/>
 
             <View
                 android:id="@+id/item_buy_view"
@@ -53,7 +53,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:textColor="@color/textcolor6"
-                android:textSize="@dimen/sp_18"
+                android:textSize="@dimen/sp_16"
                 android:text="00:00"
                 />
             <TextView
@@ -82,7 +82,7 @@
             android:text="00.0"
             android:layout_marginLeft="@dimen/dp_6"
             android:textColor="#b11450"
-            android:textSize="@dimen/sp_36"/>
+            android:textSize="@dimen/sp_32"/>
         <ImageView
             android:id="@+id/buy_item_ok"
             android:layout_width="@dimen/dp_24"

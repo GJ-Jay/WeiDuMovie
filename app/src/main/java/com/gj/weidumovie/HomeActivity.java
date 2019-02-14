@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.bw.movie.R;
 import com.gj.weidumovie.core.WDActivity;
@@ -82,4 +83,17 @@ public class HomeActivity extends WDActivity {
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
     }
+    private long exitTime = 0;
+    @Override
+    public void onBackPressed() {
+        if(System.currentTimeMillis() - exitTime > 2000) {
+            Toast.makeText(this, "再按一次退出", Toast.LENGTH_SHORT).show();
+            exitTime = System.currentTimeMillis();
+        } else {
+            finish();
+            System.exit(0);
+            android.os.Process.killProcess(android.os.Process.myPid());
+        }
+    }
+
 }

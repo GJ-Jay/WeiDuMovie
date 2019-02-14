@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -114,14 +115,6 @@ public class Fragment_Movie_One extends WDFragment {
         return R.layout.fragment_movie_one;
     }
 
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 100) {
-            UIUtils.showToastSafe("权限打开");
-        }
-    }
     @Override
     protected void initView() {
         /*File file = new File(movieFile);
@@ -132,24 +125,7 @@ public class Fragment_Movie_One extends WDFragment {
         }*/
         cacheManager = new CacheManager();
         myListener = new MyLocationListener();
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(getActivity(), new String[]{
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.READ_PHONE_STATE,
-                        Manifest.permission.ACCESS_NETWORK_STATE,
-                        Manifest.permission.CHANGE_WIFI_STATE,
-                        Manifest.permission.ACCESS_WIFI_STATE,
-                        Manifest.permission.ACCESS_COARSE_LOCATION,
-                        Manifest.permission.ACCESS_FINE_LOCATION,
-                        Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS
-                }, 100);
-            }else {
-                initData();
-            }
-        }else {
-            initData();
-        }
+
 
         final EditText editText= oneMySearch.findViewById(R.id.one_sou);
        TextView textView= oneMySearch.findViewById(R.id.one_sou_ok);
@@ -185,6 +161,7 @@ public class Fragment_Movie_One extends WDFragment {
     @Override
     public void onResume() {
         super.onResume();
+
         initData();
     }
 
@@ -324,8 +301,13 @@ public class Fragment_Movie_One extends WDFragment {
             //更多结果信息获取说明，请参照类参考中BDLocation类中的说明
             String locationDescribe = location.getLocationDescribe();    //获取位置描述信息
             String addr = location.getCity();    //获取详细地址信息
-            //showAddress.setText(locationDescribe + addr);
-            showAddress.setText(addr);
+            if(TextUtils.isEmpty(locationDescribe)&&TextUtils.isEmpty(addr)){
+                showAddress.setText("北京市");
+            }else {
+                showAddress.setText(locationDescribe + addr);
+            }
+
+            //showAddress.setText(addr);
         }
     }
 

@@ -1,7 +1,12 @@
 package com.gj.weidumovie.core;
 
+import android.Manifest;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
@@ -10,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gj.weidumovie.util.LogUtils;
+import com.gj.weidumovie.util.UIUtils;
 import com.google.gson.Gson;
 import com.umeng.analytics.MobclickAgent;
 
@@ -46,6 +52,20 @@ public abstract class WDFragment extends Fragment {
 	public void onResume() {
 		super.onResume();
 		//if (!MTStringUtils.isEmpty(getPageName()))
+			if (Build.VERSION.SDK_INT >= 23) {
+				if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+					ActivityCompat.requestPermissions(getActivity(), new String[]{
+							Manifest.permission.WRITE_EXTERNAL_STORAGE,
+							Manifest.permission.READ_PHONE_STATE,
+							Manifest.permission.ACCESS_NETWORK_STATE,
+							Manifest.permission.CHANGE_WIFI_STATE,
+							Manifest.permission.ACCESS_WIFI_STATE,
+							Manifest.permission.ACCESS_COARSE_LOCATION,
+							Manifest.permission.ACCESS_FINE_LOCATION,
+							Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS
+					}, 100);
+				}
+			}
 			Log.i("abb", "onResume: "+getPageName());
 			if (!TextUtils.isEmpty(getPageName())){
 
@@ -77,4 +97,11 @@ public abstract class WDFragment extends Fragment {
 	 * 初始化视图
 	 */
 	protected abstract void initView();
+	@Override
+	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+		if (requestCode == 100) {
+			UIUtils.showToastSafe("权限打开");
+		}
+	}
 }
