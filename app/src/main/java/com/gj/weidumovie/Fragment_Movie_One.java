@@ -301,10 +301,12 @@ public class Fragment_Movie_One extends WDFragment {
             //更多结果信息获取说明，请参照类参考中BDLocation类中的说明
             String locationDescribe = location.getLocationDescribe();    //获取位置描述信息
             String addr = location.getCity();    //获取详细地址信息
-            if(TextUtils.isEmpty(locationDescribe)&&TextUtils.isEmpty(addr)){
-                showAddress.setText("北京市");
+            if(TextUtils.isEmpty(addr)){
+                showAddress.setText("定位中...");
+                initData();
             }else {
-                showAddress.setText(locationDescribe + addr);
+                showAddress.setText(addr);
+                mLocationClient.stop();
             }
 
             //showAddress.setText(addr);

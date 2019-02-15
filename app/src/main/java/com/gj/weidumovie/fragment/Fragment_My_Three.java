@@ -84,6 +84,7 @@ public class Fragment_My_Three extends WDFragment {
     private String nickName;
     private String headPic;
     private String sessionId;
+    private UserSiginPresenter userSiginPresenter;
 
     @Override
     public String getPageName() {
@@ -100,6 +101,7 @@ public class Fragment_My_Three extends WDFragment {
         sp = getContext().getSharedPreferences("Config", Context.MODE_PRIVATE);
 
         queryUserInfoPresenter = new QueryUserInfoPresenter(new queryCall());
+        userSiginPresenter = new UserSiginPresenter(new userSiginCall());
         if (userId != 0) {
             //根据id查询用户
 
@@ -163,8 +165,11 @@ public class Fragment_My_Three extends WDFragment {
                 if(userId==0){
                     return;
                 }
-                UserSiginPresenter userSiginPresenter = new UserSiginPresenter(new userSiginCall());
                 userSiginPresenter.reqeust(userId,sessionId);
+                siginIn.setText("已签到");
+                /*siginIn.setFocusableInTouchMode(true);
+                siginIn.setFocusable(true);
+                siginIn.requestFocus();*/
                 break;
             case R.id.btn_msg_mine://我的信息页面跳转
                 if (userId == 0) {
@@ -240,7 +245,16 @@ public class Fragment_My_Three extends WDFragment {
     private class userSiginCall implements DataCall<Result> {
         @Override
         public void success(Result data) {
-            UIUtils.showToastSafe(data.getMessage());
+            if (data.getStatus().equals("0000")){
+                siginIn.setText("已签到");
+                siginIn.setFocusable(false);
+                UIUtils.showToastSafe(data.getMessage());
+            }
+           /* if (data.getStatus().equals("1001")){
+                siginIn.setText("已签到");
+                siginIn.setFocusable(false);
+            }
+            UIUtils.showToastSafe(data.getMessage());*/
         }
 
         @Override

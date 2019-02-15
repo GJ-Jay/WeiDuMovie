@@ -85,10 +85,15 @@
             android:textSize="@dimen/sp_30"/>
         <ImageView
             android:id="@+id/buy_item_ok"
-            android:layout_width="@dimen/dp_24"
-            android:layout_height="@dimen/dp_24"
+            android:layout_width="@dimen/dp_12"
+            android:layout_height="@dimen/dp_18"
             android:layout_marginLeft="@dimen/dp_10"
             android:src="@drawable/com_icon_next_default_xxhdpi"
-            />
+            android:layout_gravity="center"/>
+        <!--
+            android:paddingTop="@dimen/dp_12"
+            android:paddingBottom="@dimen/dp_12"
+            android:paddingLeft="@dimen/dp_6"
+            android:paddingRight="@dimen/dp_6"-->
     </LinearLayout>
 </LinearLayout>

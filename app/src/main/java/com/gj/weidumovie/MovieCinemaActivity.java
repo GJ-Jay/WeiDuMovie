@@ -133,7 +133,7 @@ public class MovieCinemaActivity extends WDActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         movieCinemaRecycle.setLayoutManager(linearLayoutManager);
-        movieCinemaRecycle.addItemDecoration(new SpaceItemDecoration(10));
+        movieCinemaRecycle.addItemDecoration(new SpaceItemDecoration(30));
         movieScheduleListAdapter = new MovieScheduleListAdapter(this);
         movieCinemaRecycle.setAdapter(movieScheduleListAdapter);
 

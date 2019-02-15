@@ -89,7 +89,7 @@ public class MovieBuyActivity extends WDActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         movieBuyRecycler.setLayoutManager(linearLayoutManager);
-        movieBuyRecycler.addItemDecoration(new SpaceItemDecoration(10));
+        movieBuyRecycler.addItemDecoration(new SpaceItemDecoration(30));
         movieScheduleListAdapter = new MovieScheduleListAdapter(this);
         movieBuyRecycler.setAdapter(movieScheduleListAdapter);
         movieScheduleListAdapter.setMovieFlowAdapter(new MovieScheduleListAdapter.OnItemClick() {

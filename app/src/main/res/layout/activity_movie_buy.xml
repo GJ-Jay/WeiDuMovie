@@ -8,7 +8,7 @@
 
     <RelativeLayout
         android:id="@+id/movie_buy"
-        android:layout_marginTop="@dimen/dp_6"
+        android:layout_marginTop="@dimen/dp_16"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_36">
         <TextView
@@ -24,6 +24,8 @@
             android:layout_height="wrap_content"
             android:textColor="#666666"
             android:textSize="@dimen/sp_12"
+            android:singleLine="true"
+            android:ellipsize="end"
             android:layout_alignParentBottom="true"
             android:text="影院"/>
     <ImageView
@@ -31,6 +33,7 @@
         android:layout_width="@dimen/dp_24"
         android:layout_height="@dimen/dp_24"
         android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
         android:src="@drawable/com_icon_navigation_default_xxhdpi"
         />
     </RelativeLayout>

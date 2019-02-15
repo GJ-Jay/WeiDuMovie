@@ -2,8 +2,10 @@ package com.gj.weidumovie;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -95,18 +97,27 @@ public class MovieShowActivity extends WDActivity implements XRecyclerView.Loadi
             hotShow.setBackgroundResource(R.drawable.btn_gradient);
             releaseShow.setBackgroundResource(R.drawable.btn_false);
             comingSoonShow.setBackgroundResource(R.drawable.btn_false);
+            hotShow.setTextColor(Color.WHITE);
+            releaseShow.setTextColor(Color.BLACK);
+            comingSoonShow.setTextColor(Color.BLACK);
             filmShowAdapter.remove();
             hotMoviePresenter.reqeust(userId, sessionId, false, 5);
         } else if (select.equals("2")) {
             releaseShow.setBackgroundResource(R.drawable.btn_gradient);
             hotShow.setBackgroundResource(R.drawable.btn_false);
             comingSoonShow.setBackgroundResource(R.drawable.btn_false);
+            hotShow.setTextColor(Color.BLACK);
+            releaseShow.setTextColor(Color.WHITE);
+            comingSoonShow.setTextColor(Color.BLACK);
             filmShowAdapter.remove();
             releaseMoviePresenter.reqeust(userId, sessionId, false, 5);
         } else {
             comingSoonShow.setBackgroundResource(R.drawable.btn_gradient);
             hotShow.setBackgroundResource(R.drawable.btn_false);
             releaseShow.setBackgroundResource(R.drawable.btn_false);
+            hotShow.setTextColor(Color.BLACK);
+            releaseShow.setTextColor(Color.BLACK);
+            comingSoonShow.setTextColor(Color.WHITE);
             filmShowAdapter.remove();
             comingSoonMoviePresenter.reqeust(userId, sessionId, false, 5);
         }
@@ -159,6 +170,9 @@ public class MovieShowActivity extends WDActivity implements XRecyclerView.Loadi
                     comingSooncheck = false;
                     releaseShow.setBackgroundResource(R.drawable.btn_false);
                     comingSoonShow.setBackgroundResource(R.drawable.btn_false);
+                    hotShow.setTextColor(Color.WHITE);
+                    releaseShow.setTextColor(Color.BLACK);
+                    comingSoonShow.setTextColor(Color.BLACK);
                     filmShowAdapter.remove();
                     hotMoviePresenter.reqeust(userId, sessionId, false, 5);
                 }
@@ -171,6 +185,9 @@ public class MovieShowActivity extends WDActivity implements XRecyclerView.Loadi
                     comingSooncheck = false;
                     hotShow.setBackgroundResource(R.drawable.btn_false);
                     comingSoonShow.setBackgroundResource(R.drawable.btn_false);
+                    hotShow.setTextColor(Color.BLACK);
+                    releaseShow.setTextColor(Color.WHITE);
+                    comingSoonShow.setTextColor(Color.BLACK);
                     filmShowAdapter.remove();
                     releaseMoviePresenter.reqeust(userId, sessionId, false, 5);
                 }
@@ -183,6 +200,9 @@ public class MovieShowActivity extends WDActivity implements XRecyclerView.Loadi
                     hotcheck = false;
                     hotShow.setBackgroundResource(R.drawable.btn_false);
                     releaseShow.setBackgroundResource(R.drawable.btn_false);
+                    hotShow.setTextColor(Color.BLACK);
+                    releaseShow.setTextColor(Color.BLACK);
+                    comingSoonShow.setTextColor(Color.WHITE);
                     filmShowAdapter.remove();
                     comingSoonMoviePresenter.reqeust(userId, sessionId, false, 5);
                 }
@@ -282,6 +302,20 @@ public class MovieShowActivity extends WDActivity implements XRecyclerView.Loadi
     @Override
     public void onResume() {
         super.onResume();
+        initData();
+        filmShowAdapter.remove();
+        SharedPreferences sharedPreferences = getSharedPreferences("Config", MODE_PRIVATE);
+        userId = sharedPreferences.getInt("userId", 0);
+        sessionId = sharedPreferences.getString("sessionId", "");
+        if (hotcheck) {
+            hotMoviePresenter.reqeust(userId, sessionId, false, 5);
+        } else if (releasecheck) {
+            releaseMoviePresenter.reqeust(userId, sessionId, false, 5);
+        } else {
+            comingSoonMoviePresenter.reqeust(userId, sessionId, false, 5);
+        }
+    }
+    public void initData(){
         //百度定位
         mLocationClient = new LocationClient(getApplicationContext());
         //声明LocationClient类
@@ -300,19 +334,8 @@ public class MovieShowActivity extends WDActivity implements XRecyclerView.Loadi
         option.setLocationNotify(false);
         mLocationClient.setLocOption(option);
         mLocationClient.start();
-        filmShowAdapter.remove();
-        SharedPreferences sharedPreferences = getSharedPreferences("Config", MODE_PRIVATE);
-        userId = sharedPreferences.getInt("userId", 0);
-        sessionId = sharedPreferences.getString("sessionId", "");
-        if (hotcheck) {
-            hotMoviePresenter.reqeust(userId, sessionId, false, 5);
-        } else if (releasecheck) {
-            releaseMoviePresenter.reqeust(userId, sessionId, false, 5);
-        } else {
-            comingSoonMoviePresenter.reqeust(userId, sessionId, false, 5);
-        }
-    }
 
+    }
     //定位
     public class MyLocationListener implements BDLocationListener {
         @Override
@@ -327,7 +350,14 @@ public class MovieShowActivity extends WDActivity implements XRecyclerView.Loadi
             }
 //            String locationDescribe = location.getLocationDescribe();    //获取位置描述信息
             String addr = location.getCity();    //获取详细地址信息
-            cimemaText.setText(addr);
+            if(TextUtils.isEmpty(addr)){
+                cimemaText.setText("定位中...");
+                initData();
+            }else {
+                cimemaText.setText(addr);
+                mLocationClient.stop();
+            }
+            //cimemaText.setText(addr);
         }
     }
     private class FollowMovieCall implements DataCall<Result> {

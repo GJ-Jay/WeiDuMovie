@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:background="@drawable/linesou"
+    android:padding="@dimen/dp_2"
     android:layout_height="wrap_content">
     <EditText
         android:id="@+id/one_sou"
@@ -12,7 +13,7 @@
         android:textColor="#f2f2f2"
         android:textSize="@dimen/sp_12"
         android:hint="请输入搜索内容"
-
+        android:textColorHint="@android:color/white"
         />
     <ImageView
         android:id="@+id/one_image_sou"

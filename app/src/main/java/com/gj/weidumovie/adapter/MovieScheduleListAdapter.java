@@ -3,6 +3,9 @@ package com.gj.weidumovie.adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.RelativeSizeSpan;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -54,7 +57,14 @@ public class MovieScheduleListAdapter extends RecyclerView.Adapter {
         movieVH.buy_item_screeningHall.setText(movieScheduleBean.getScreeningHall());
         movieVH.buy_item_start.setText(movieScheduleBean.getBeginTime());
         movieVH.buy_item_end.setText(movieScheduleBean.getEndTime());
-        movieVH.buy_item_price.setText(String.valueOf(movieScheduleBean.getPrice()));
+
+        String price = String.valueOf(movieScheduleBean.getPrice());
+        SpannableString spannableString = new SpannableString(price);
+        if (price.contains(".")){
+            spannableString.setSpan(new RelativeSizeSpan(0.5f), price.indexOf("."), price.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+
+        movieVH.buy_item_price.setText(spannableString);
 
         movieVH.buy_item_ok.setOnClickListener(new View.OnClickListener() {
             @Override

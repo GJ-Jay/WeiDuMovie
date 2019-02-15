@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/image"
         android:layout_marginTop="60dp"
-        android:text="八位移动通信学院作品"
+        android:text="八维移动通信学院作品"
         android:textSize="14sp"
         android:textColor="@color/textcolor"
         android:gravity="center"/>

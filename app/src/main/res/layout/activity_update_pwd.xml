@@ -46,7 +46,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_2"
-            android:background="@color/textcolor9"/>
+            android:background="#f9f9f9"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -74,7 +74,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_2"
-            android:background="@color/textcolor9"/>
+            android:background="#f9f9f9"/>
 
         <RelativeLayout
             android:layout_width="match_parent"

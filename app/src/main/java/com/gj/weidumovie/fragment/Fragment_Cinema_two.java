@@ -230,10 +230,12 @@ public class Fragment_Cinema_two extends WDFragment {
             //更多结果信息获取说明，请参照类参考中BDLocation类中的说明
             String locationDescribe = location.getLocationDescribe();    //获取位置描述信息
             String addr = location.getAddrStr();    //获取详细地址信息
-            if(TextUtils.isEmpty(locationDescribe)&&TextUtils.isEmpty(addr)){
-                cimemaText.setText("北京市");
+            if(TextUtils.isEmpty(addr)){
+                cimemaText.setText("定位中...");
+                initData();
             }else {
-                cimemaText.setText(locationDescribe + addr);
+                cimemaText.setText(addr);
+                mLocationClient.stop();
             }
            // cimemaText.setText(locationDescribe + addr);
             //cimemaText.setText(addr);
